@@ -1,21 +1,19 @@
 import { Route, Routes } from "react-router-dom";
 import styled from "styled-components";
-import Footer from "./components/Footer/Footer";
 import Home from "./components/Home/Home";
+import Landing from "./components/Landing/Landing";
 import Login from "./components/Login/Login";
-import Navbar from "./components/Navigation/Navbar";
 import SignUp from "./components/Signup/Signup";
 
 const App = () => {
   return (
     <StyledApp className="App">
-      <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/home" element={<Landing />} />
       </Routes>
-      <Footer />
     </StyledApp>
   );
 };
