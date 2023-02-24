@@ -16,7 +16,7 @@ const Home = () => {
       <StyledSectionOne className="section-1">
         <div className="section-details">
           <h1>Last Serve</h1>
-          <p>Let's end the hunger together.</p>
+          <p>Let's end hunger together.</p>
         </div>
         <div className="section-img">
           <img src={home_img} alt="home_img" />

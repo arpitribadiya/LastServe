@@ -24,6 +24,7 @@ const StyledFooter = styled.footer`
   display: flex;
   flex-direction: column;
   gap: 2rem;
+  margin-top: auto;
   .social-media-links {
     display: flex;
     justify-content: center;

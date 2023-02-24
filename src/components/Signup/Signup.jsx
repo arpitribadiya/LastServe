@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import './signup.css';
 import { useNavigate } from 'react-router-dom';
 
-function RegistrationForm() {
+function SignUp() {
 
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
@@ -19,7 +18,7 @@ function RegistrationForm() {
     const nameRegEx = new RegExp('^[A-Za-z]+$');
     const validEmail = new RegExp('^[a-zA-Z0-9._:$!%-]+@[a-zA-Z0-9.-]+.[a-zA-Z]$');
 
-    const [disabled,setDisabled] = useState(true);
+    const [disabled, setDisabled] = useState(true);
 
     const navigate = useNavigate();
 
@@ -96,16 +95,16 @@ function RegistrationForm() {
             if (!value) {
                 setConfirmPasswordError('Enter confirm password');
                 setDisabled(true);
-            }else if(value.length <8 ){
+            } else if (value.length < 8) {
                 setConfirmPasswordError('Confirm password must be min. 8 charceters');
                 setDisabled(true);
             } else if (password && value !== password) {
                 setConfirmPasswordError('Password and confirm password do not match');
                 setDisabled(true);
-            } else if(!password){
+            } else if (!password) {
                 setPasswordError('Enter a password');
                 setDisabled(true);
-            }else if (password && value === password) {
+            } else if (password && value === password) {
                 setConfirmPasswordError('');
                 setDisabled(false);
             } else {
@@ -116,8 +115,8 @@ function RegistrationForm() {
     }
 
     const handleSubmit = (e) => {
-          console.log('Inside submit');
-          navigate('/login',{state : {fName : firstName, lName : lastName, em : email}});
+        console.log('Inside submit');
+        navigate('/login', { state: { fName: firstName, lName: lastName, em: email } });
     }
 
     return (
@@ -175,4 +174,4 @@ function RegistrationForm() {
             </div>
         </form>
     )
-}export default SignUp;
+} export default SignUp;

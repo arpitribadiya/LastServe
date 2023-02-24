@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 
 const Navbar = () => {
@@ -10,8 +11,8 @@ const Navbar = () => {
         <div className="nav-link">About Us</div>
       </div>
       <div className="nav-links">
-        <div className="nav-link">Login</div>
-        <link className="nav-link sign-up" to='/signup'>Sign Up</link>
+        <NavLink className="nav-link login" to="/login">Login</NavLink>
+        <NavLink className="nav-link sign-up" to='/signup'>Sign Up</NavLink>
       </div>
     </StyledNavbar>
   );
@@ -47,6 +48,11 @@ const StyledNavbar = styled.nav`
       color: white;
       padding: 1rem;
       border-radius: 5px;
+      text-decoration: none;
+    }
+
+    .login{
+      text-decoration: none;
     }
   }
   @media only screen and (min-width: 280px) and (max-width: 432px) {
