@@ -11,7 +11,7 @@ const Navbar = () => {
       </div>
       <div className="nav-links">
         <div className="nav-link">Login</div>
-        <div className="nav-link sign-up">Sign Up</div>
+        <link className="nav-link sign-up" to='/signup'>Sign Up</link>
       </div>
     </StyledNavbar>
   );
