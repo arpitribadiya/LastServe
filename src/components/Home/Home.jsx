@@ -9,10 +9,13 @@ import res_img3 from "../../assets/res_img3.jpg";
 import res_img4 from "../../assets/res_img4.jpg";
 import res_img5 from "../../assets/res_img5.jpg";
 import res_img6 from "../../assets/res_img6.jpg";
+import Navbar from "../Navigation/Navbar";
+import Footer from "../Footer/Footer"
 
 const Home = () => {
   return (
     <StyledHome className="home">
+      <Navbar />
       <StyledSectionOne className="section-1">
         <div className="section-details">
           <h1>Last Serve</h1>
@@ -144,6 +147,7 @@ const Home = () => {
           </div>
         </div>
       </StyledSectionFour>
+      <Footer />
     </StyledHome>
   );
 };
