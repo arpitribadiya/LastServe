@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import login_img from "../../assets/login.jpg";
 import Footer from "../Footer/Footer";
@@ -6,6 +7,10 @@ import Footer from "../Footer/Footer";
 function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+
+  const [authError, setAuthError] = useState("");
+  const navigate = useNavigate();
+
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -18,8 +23,14 @@ function Login() {
   };
 
   const handleSubmit = (e) => {
-    console.log("Username:", username);
-    console.log("Password:", password);
+    e.preventDefault();
+    if ("abc@gmail.com" === username && "12345678" === password) {
+      navigate('/home');
+    } else {
+      setUsername('');
+      setPassword('');
+      setAuthError("Invalid Username and Password");
+    }
   };
 
   return (
@@ -59,6 +70,10 @@ function Login() {
             </div>
           </div>
           <button className="login-btn">Login</button>
+          <div className="err">
+            {<span className='err'>{authError}</span>}
+          </div>
+          <Link to="/passwordReset">Reset Password</Link>
         </StyledLogin>
         <StyledLoginImg className="login-img">
           <img src={login_img} alt="login_img" />
@@ -97,6 +112,12 @@ const StyledLogin = styled.form`
       border-radius: 5px;
     }
   }
+  a{
+    text-decoration: none;
+    font-size: 1.5rem;
+    text-align: center;
+    color:  rgb(0, 127, 255);
+  }
   button {
     background-color: rgb(0, 127, 255);
     outline: none;
@@ -124,6 +145,12 @@ const StyledLogin = styled.form`
         }
       }
     }
+  }
+  .err{
+    padding: 0rem;
+    color: red;
+    font-size: small;
+    text-align: center;
   }
 `;
 

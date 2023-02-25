@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Home from "./components/Home/Home";
 import Landing from "./components/Landing/Landing";
 import Login from "./components/Login/Login";
+import PasswordReset from "./components/PasswordReset/PasswordReset";
 import SignUp from "./components/Signup/Signup";
 
 const App = () => {
@@ -13,6 +14,7 @@ const App = () => {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
         <Route path="/home" element={<Landing />} />
+        <Route path="/passwordReset" element={<PasswordReset />} />
       </Routes>
     </StyledApp>
   );
