@@ -7,6 +7,8 @@ import NewPassword from "./components/NewPassword/NewPassword";
 import PasswordReset from "./components/PasswordReset/PasswordReset";
 import SignUp from "./components/Signup/Signup";
 import UserProfile from "./components/UserProfile/UserProfile";
+import SignupRestaurant from "./components/SignupRestaurant/SignupRestaurant";
+import RestaurantApprovalPending from "./components/RestaurantApprovalPending/RestaurantApprovalPending";
 
 const App = () => {
   return (
@@ -19,6 +21,8 @@ const App = () => {
         <Route path="/passwordReset" element={<PasswordReset />} />
         <Route path="/newPassword" element={<NewPassword />} />
         <Route path="/profile" element={<UserProfile />} />
+        <Route path="/signupRestaurant" element={<SignupRestaurant />} />
+        <Route path="/approvalPending" element={<RestaurantApprovalPending />} />
       </Routes>
     </StyledApp>
   );
