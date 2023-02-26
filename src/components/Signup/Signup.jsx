@@ -72,7 +72,7 @@ function SignUp() {
             if (!value) {
                 setEmailError('Enter an email');
                 setDisabled(true);
-            } else if (!value.match(validEmail)) {
+            } else if (!validEmail.test(value)) {
                 setEmailError('Enter a valid email address');
                 setDisabled(true);
             } else {
@@ -91,6 +91,7 @@ function SignUp() {
                 setDisabled(true);
             } else if (confirmPassword && value === confirmPassword) {
                 setConfirmPasswordError('');
+                setPasswordError('');
                 setDisabled(false);
             } else {
                 setPasswordError('');
@@ -122,9 +123,9 @@ function SignUp() {
     const handleSubmit = (e) => {
         e.preventDefault();
         handleInputValidation(e);
-        console.log({ lastNameError });
-        if ({ firstNameError } || { lastNameError } || { email } ||
-            { password } || { confirmPasswordError }) {
+        console.log(blankFromError);
+        if (firstNameError || lastNameError || emailError ||
+            passwordError || confirmPasswordError) {
             setBlankFormError('Enter mandatory fields');
         } else {
             setBlankFormError('');

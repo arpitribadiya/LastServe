@@ -1,51 +1,92 @@
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import passreset_img from '../../assets/passreset.jpg'
 import Footer from '../Footer/Footer';
 
 function PasswordReset() {
 
-    const [email, setEmail] = useState('');
-    const [notActive, setNotActive] = useState('input-wrapper-disabled');
-    const [resend, setResend] = useState("Send");
+  const [email, setEmail] = useState('');
+  const [resetKey, setResetKey] = useState('');
+  const [ipWrapDisable, setipWrapDisable] = useState('input-wrapper-disabled');
+  const [newPassBtn, setNewPasBtn] = useState('newpass-btn-disabled');
+  const [resend, setResend] = useState("Send");
 
-    const handleOnChange = (e) => {
-        const { name, value } = e.target;
-        if ("email" === name) {
-            setEmail(value);
-        }
+  const [emailError, setEmailError] = useState();
+  const [resetKeyError, setResetKeyError] = useState();
+
+  const navigate = useNavigate();
+
+  const handleOnChange = (e) => {
+    const { name, value } = e.target;
+    if ("email" === name) {
+      setEmail(value);
     }
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        setNotActive('input-wrapper');
-        setResend("Resend");
+    if ("resetKey" === name) {
+      setResetKey(value);
     }
+  }
 
-    return (
-        <>
-            <StyledResetImgWrapper className='reset-img-wrapper'>
-                <StyledReset className='pass-reset-form' onSubmit={(e) => handleSubmit(e)}>
-                    <div className='form-title'>
-                        <h3>Reset Password</h3>
-                    </div>
-                    <div className='input-wrapper'>
-                        <label className='form-label'>Registered E-mail</label>
-                        <input className='form-input' type='text' name='email' value={email} onChange={(e) => handleOnChange(e)} placeholder='E-mail'></input>
-                    </div>
-                    <div className={notActive}>
-                        <label className='form-label'>Reset Key</label>
-                        <input className='form-input' type='text' name='resetkey' placeholder='Reset key'></input>
-                    </div>
-                    <button className="reset-btn" >{resend} Reset-link</button>
-                </StyledReset>
-                <StyledResetImg className="login-img">
-                    <img src={passreset_img} alt="passreset_img" />
-                </StyledResetImg>
-            </StyledResetImgWrapper>
-            <Footer />
-        </>
-    )
+  const handleInputValidation = e => {
+    const { name, value } = e.target;
+    if ("email" === name) {
+      if (!value) {
+        setEmailError('Enter an email');
+      } else if (!('abc@gmail.com' === value)) {
+        setEmailError('Entered email is not a registered email');
+      } else {
+        setEmailError('');
+      }
+    }
+  }
+
+  const handleOnClick = (e) => {
+    e.preventDefault();
+    setipWrapDisable('input-wrapper');
+    setNewPasBtn('newpass-btn');
+    setResend("Resend");
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if ("abc123" === resetKey && "abc") {
+      navigate('/newPassword');
+    } else {
+      setResetKeyError('Invalid Reset Key');
+    }
+  }
+
+  return (
+    <>
+      <StyledResetImgWrapper className='reset-img-wrapper'>
+        <StyledReset className='pass-reset-form' >
+          <div className='form-title'>
+            <h3>Reset Password</h3>
+          </div>
+          <div className='input-wrapper'>
+            <label className='form-label'>Registered E-mail*</label>
+            <input className='form-input' type='text' name='email' value={email} onChange={(e) => handleOnChange(e)} onBlur={handleInputValidation} placeholder='E-mail'></input>
+          </div>
+          <div className='err'>
+            {<span className='err'>{emailError}</span>}
+          </div>
+          <div className={ipWrapDisable}>
+            <label className='form-label'>Reset Key*</label>
+            <input className='form-input' type='text' name='resetKey' value={resetKey} onChange={(e) => handleOnChange(e)} placeholder='Reset Key'></input>
+          </div>
+          <div className='err'>
+            {<span className='err'>{resetKeyError}</span>}
+          </div>
+          <button className={newPassBtn} onClick={(e) => handleSubmit(e)}>Set New Password</button>
+          <button className='reset-btn' onClick={(e) => handleOnClick(e)}>{resend} Reset Key</button>
+        </StyledReset>
+        <StyledResetImg className="login-img">
+          <img src={passreset_img} alt="passreset_img" />
+        </StyledResetImg>
+      </StyledResetImgWrapper>
+      <Footer />
+    </>
+  )
 }
 
 const StyledResetImgWrapper = styled.div`
@@ -61,7 +102,7 @@ const StyledReset = styled.form`
   flex-basis: 50%;
   display: flex;
   flex-direction: column;
-  gap: 4rem;
+  gap: 2rem;
   padding: 0 1rem;
   .form-title{
      font-size: 2rem;
@@ -100,6 +141,9 @@ const StyledReset = styled.form`
     color: red;
     font-size: small;
     text-align: center;
+  }
+  .newpass-btn-disabled{
+    display: none;
   }
 `;
 
