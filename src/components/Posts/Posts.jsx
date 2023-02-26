@@ -4,24 +4,28 @@ import Post from "./Post";
 
 const Posts = () => {
   return (
-    <StyledPosts>
-      <Post />
-      <Post />
-      <Post />
-      <Post />
-      <Post />
-      <Post />
-      <Post />
-    </StyledPosts>
+    <StyledPostsWrapper>
+      <StyledPosts>
+        <Post />
+        <Post />
+        <Post />
+        <Post />
+        <Post />
+        <Post />
+        <Post />
+      </StyledPosts>
+    </StyledPostsWrapper>
   );
 };
 
-const StyledPosts = styled.div`
-  overflow: scroll;
+const StyledPostsWrapper = styled.div`
   min-height: 100vh;
   margin-left: 30%;
   width: 40%;
   border-right: 1px solid #ccc;
+`;
+
+const StyledPosts = styled.div`
 `;
 
 export default Posts;

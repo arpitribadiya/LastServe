@@ -6,6 +6,7 @@ import Login from "./components/Login/Login";
 import NewPassword from "./components/NewPassword/NewPassword";
 import PasswordReset from "./components/PasswordReset/PasswordReset";
 import SignUp from "./components/Signup/Signup";
+import UserProfile from "./components/UserProfile/UserProfile";
 
 const App = () => {
   return (
@@ -17,6 +18,7 @@ const App = () => {
         <Route path="/home" element={<Landing />} />
         <Route path="/passwordReset" element={<PasswordReset />} />
         <Route path="/newPassword" element={<NewPassword />} />
+        <Route path="/profile" element={<UserProfile />} />
       </Routes>
     </StyledApp>
   );
