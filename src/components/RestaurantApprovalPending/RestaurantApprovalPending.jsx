@@ -52,8 +52,12 @@ const StyledSectionOne = styled.div`
     padding-top: 1rem;
     /* display: none; */
     img {
-      width: 100%;
-      object-fit: cover;
+        width: 40%;
+        object-fit: cover;
+        position: absolute;
+        left: 70rem;
+        top: 10rem;
+      
     }
   }
   @media only screen and (min-width: 280px) and (max-width: 1120px) {

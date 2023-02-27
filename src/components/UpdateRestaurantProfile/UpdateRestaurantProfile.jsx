@@ -9,10 +9,10 @@ import login_img from "../../assets/login.jpg";
 function UpdateRestaurantProfile() {
 
     
-    const [restaurantName, setRestaurantName] = useState('');
-    const [address, setAddress] = useState('');
-    const [postalcode, setPostalCode] = useState('');
-    const [phoneNumber, setPhoneNumber] = useState('');
+    const [restaurantName, setRestaurantName] = useState('Subway');
+    const [address, setAddress] = useState('133, Spring Garden Road');
+    const [postalcode, setPostalCode] = useState('B3J 2K9');
+    const [phoneNumber, setPhoneNumber] = useState('1231231234');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
@@ -167,13 +167,17 @@ const StyledDiv = styled.div`
   margin-left: 30%;
 `;
 
+
 const StyledSignupImgWrapper = styled.div`
     display: flex;
     width: 60%;
-    box-shadow: 1px 1px 2px 2px #ccc;
-    border-radius: 5px;
     margin: 1rem auto;
     padding: 3rem;
+    .myclass {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
 `
 
 
