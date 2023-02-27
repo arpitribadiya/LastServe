@@ -13,8 +13,6 @@ import RestaurantOverview from '../RestaurantOverview/RestaurantOverview';
 import RestaurantPosts from '../RestaurantPosts/RestaurantPosts';
 import RestaurantVolunteers from '../RestaurantVolunteers/RestaurantVolunteers';
 import RestaurantProfile from '../RestaurantProfile/RestaurantProfile';
-import Navbar from '../Navigation/Navbar';
-import Footer from '../Footer/Footer';
 
 function RestaurantSideBar() {
 

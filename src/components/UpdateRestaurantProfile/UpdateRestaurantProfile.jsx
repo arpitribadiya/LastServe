@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import SignupModal from '../SignupModal/SignupModal';
-import login_img from "../../assets/login.jpg";
 
 
 
@@ -13,25 +11,17 @@ function UpdateRestaurantProfile() {
     const [address, setAddress] = useState('133, Spring Garden Road');
     const [postalcode, setPostalCode] = useState('B3J 2K9');
     const [phoneNumber, setPhoneNumber] = useState('1231231234');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState('');
 
     const [restaurantNameError, setRestaurantNameError] = useState('');
     const [addressError, setAddressError] = useState('');
     const [postalcodeError, setPostalcodeError] = useState('');
     const [phoneNumberError, setPhoneNumberError] = useState('');
-    const [emailError, setEmailError] = useState('');
-    const [passwordError, setPasswordError] = useState('');
-    const [confirmPasswordError, setConfirmPasswordError] = useState('');
     const [blankFromError, setBlankFormError] = useState('');
 
     const commonRegEx = new RegExp('^[A-Za-z]+$');
     const phoneRegEx = new RegExp('^[0-9]{10}$');
-    const validEmail = new RegExp('^[a-zA-Z0-9._:$!%-]+@[a-zA-Z0-9.-]+.[a-zA-Z]$');
 
     const [disabled, setDisabled] = useState(true);
-    const [showModal, setShowModal] = useState(false);
 
     const navigate = useNavigate();
 
@@ -159,12 +149,6 @@ function UpdateRestaurantProfile() {
     );
 };
 
-const StyledDiv = styled.div`
-  min-height: 100vh;
-  margin-left: 30%;
-`;
-
-
 const StyledSignupImgWrapper = styled.div`
     display: flex;
     width: 60%;
@@ -177,15 +161,6 @@ const StyledSignupImgWrapper = styled.div`
     }
 `
 
-
-const StyledSignupImg = styled.div`
-    flex-basis: 50%;
-    img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
-`
 const StyledForm = styled.form`
     margin:2rem auto;
     width: 40%;

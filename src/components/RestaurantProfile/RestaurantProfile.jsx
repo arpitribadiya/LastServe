@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from 'styled-components';
-import Navbar from "../Navigation/Navbar";
 import restaurant_img from "../../assets/Restaurant.avif";
 import UpdateRestaurantProfile from '../UpdateRestaurantProfile/UpdateRestaurantProfile';
 
