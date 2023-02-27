@@ -26,7 +26,11 @@ function Login() {
     e.preventDefault();
     if ("abc@gmail.com" === username && "12345678" === password) {
       navigate('/home');
-    } else {
+    } 
+    else if("xyz@gmail.com" === username && "12345678" === password){
+      navigate('/restaurantSideBar');
+    }
+    else {
       setUsername('');
       setPassword('');
       setAuthError("Invalid Username and Password");
