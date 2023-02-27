@@ -18,12 +18,12 @@ import Footer from '../Footer/Footer';
 
 function RestaurantSideBar() {
 
-  const [activeComponent, setactiveComponent] = useState('profile');
-  const [activeLink, setActiveLink] = useState('profile');
+  const [activeComponent, setactiveComponent] = useState('overview');
+  const [activeLink, setActiveLink] = useState('overview');
 
   let component = null;
-  if ('overview' === activeComponent) {
-    component = <RestaurantOverview />
+  if ('profile' === activeComponent) {
+    component = <RestaurantProfile />
   } else if ('posts' === activeComponent) {
     component = <RestaurantPosts />
   } else if ('orders' === activeComponent) {
@@ -31,7 +31,7 @@ function RestaurantSideBar() {
   }else if ('volunteers' === activeComponent) {
     component = <RestaurantVolunteers />
   }else{
-    component = <RestaurantProfile />
+    component = <RestaurantOverview />
   }
     return(
     <>
@@ -41,9 +41,9 @@ function RestaurantSideBar() {
           <img src={app_logo} alt="app_logo" />
         </div>
         <div className="nav-links">
-          <div className='link-wrapper'>
+          <div className={activeLink === 'profile' ? 'link-wrapper active' : 'link-wrapper'}>
             <AiOutlineHome />
-            <Link to="/restaurantSideBar">Profile</Link>
+            <Link to="/restaurantSideBar"  onClick={() => { setactiveComponent("profile"); setActiveLink('profile') }}>Profile</Link>
           </div>
           <div className={activeLink === 'overview' ? 'link-wrapper active' : 'link-wrapper'}>
             <AiOutlineUser />
