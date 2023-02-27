@@ -78,7 +78,7 @@ const StyledSideabar = styled.div`
   position: fixed;
   width: 20%;
   /* flex-basis: 20%; */
-  margin-left: 10%;
+  margin-left: 2%;
   height: 100vh;
   border-right: 1px solid #ccc;
   font-size: 1.8rem;
