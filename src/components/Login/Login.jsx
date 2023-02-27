@@ -104,6 +104,7 @@ const StyledLogin = styled.form`
     font-size: 2rem;
     flex-direction: column;
     gap: 1rem;
+    padding: 1rem;
     input {
       padding: 1rem;
       outline: none;
