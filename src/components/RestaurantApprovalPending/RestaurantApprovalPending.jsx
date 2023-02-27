@@ -1,8 +1,5 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React from 'react';
 import styled from 'styled-components';
-import SignupModal from '../SignupModal/SignupModal';
-import login_img from "../../assets/login.jpg";
 import Navbar from "../Navigation/Navbar";
 import Footer from "../Footer/Footer"
 import approval_pending from "../../assets/approvalPending.jpg";
