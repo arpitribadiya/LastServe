@@ -67,9 +67,6 @@ function UpdateRestaurantProfile() {
             if (!value) {
                 setAddressError('Enter address');
                 setDisabled(true);
-            } else if (!value.match(commonRegEx)) {
-                setAddressError('Address can contain only alphabets');
-                setDisabled(true);
             } else {
                 setAddressError('');
                 setDisabled(false);
