@@ -4,8 +4,11 @@ import styled from 'styled-components';
 import SignupModal from '../SignupModal/SignupModal';
 import login_img from "../../assets/login.jpg";
 
-function SignupRestaurant() {
 
+
+function UpdateRestaurantProfile() {
+
+    
     const [restaurantName, setRestaurantName] = useState('');
     const [address, setAddress] = useState('');
     const [postalcode, setPostalCode] = useState('');
@@ -42,12 +45,6 @@ function SignupRestaurant() {
             setPostalCode(value);
         }else if('phonenumber' === name){
             setPhoneNumber(value);
-        }else if ('email' === name) {
-            setEmail(value);
-        } else if ('password' === name) {
-            setPassword(value);
-        } else if ('confirmPassword' === name) {
-            setConfirmPassword(value);
         }
     }
 
@@ -96,55 +93,6 @@ function SignupRestaurant() {
                 setPhoneNumberError('');
                 setDisabled(false);
             }
-        }else if ('email' === name) {
-            if (!value) {
-                setEmailError('Enter an email');
-                setDisabled(true);
-            } else if (!validEmail.test(value)) {
-                setEmailError('Enter a valid email address');
-                setDisabled(true);
-            } else {
-                setEmailError('');
-                setDisabled(false);
-            }
-        } else if ('password' === name) {
-            if (!value) {
-                setPasswordError('Enter a password');
-                setDisabled(true);
-            } else if (value.length < 8) {
-                setPasswordError('Password must containt min. 8 characters');
-                setDisabled(true);
-            } else if (confirmPassword && value !== confirmPassword) {
-                setConfirmPasswordError('Password and confirm password do not match');
-                setDisabled(true);
-            } else if (confirmPassword && value === confirmPassword) {
-                setConfirmPasswordError('');
-                setPasswordError('');
-                setDisabled(false);
-            } else {
-                setPasswordError('');
-                setDisabled(false);
-            }
-        } else if ('confirmPassword' === name) {
-            if (!value) {
-                setConfirmPasswordError('Enter confirm password');
-                setDisabled(true);
-            } else if (value.length < 8) {
-                setConfirmPasswordError('Confirm password must be min. 8 charceters');
-                setDisabled(true);
-            } else if (password && value !== password) {
-                setConfirmPasswordError('Password and confirm password do not match');
-                setDisabled(true);
-            } else if (!password) {
-                setPasswordError('Enter a password');
-                setDisabled(true);
-            } else if (password && value === password) {
-                setConfirmPasswordError('');
-                setDisabled(false);
-            } else {
-                setConfirmPasswordError('');
-                setDisabled(false);
-            }
         }
     }
 
@@ -152,16 +100,11 @@ function SignupRestaurant() {
         e.preventDefault();
         handleInputValidation(e);
         console.log(blankFromError);
-        if (restaurantNameError || addressError || postalcodeError || emailError || phoneNumberError ||
-            passwordError || confirmPasswordError) {
+        if (restaurantNameError || addressError || postalcodeError || phoneNumberError) {
             setBlankFormError('Enter mandatory fields');
         } else {
-            navigate('/approvalPending');
+            navigate('/restaurantSideBar');
         }
-    }
-
-    const handleModalClose = e => {
-        setShowModal(false);
     }
 
     return (
@@ -169,7 +112,7 @@ function SignupRestaurant() {
             <StyledForm className='form'>
                 <div className='formContent'>
                     <div className='formTitle'>
-                        <h3>Register Restaurant</h3>
+                        <h3>Register Details</h3>
                     </div>
 
                     <div className='inputWrapper'>
@@ -204,30 +147,6 @@ function SignupRestaurant() {
                         {<span className='err'>{phoneNumberError}</span>}
                     </div>
 
-                    <div className='inputWrapper'>
-                        <label className='formLabel'>Email*</label>
-                        <input className='formInput' type='email' name='email' value={email} onChange={(e) => handleInputChange(e)} onBlur={handleInputValidation} placeholder='Email' />
-                    </div>
-                    <div className='err'>
-                        {<span className='err'>{emailError}</span>}
-                    </div>
-
-                    <div className='inputWrapper'>
-                        <label className='formLabel'>Password*</label>
-                        <input className='formInput' type='password' name='password' value={password} onChange={(e) => handleInputChange(e)} onBlur={handleInputValidation} placeholder='Password' />
-                    </div>
-                    <div className='err'>
-                        {<span className='err'>{passwordError}</span>}
-                    </div>
-
-                    <div className='inputWrapper'>
-                        <label className='formLabel'>Confirm Password*</label>
-                        <input className='formInput' type='password' name='confirmPassword' value={confirmPassword} onChange={(e) => handleInputChange(e)} onBlur={handleInputValidation} placeholder='Confirm Password' />
-                    </div>
-                    <div className='err'>
-                        {<span className='err'>{confirmPasswordError}</span>}
-                    </div>
-
                     <div className='footNote'>
                         <p>* Mandatory fields</p>
                     </div>
@@ -236,19 +155,21 @@ function SignupRestaurant() {
                         {<span className='blank-err'>{blankFromError}</span>}
                     </div>
 
-                    <button disabled={disabled} className='registerBtn' type='submit' onClick={(e) => handleSubmit(e)}>Register</button>
+                    <button disabled={disabled} className='registerBtn' type='submit' onClick={(e) => handleSubmit(e)}>Update</button>
                 </div>
             </StyledForm>
-            <StyledSignupImg className="login-img">
-                <img src={login_img} alt="login_img" />
-            </StyledSignupImg>
         </StyledSignupImgWrapper>
-    )
-}
+    );
+};
+
+const StyledDiv = styled.div`
+  min-height: 100vh;
+  margin-left: 30%;
+`;
 
 const StyledSignupImgWrapper = styled.div`
     display: flex;
-    width: 70%;
+    width: 60%;
     box-shadow: 1px 1px 2px 2px #ccc;
     border-radius: 5px;
     margin: 1rem auto;
@@ -257,7 +178,7 @@ const StyledSignupImgWrapper = styled.div`
 
 
 const StyledSignupImg = styled.div`
-    flex-basis: 60%;
+    flex-basis: 50%;
     img {
         width: 100%;
         height: 100%;
@@ -266,11 +187,11 @@ const StyledSignupImg = styled.div`
 `
 const StyledForm = styled.form`
     margin:2rem auto;
-    width: 50%;
+    width: 40%;
     display: flex;
     flex-direction: column;
-    gap: 4rem;
-    padding: 0 1rem;
+    gap: 2rem;
+    padding: 0 0rem;
     .formContent {
         display: flex;
         flex-direction: column;
@@ -326,4 +247,5 @@ const StyledForm = styled.form`
     padding: 0rem;
     }
 `
-export default SignupRestaurant;
+
+export default UpdateRestaurantProfile;
