@@ -50,7 +50,7 @@ const StyledSectionOne = styled.div`
   }
 
   .section-img {
-    flex-basis: 35%;
+    flex-basis: 15%;
     padding-top: 1rem;
     padding-left: 1rem;
     /* display: none; */
@@ -60,7 +60,7 @@ const StyledSectionOne = styled.div`
         object-fit: cover;
         position: absolute;
         left: 92rem;
-        top: 10rem;
+        top: 2rem;
     }
   }
   @media only screen and (min-width: 280px) and (max-width: 1120px) {
