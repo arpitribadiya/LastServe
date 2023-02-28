@@ -7,7 +7,7 @@ import Filters from "../Filters/Filters";
 const Landing = () => {
   return (
     <StyledLanding>
-      <Sidebar />
+      <Sidebar activeRoute="home" />
       <Posts />
       <Filters />
     </StyledLanding>
