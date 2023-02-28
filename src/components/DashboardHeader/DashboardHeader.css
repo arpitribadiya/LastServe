@@ -1,0 +1,19 @@
+    .DashboardHeader{
+    display: flex;
+    position: relative;
+    height: 41px;
+    left: 0px;
+    right: 33px;
+    top: 41px;
+    padding-left: 24px !important;
+    padding-right: 24px !important; 
+    justify-content: space-between;
+    }
+    
+    .DashboardHeader h4{
+        margin: auto ;
+    }
+
+    .DashboardHeader-icons{
+        float: right;
+    }
