@@ -10,6 +10,7 @@ import UserProfile from "./components/UserProfile/UserProfile";
 import SignupRestaurant from "./components/SignupRestaurant/SignupRestaurant";
 import RestaurantApprovalPending from "./components/RestaurantApprovalPending/RestaurantApprovalPending";
 import RestaurantSideBar from "./components/RestaurantSideBar/RestaurantSideBar";
+import Subscription from "./components/Subscription/Subscription";
 const App = () => {
   return (
     <StyledApp className="App">
@@ -22,8 +23,12 @@ const App = () => {
         <Route path="/newPassword" element={<NewPassword />} />
         <Route path="/profile" element={<UserProfile />} />
         <Route path="/signupRestaurant" element={<SignupRestaurant />} />
-        <Route path="/approvalPending" element={<RestaurantApprovalPending />} />
+        <Route
+          path="/approvalPending"
+          element={<RestaurantApprovalPending />}
+        />
         <Route path="/restaurantSideBar" element={<RestaurantSideBar />} />
+        <Route path="/restaurants" element={<Subscription />} />
       </Routes>
     </StyledApp>
   );

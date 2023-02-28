@@ -1,179 +1,150 @@
 import React from 'react'
+import { Col, Container, Row } from 'react-bootstrap';
 import styled from 'styled-components';
+import DashboardHeader from '../DashboardHeader/DashboardHeader';
 
 function RestaurantOverview() {
+
     return (
+        
         <StyledDiv>
-        <StyledSectionTwo className="section-2">
-        <div className="section-body-wrapper">
-          <div className="section-content">
-            <h5>Past Posts</h5>
-            <p>
-              10
-            </p>
-          </div>
-          <div className="section-content">
-            <h5>Active Posts</h5>
-            <p>
-              10
-            </p>
-          </div>
-          <div className="section-content">
-            <h5>All Orders</h5>
-            <p>
-              10
-            </p>
-          </div>
-          <div className="section-content">
-            <h5>Active Orders</h5>
-            <p>
-              10
-            </p>
-          </div>
-        </div>
-      </StyledSectionTwo>
+      <script src="https://cdn.jsdelivr.net/npm/react/umd/react.production.min.js" crossorigin></script>
+
+<script
+  src="https://cdn.jsdelivr.net/npm/react-dom/umd/react-dom.production.min.js"
+  crossorigin></script>
+
+<script
+  src="https://cdn.jsdelivr.net/npm/react-bootstrap@next/dist/react-bootstrap.min.js"
+  crossorigin></script>
+
+<script>var Alert = ReactBootstrap.Alert;</script>
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+    integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
+    crossorigin="anonymous"
+    />
+    <div class="dashboard">
+    <DashboardHeader heading="Overview"/>
+    <div class="dashboard-content">
+
+    <Container>
+    <Row>
+
+        <Col md={3} sm={6} xs={12}> <div className='overview-dashboard-tile'>
+                <h2 className='heading'>
+                    Orders
+                </h2>
+                <h2 className='number'>
+                    10
+                </h2>
+            </div></Col>
+        <Col md={3} sm={6} xs={12}x> <div className='overview-dashboard-tile'>
+        <h2 className='heading'>
+                    Active Orders
+                </h2>
+                <h2 className='number'>
+                    10
+                </h2>
+            </div>
+        </Col>
+        <Col md={3} sm={6} xs={12}x> <div className='overview-dashboard-tile'>
+        <h2 className='heading'>
+                    Posts
+                </h2>
+                <h2 className='number'>
+                    10
+                </h2>
+            
+            </div>
+        </Col>
+        <Col md={3} sm={6} xs={12}x> <div className='overview-dashboard-tile'>
+        <h2 className='heading'>
+                    Active Posts
+                </h2>
+                <h2 className='number'>
+                    10
+                </h2>
+            </div></Col>
+    </Row>
+    </Container>
+      
+    </div>
+
+
+ 
+
+
+    </div>
+
         </StyledDiv>
     )
 }
 
 const StyledDiv = styled.div`
   min-height: 100vh;
-  margin-left: 30%;
-`;
-
-
-const StyledHome = styled.div``;
-
-const StyledSectionOne = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  height: 90vh;
-  .section-details {
-    flex-basis: 40%;
-    padding: 2rem 2rem 2rem 5rem;
+  margin-left: 20%;
+  .overview-container{
+    position: absolute;
+    left: 20%;
+    right: 0px;
+    top: 0px;
+    bottom: 0px;
+    width :80%;
+    
+    }
+    .overview-top{
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    h1 {
-      font-size: 8rem;
-      font-weight: 500;
+    position: absolute;
+    height: 41px;
+    left: 0px;
+    right: 33px;
+    top: 30px;
     }
-    p {
-      font-size: 6rem;
-      color: rgb(161, 161, 161);
-      font-weight: 300;
-      margin: 5px 10px 5px 45px;
-  }
-
-  .section-img {
-    flex-basis: 60%;
-    padding-top: 1rem;
-    /* display: none; */
-    img {
-      width: 100%;
-      object-fit: cover;
+    
+    .overview-top h4{
+        margin: auto ;
     }
-  }
-  @media only screen and (min-width: 280px) and (max-width: 1120px) {
-    height: 65vh;
-    padding: 3rem 1rem 2rem 1rem;
-    .section-details {
-      flex-basis: 100%;
-      padding: 0;
-      h1 {
-        font-size: 5.5rem;
-      }
-      p {
-        font-size: 3.5rem;
-      }
+    
+    .overview-content{
+    position: absolute;
+    height: 134px;
+    left: 0;
+    padding-left: 12px;
+    padding-right: 12px;
+    right:0px;
+    top: 128px;
+    
     }
-    .section-img {
-      flex-basis: 100%;
-      overflow: hidden;
+    .overview-dashboard-tile{
+        width:100%;
+        height:134px;
+        background-color: #dedddd;
+        border: 1px solid #DFE0EB;
+    border-radius: 8px;
+        
     }
-  }
-  @media only screen and (min-width: 435px) and (max-width: 1120px) {
-    padding: 2rem 2rem 2rem 5rem;
-  }
+    
+    .overview-dashboard-tile .heading{
+    
+        position: relative;
+        top: 24px;
+        text-align: center;
+    
+        
+    }
+    .overview-dashboard-tile .number{
+    
+        position: relative;
+        top: 24px;
+        text-align: center;
+    
+        
+    }
+    .overview-icons{
+        float: right;
+    }
 `;
-
-
-const StyledSectionTwo = styled.div`
-  background-color: rgb(239, 240, 243);
-  padding: 6rem 2rem;
-  .section-header-wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-    h4 {
-      text-align: center;
-      font-size: 3rem;
-      font-weight: 300;
-    }
-
-    button {
-      background-color: rgb(2, 127, 254);
-      color: white;
-      padding: 1rem;
-      border-radius: 5px;
-      border: none;
-      width: fit-content;
-      font-size: 1.5rem;
-      :hover {
-        cursor: pointer;
-      }
-    }
-  }
-
-  .section-body-wrapper {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 5rem;
-    align-items: center;
-    justify-content: space-between;
-    padding: 2rem 5rem;
-    .section-content {
-      display: flex;
-      flex-direction: column;
-      gap: 2rem;
-      flex-basis: 40%;
-      h5 {
-        font-size: 2rem;
-      }
-      p {
-        font-size: 1.5rem;
-        font-weight: 200;
-        text-align: justify;
-      }
-      button {
-        background-color: white;
-        padding: 1rem;
-        border: 1px solid rgb(2, 127, 254);
-        color: rgb(2, 127, 254);
-        border-radius: 5px;
-        width: fit-content;
-        :hover {
-          cursor: pointer;
-        }
-      }
-    }
-  }
-
-  @media only screen and (min-width: 280px) and (max-width: 432px) {
-    .section-header-wrapper {
-      h4 {
-        font-size: 3rem;
-      }
-    }
-    .section-body-wrapper {
-      padding: 3rem 1rem;
-      .section-content {
-        flex-basis: 100%;
-      }
-    }
-  }
-`;
-
 
 export default RestaurantOverview;

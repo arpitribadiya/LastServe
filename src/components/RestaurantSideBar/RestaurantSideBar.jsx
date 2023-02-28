@@ -16,12 +16,12 @@ import RestaurantProfile from '../RestaurantProfile/RestaurantProfile';
 
 function RestaurantSideBar() {
 
-  const [activeComponent, setactiveComponent] = useState('overview');
-  const [activeLink, setActiveLink] = useState('overview');
+  const [activeComponent, setactiveComponent] = useState('profile');
+  const [activeLink, setActiveLink] = useState('profile');
 
   let component = null;
-  if ('profile' === activeComponent) {
-    component = <RestaurantProfile />
+  if ('overview' === activeComponent) {
+    component = <RestaurantOverview />
   } else if ('posts' === activeComponent) {
     component = <RestaurantPosts />
   } else if ('orders' === activeComponent) {
@@ -29,7 +29,7 @@ function RestaurantSideBar() {
   }else if ('volunteers' === activeComponent) {
     component = <RestaurantVolunteers />
   }else{
-    component = <RestaurantOverview />
+    component = <RestaurantProfile />
   }
     return(
     <>
@@ -39,9 +39,9 @@ function RestaurantSideBar() {
           <img src={app_logo} alt="app_logo" />
         </div>
         <div className="nav-links">
-          <div className={activeLink === 'profile' ? 'link-wrapper active' : 'link-wrapper'}>
+          <div className='link-wrapper'>
             <AiOutlineHome />
-            <Link to="/restaurantSideBar"  onClick={() => { setactiveComponent("profile"); setActiveLink('profile') }}>Profile</Link>
+            <Link to="/restaurantSideBar">Profile</Link>
           </div>
           <div className={activeLink === 'overview' ? 'link-wrapper active' : 'link-wrapper'}>
             <AiOutlineUser />
@@ -76,7 +76,6 @@ const StyledSideabar = styled.div`
   position: fixed;
   width: 20%;
   /* flex-basis: 20%; */
-  margin-left: 2%;
   height: 100vh;
   border-right: 1px solid #ccc;
   font-size: 1.8rem;
