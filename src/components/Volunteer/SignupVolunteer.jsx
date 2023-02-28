@@ -126,7 +126,7 @@ function SignupVolunteer() {
                     <div className="login-type-wrapper">
                     <label className='formLabel'>Kindly choose your gender*</label>
             <div className="radio-input-wrapper"> 
-              <input type="radio" name="login-type" id="male-user" />
+              <input type="radio" name="login-type" id="male-user" checked/>
               <label htmlFor="male-user">Male</label>
             </div>
             <div className="radio-input-wrapper">
@@ -142,12 +142,12 @@ function SignupVolunteer() {
           <div className="login-type-wrapper">
                     <label className='formLabel'>Kindly choose your occupation*</label>
             <div className="radio-input-wrapper"> 
-              <input type="radio" name="occupation-type" id="student" />
-              <label htmlFor="male-user">Student</label>
+              <input type="radio" name="occupation-type" id="student" checked/>
+              <label htmlFor="student">Student</label>
             </div>
             <div className="radio-input-wrapper">
               <input type="radio" name="occupation-type" id="worker" />
-              <label htmlFor="female-user"> Working Professional</label>
+              <label htmlFor="worker"> Working Professional</label>
             </div>
           </div>
           <div>
