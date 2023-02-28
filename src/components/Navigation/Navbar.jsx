@@ -6,9 +6,9 @@ const Navbar = () => {
   return (
     <StyledNavbar>
       <div className="nav-logo-wrapper">
-        <div className="nav-link">Logo</div>
-        <div className="nav-link">Volunteer</div>
-        <div className="nav-link">About Us</div>
+        <NavLink className="nav-link nav-link-left">Logo</NavLink>
+        <NavLink className="nav-link nav-link-left" to="/signupVolunteer">Volunteer</NavLink>
+        <NavLink className="nav-link nav-link-left">About Us</NavLink>
       </div>
       <div className="nav-links">
         <NavLink className="nav-link login" to="/login">Login</NavLink>
@@ -26,6 +26,10 @@ const StyledNavbar = styled.nav`
   font-size: 1.8rem;
   border-bottom: 1px solid rgb(219, 216, 216);
   .nav-logo-wrapper {
+    .nav-link-left{
+      text-decoration: none;
+      color: black;
+    }
     display: flex;
     gap: 1rem;
     .nav-link {
