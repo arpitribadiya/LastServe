@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from "react-router-dom";
 import styled from 'styled-components';
 import SignupModal from '../SignupModal/SignupModal';
 import login_img from "../../assets/login.jpg";
@@ -200,6 +200,7 @@ function SignUp() {
                     </div>
 
                     <button disabled={disabled} className='registerBtn' type='submit' onClick={(e) => handleSubmit(e)}>Register</button>
+                    <Link to="/signupRestaurant">Register Restaurant</Link>
                     <div className='submit-modal'>
                         <SignupModal onClose={handleModalClose} showModal={showModal} />
                     </div>
@@ -237,6 +238,13 @@ const StyledForm = styled.form`
     flex-direction: column;
     gap: 4rem;
     padding: 0 1rem;
+    a{
+        margin: 2rem;
+        text-decoration: none;
+        font-size: 1.5rem;
+        text-align: center;
+        color:  rgb(0, 127, 255);
+    }
     .formContent {
         display: flex;
         flex-direction: column;

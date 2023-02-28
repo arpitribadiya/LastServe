@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import SignupModal from '../SignupModal/SignupModal';
 import login_img from "../../assets/login.jpg";
 
 function SignupRestaurant() {
@@ -28,7 +27,6 @@ function SignupRestaurant() {
     const validEmail = new RegExp('^[a-zA-Z0-9._:$!%-]+@[a-zA-Z0-9.-]+.[a-zA-Z]$');
 
     const [disabled, setDisabled] = useState(true);
-    const [showModal, setShowModal] = useState(false);
 
     const navigate = useNavigate();
 
@@ -160,10 +158,6 @@ function SignupRestaurant() {
         }
     }
 
-    const handleModalClose = e => {
-        setShowModal(false);
-    }
-
     return (
         <StyledSignupImgWrapper className="login-img-wrapper">
             <StyledForm className='form'>
@@ -238,6 +232,7 @@ function SignupRestaurant() {
 
                     <button disabled={disabled} className='registerBtn' type='submit' onClick={(e) => handleSubmit(e)}>Register</button>
                 </div>
+                <Link to="/signup">Register User</Link>
             </StyledForm>
             <StyledSignupImg className="login-img">
                 <img src={login_img} alt="login_img" />
@@ -262,6 +257,7 @@ const StyledSignupImg = styled.div`
         width: 100%;
         height: 100%;
         object-fit: cover;
+        margin-left: 1rem;
     }
 `
 const StyledForm = styled.form`
@@ -271,6 +267,12 @@ const StyledForm = styled.form`
     flex-direction: column;
     gap: 4rem;
     padding: 0 1rem;
+    a{
+        text-decoration: none;
+        font-size: 1.5rem;
+        text-align: center;
+        color:  rgb(0, 127, 255);
+    }
     .formContent {
         display: flex;
         flex-direction: column;
