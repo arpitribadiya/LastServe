@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Footer from '../Footer/Footer';
 import edit_img from '../../assets/edit_usr_det.jpg';
 import { useNavigate } from 'react-router-dom';
+import EditUsrDetModal from './EditUsrDetModal';
 
 function EditUserDetails() {
 
@@ -11,6 +12,9 @@ function EditUserDetails() {
 
     const [firstNameError, setFirstNameError] = useState();
     const [lastNameError, setLastNameError] = useState('');
+    const [blankFormError, setBlankFormError] = useState('');
+
+    const [showModal, setShowModal] = useState(false);
 
     const nameRegEx = new RegExp('^[A-Za-z]+$');
 
@@ -49,8 +53,20 @@ function EditUserDetails() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log("Inside submit");
-        navigate('/profile');
+        handleInputValidation(e);
+        if (firstNameError || lastNameError) {
+            setBlankFormError('Enter mandatory fields');
+        } else {
+            setBlankFormError('');
+            setFirstNameError('');
+            setLastNameError('');
+            setShowModal(true);
+        }
+    }
+
+    const handleModalClose = e => {
+        setShowModal('false');
+        navigate('/home');
     }
 
     return (
@@ -75,7 +91,16 @@ function EditUserDetails() {
                         <label className='form-label'>Email</label>
                         <input className='form-input-readonly' type='email' name='email' value='jimmyand@dal.ca' readOnly placeholder='Email'></input>
                     </div>
+                    <div className='footNote'>
+                        <p>* Mandatory fields</p>
+                    </div>
+                    <div className='err'>
+                        {<span className='blank-err'>{blankFormError}</span>}
+                    </div>
                     <button className="edit-btn">Save Changes</button>
+                    <div className='edit-modal'>
+                        <EditUsrDetModal showModal={showModal} onClose={handleModalClose} />
+                    </div>
                 </StyledEditDetails>
                 <StyledEditDetImg className='edit-det-img'>
                     <img src={edit_img} alt='edit_det_img' />
@@ -137,6 +162,12 @@ const StyledEditDetails = styled.form`
     }
     .form-input-readonly{
         background-color: #d4d2d2;
+    }
+    .footNote{
+    color: red;
+    justify-content: left;
+    font-size: small;
+    padding: 0rem;
     }
 `;
 
