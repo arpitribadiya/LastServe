@@ -1,70 +1,141 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# LastServe
 
-## Available Scripts
+Restaurants that have leftover food will update their public posting on our website each night with how much food is still available. Anyone in need of food can do so by setting up a time slot and coming to pick up their meal for that evening. By doing this, food waste in restaurants will be reduced and people won't go to bed hungry.
 
-In the project directory, you can run:
+* *Date Created*: 25 Feb 2023
+* *Last Modification Date*: 28 Feb 2023
+* *Git URL*: https://git.cs.dal.ca/ribadiya/csci_5709_web_group6.git
+* *Deployed Project URL*: https://last-serve.netlify.app/
 
-### `npm start`
+## Authors
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+* [Arpit Ribadiya](ar304626@dal.ca) - *(Full Stack Developer)*
+* [Jay Kania](jy440982@dal.ca) - *(Full Stack Developer)*
+* [Lav Patel](lv842182@dal.ca) - *(Full Stack Developer)*
+* [Neha Karkhanis](nh601176@dal.ca) - *(Full Stack Developer)*
+* [Viraj Joshi](viraj.joshi@dal.ca) - *(Full Stack Developer)*
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
 
-### `npm test`
+## Getting Started
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Prerequisites
 
-### `npm run build`
+To have a local copy of this project up and running on your local machine, you will first need to install the following software / libraries / plug-ins
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```
+1. To install all required package and dependecncy in local run below commnad:- 
+npm install
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+2. To start project in local run below commnad:-
+npm start
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+3. To login as User, use below credentials on login page
+username = "abc@gmail.com"
+password = "12345678"
 
-### `npm run eject`
+4. To login as Restaurant, use below credentials on login page
+username = "xyz@gmail.com"
+password = "12345678"
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Built With
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+* [Reactjs](https://reactjs.org/) - The web framework used.
+* [npm](https://www.npmjs.com/) - Dependency Management.
+* [Visual Studio Code](https://code.visualstudio.com/) - Source-code editor.
+* [GitLab](https://about.gitlab.com/) - Source Code Repository
+* [Netlify](https://app.netlify.com/) - Online Platform used for web application deployment.
+* [Toastify](https://www.npmjs.com/package/react-toastify) -react library to display short livedalerts on web pages.
+* [react datatables](https://react-data-table-component.netlify.app/?path=/story/getting-started-intro--page) -react library to display data in tables format.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Sources Used
 
-## Learn More
+### SignupRestaurant.js
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+*Lines 31, 157
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```
+const navigate = useNavigate();
+navigate('/approvalPending');
 
-### Code Splitting
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+The code above was created by adapting the code in [bobbyhadz](https://bobbyhadz.com/blog/react-redirect-after-form-submit) as shown below: 
 
-### Analyzing the Bundle Size
+```
+const navigate = useNavigate();
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+const handleSubmit = event => {
+    event.preventDefault();
 
-### Making a Progressive Web App
+    // 👇️ redirect to /contacts
+    navigate('/contacts');
+  };
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+```
 
-### Advanced Configuration
+The code in [bobbyhadz](https://bobbyhadz.com/blog/react-redirect-after-form-submit) was implemented to route user to contacts page when he submit form. The code was used because somewhat similar requirement was there like on submitting form wanted to redirect user on other page. The code was modified by just using required navigate function with actual page routing which was ApprovalPending page in our case.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
 
-### Deployment
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+### App.js
 
-### `npm run build` fails to minify
+*Lines 27 - 29*
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```
+<BrowserRouter>
+      <Route path="/signupRestaurant" element={<SignupRestaurant />} />
+       <Route path="/approvalPending" element={<RestaurantApprovalPending />} />
+       <Route path="/restaurantSideBar" element={<RestaurantSideBar />} />
+  </BrowserRouter>
+
+```
+
+The code above was created by adapting the code in [dev](https://dev.to/emmanuelthecoder/getting-started-with-react-router-19de) as shown below: 
+
+```
+<BrowserRouter>
+      <Routes>
+        <Route path="/" element={<App />} >
+        <Route path="users" element={<Users/>} />
+        <Route path ="posts" element={<Posts />} />
+        <Route path="*" element={<h1>Route does not exist</h1>}/>
+      </Routes>
+  </BrowserRouter>
+
+```
+
+The code in [dev](https://dev.to/emmanuelthecoder/getting-started-with-react-router-19de) was implemented to route user on different pages.The code was used because same functionality was required in application. The code was modified by replacing application component and route at required places.
+
+### src/components/RestaurantVolunteer/RestaurantVolunteer.jsx
+
+*Lines 136 - 142*
+
+```
+    <div class="dashboard-content">
+        <DataTable
+            columns={columns}
+            data={data}
+            pagination
+        />
+    </div>
+
+
+```
+
+The code above was created by adapting the code in [React Datatable documentation ](https://jbetancur.github.io/react-data-table-component/?path=/docs/pagination-basic--basic&globals=outline:true) as shown below: 
+
+```
+
+() => <DataTable title="Movie List" columns={columns} data={data} pagination />
+
+
+```
+
+- <!---How---> The code in [React Datatable documentation ](https://jbetancur.github.io/react-data-table-component/?path=/docs/pagination-basic--basic&globals=outline:true) was implemented by jbetancur
+- <!---Why---> [React Datatable documentation ](https://jbetancur.github.io/react-data-table-component/?path=/docs/pagination-basic--basic&globals=outline:true)'s Code was used to use the library and create the pagination in the tables used
+- <!---How---> [React Datatable documentation ](https://jbetancur.github.io/react-data-table-component/?path=/docs/pagination-basic--basic&globals=outline:true) Code was modified by using different Data and columns and using the tags separately rather than a function.
+
+
