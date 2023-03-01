@@ -11,6 +11,7 @@ import SignupRestaurant from "./components/SignupRestaurant/SignupRestaurant";
 import RestaurantApprovalPending from "./components/RestaurantApprovalPending/RestaurantApprovalPending";
 import RestaurantSideBar from "./components/RestaurantSideBar/RestaurantSideBar";
 import Subscription from "./components/Subscription/Subscription";
+import Appointment from "./components/Appoinment/Appointment";
 import SignupVolunteer from "./components/Volunteer/SignupVolunteer";
 
 const App = () => {
@@ -32,6 +33,7 @@ const App = () => {
         <Route path="/restaurantSideBar" element={<RestaurantSideBar />} />
         <Route path="/restaurants" element={<Subscription />} />
         <Route path="/signupVolunteer" element={<SignupVolunteer />} />
+        <Route path="/appointment" element={<Appointment />} />
       </Routes>
     </StyledApp>
   );

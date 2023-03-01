@@ -11,8 +11,12 @@ const Navbar = () => {
         <NavLink className="nav-link nav-link-left">About Us</NavLink>
       </div>
       <div className="nav-links">
-        <NavLink className="nav-link login" to="/login">Login</NavLink>
-        <NavLink className="nav-link sign-up" to='/signup'>Sign Up</NavLink>
+        <NavLink className="nav-link login" to="/login">
+          Login
+        </NavLink>
+        <NavLink className="nav-link sign-up" to="/signup">
+          Sign Up
+        </NavLink>
       </div>
     </StyledNavbar>
   );
@@ -43,6 +47,7 @@ const StyledNavbar = styled.nav`
     align-items: center;
     gap: 2rem;
     .nav-link {
+      color: black;
       :hover {
         cursor: pointer;
       }
@@ -55,7 +60,7 @@ const StyledNavbar = styled.nav`
       text-decoration: none;
     }
 
-    .login{
+    .login {
       text-decoration: none;
     }
   }

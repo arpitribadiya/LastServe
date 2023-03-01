@@ -85,6 +85,11 @@ const StyledRestaurant = styled.div`
         cursor: pointer;
       }
     }
+    .res-location {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
   }
 `;
 
