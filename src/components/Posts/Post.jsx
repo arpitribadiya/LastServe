@@ -2,7 +2,20 @@ import React from "react";
 import styled from "styled-components";
 import res_img from "../../assets/res_img1.jpg";
 import { GoLocation } from "react-icons/go";
+import { useNavigate } from "react-router-dom";
 const Post = () => {
+  const navigate = useNavigate();
+
+  // get the id or details of the restaurant and pass it to the handler
+  // currently its hard coded value
+  const bookAppointmentHandler = () => {
+    navigate("/appointment", {
+      state: {
+        res_id: "res_id",
+      },
+    });
+  };
+
   return (
     <StyledPost className="post">
       <div className="res-img">
@@ -20,7 +33,9 @@ const Post = () => {
           <GoLocation />
           <span>6969 Bayers Rd, NS</span>
         </p>
-        <button className="res-appointment">Book Appointment</button>
+        <button className="res-appointment" onClick={bookAppointmentHandler}>
+          Book Appointment
+        </button>
       </div>
     </StyledPost>
   );
@@ -58,11 +73,9 @@ const StyledPost = styled.div`
       text-align: justify;
     }
     .res-location {
-      color: rgb(150, 150, 150);
       display: flex;
       align-items: center;
       gap: 1rem;
-      font-weight: 300;
       span {
         font-size: 1.5rem;
       }
