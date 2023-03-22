@@ -1,9 +1,22 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import usrDetails_img from "../../assets/user_details.jpg";
 import Footer from "../Footer/Footer";
+import axios from "axios";
 
-function UserDetails() {
+const UserDetails = ({ email }) => {
+  console.log(email);
+  const [userDetails, setUserDetails] = useState('');
+
+  useEffect(() => {
+    const getUserDetails = async () => {
+      const result = await axios.get("http://localhost:5000/users/" + email);
+      setUserDetails(result.data);
+      console.log(result.data);
+    }
+    getUserDetails();
+  }, []);
+
   return (
     <>
       <StyledUsrDetailsImgWrapper className="usrDetails-img-wrapper">
@@ -12,15 +25,15 @@ function UserDetails() {
             <div className="profile-contents">
               <div className="detail-wrapper">
                 <p className="detail-label">First Name:</p>
-                <p className="detail-content">Jimmy</p>
+                <p className="detail-content">{userDetails.fname}</p>
               </div>
               <div className="detail-wrapper">
                 <p className="detail-label">Last Name:</p>
-                <p className="detail-content">Anderson</p>
+                <p className="detail-content">{userDetails.lname}</p>
               </div>
               <div className="detail-wrapper">
                 <p className="detail-label">Email:</p>
-                <p className="detail-content">jimmyand@dal.ca</p>
+                <p className="detail-content">{userDetails.email}</p>
               </div>
             </div>
           </div>

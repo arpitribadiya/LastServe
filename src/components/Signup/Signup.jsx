@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import styled from 'styled-components';
 import SignupModal from '../SignupModal/SignupModal';
 import login_img from "../../assets/login.jpg";
+import axios from 'axios';
 
 function SignUp() {
 
@@ -42,7 +43,17 @@ function SignUp() {
         }
     }
 
-    const handleInputValidation = e => {
+    const emailExists = async () => {
+        const result = await axios.post('http://localhost:5000/users/checkEmail', { email: email });
+        console.log(result);
+        if (result.status === 400) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    const handleInputValidation = async e => {
         const { name, value } = e.target;
         if ('firstName' === name) {
             console.log(value);
@@ -75,7 +86,12 @@ function SignUp() {
             } else if (!validEmail.test(value)) {
                 setEmailError('Enter a valid email address');
                 setDisabled(true);
+            } else if (await emailExists()) {
+                console.log("Email already exists");
+                setEmailError('Email already exists');
+                setDisabled(true);
             } else {
+                console.log("Email doesnt exist");
                 setEmailError('');
                 setDisabled(false);
             }
@@ -123,18 +139,27 @@ function SignUp() {
     const handleSubmit = (e) => {
         e.preventDefault();
         handleInputValidation(e);
-        console.log(blankFromError);
         if (firstNameError || lastNameError || emailError ||
             passwordError || confirmPasswordError) {
             setBlankFormError('Enter mandatory fields');
         } else {
+            const user = {
+                fname: firstName,
+                lname: lastName,
+                email: email,
+                password: password
+            }
             setBlankFormError('');
             setFirstName('');
             setLastName('');
             setEmail('');
             setPassword('');
             setConfirmPassword('');
-            setShowModal(true);
+            axios.post('http://localhost:5000/users/register', user)
+                .then(res => {
+                    console.log(res);
+                    setShowModal(true);
+                });
         }
     }
 
