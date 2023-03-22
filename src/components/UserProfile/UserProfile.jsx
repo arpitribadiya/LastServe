@@ -10,15 +10,17 @@ import app_logo from "../../assets/app_logo.jpg";
 import { Link } from "react-router-dom";
 import UserDetails from '../UserDetails/UserDetails';
 import EditUserDetails from '../EditUserDetails/EditUserDetails';
+import { useLocation } from 'react-router-dom';
 
 function UserProfile() {
 
   const [activeComponent, setactiveComponent] = useState('profile');
   const [activeLink, setActiveLink] = useState('profile');
+  const loc = useLocation();
 
   let component = null;
   if ('profile' === activeComponent) {
-    component = <UserDetails />
+    component = <UserDetails email={loc.state.email} />
   } else if ('edit' === activeComponent) {
     component = <EditUserDetails />
   } else if ('order' === activeComponent) {

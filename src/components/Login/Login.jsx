@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import login_img from "../../assets/login.jpg";
 import Footer from "../Footer/Footer";
+import axios from 'axios';
 
 function Login() {
   const [username, setUsername] = useState("");
@@ -22,17 +23,23 @@ function Login() {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if ("abc@gmail.com" === username && "12345678" === password) {
-      navigate('/home');
-    } 
-    else if("xyz@gmail.com" === username && "12345678" === password){
-      navigate('/restaurantSideBar');
-    }
-    else {
-      setUsername('');
-      setPassword('');
+    try {
+      const result = await axios.post('http://localhost:5000/users/login', { email: username, password: password });
+      if (result.status === 200) {
+        navigate('/home', { state: { email: username } });
+      }
+      else if ("xyz@gmail.com" === username && "12345678" === password) {
+        navigate('/restaurantSideBar');
+      }
+      else {
+        setUsername('');
+        setPassword('');
+        setAuthError("Invalid Username and Password");
+      }
+    } catch (error) {
+      console.error(error);
       setAuthError("Invalid Username and Password");
     }
   };

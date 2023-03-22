@@ -10,7 +10,9 @@ import styled from "styled-components";
 import app_logo from "../../assets/app_logo.jpg";
 import { Link } from "react-router-dom";
 
-const Sidebar = ({ activeRoute }) => {
+const Sidebar = ({ activeRoute, email }) => {
+  console.log(activeRoute);
+  console.log(email);
   return (
     <StyledSideabar>
       <div className="logo-wrapper">
@@ -24,32 +26,29 @@ const Sidebar = ({ activeRoute }) => {
           <Link to="/home">Home</Link>
         </div>
         <div
-          className={`link-wrapper ${
-            activeRoute === "explore" ? "active" : ""
-          }`}
+          className={`link-wrapper ${activeRoute === "explore" ? "active" : ""
+            }`}
         >
           <AiOutlineSearch />
           <Link to="/restaurants">Explore</Link>
         </div>
         <div
-          className={`link-wrapper ${
-            activeRoute === "notifications" ? "active" : ""
-          }`}
+          className={`link-wrapper ${activeRoute === "notifications" ? "active" : ""
+            }`}
         >
           <IoNotificationsOutline />
           <Link to="/notifications">Notifications</Link>
         </div>
         <div
-          className={`link-wrapper ${
-            activeRoute === "appointments" ? "active" : ""
-          }`}
+          className={`link-wrapper ${activeRoute === "appointments" ? "active" : ""
+            }`}
         >
           <AiOutlineCalendar />
           <Link to="/appointments">Appointments</Link>
         </div>
         <div className={`link-wrapper profile-wrapper`}>
           <BiUser />
-          <Link to="/profile">Profile</Link>
+          <Link to="/profile" state={{ email: email }}>Profile</Link>
         </div>
       </div>
     </StyledSideabar>
