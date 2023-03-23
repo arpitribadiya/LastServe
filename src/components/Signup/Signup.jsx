@@ -157,7 +157,6 @@ function SignUp() {
             setConfirmPassword('');
             axios.post('http://localhost:5000/users/register', user)
                 .then(res => {
-                    console.log(res);
                     setShowModal(true);
                 });
         }

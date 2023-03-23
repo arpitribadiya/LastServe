@@ -1,16 +1,27 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components';
 import Footer from '../Footer/Footer';
 import edit_img from '../../assets/edit_usr_det.jpg';
 import { useNavigate } from 'react-router-dom';
 import EditUsrDetModal from './EditUsrDetModal';
+import axios from 'axios';
 
-function EditUserDetails() {
+const EditUserDetails = ({ email }) => {
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
+    const [emailInput, setEmailInput] = useState("");
 
-    const [firstName, setFirstName] = useState('Jimmy');
-    const [lastName, setLastName] = useState('Anderson');
+    useEffect(() => {
+        const getUserDetails = async () => {
+            const result = await axios.get("http://localhost:5000/users/" + email);
+            setFirstName(result.data.fname);
+            setLastName(result.data.lname);
+            setEmailInput(email);
+        }
+        getUserDetails();
+    }, []);
 
-    const [firstNameError, setFirstNameError] = useState();
+    const [firstNameError, setFirstNameError] = useState('');
     const [lastNameError, setLastNameError] = useState('');
     const [blankFormError, setBlankFormError] = useState('');
 
@@ -19,7 +30,6 @@ function EditUserDetails() {
     const nameRegEx = new RegExp('^[A-Za-z]+$');
 
     const navigate = useNavigate();
-
 
     const handleOnChange = (e) => {
         const { name, value } = e.target;
@@ -51,16 +61,20 @@ function EditUserDetails() {
         }
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         handleInputValidation(e);
         if (firstNameError || lastNameError) {
             setBlankFormError('Enter mandatory fields');
         } else {
-            setBlankFormError('');
-            setFirstNameError('');
-            setLastNameError('');
-            setShowModal(true);
+            console.log(lastName);
+            const result = await axios.put('http://localhost:5000/users/update', { fname: firstName, lname: lastName, email: emailInput });
+            if (result.status === 200) {
+                setBlankFormError('');
+                setFirstNameError('');
+                setLastNameError('');
+                setShowModal(true);
+            }
         }
     }
 
@@ -75,21 +89,21 @@ function EditUserDetails() {
                 <StyledEditDetails className='edit-det-form' onSubmit={(e) => handleSubmit(e)}>
                     <div className='input-wrapper'>
                         <label className='form-label'>First Name*</label>
-                        <input className='form-input' type='text' name='firstName' value={firstName} onChange={(e) => handleOnChange(e)} onBlur={handleInputValidation} placeholder='Dummy FirstName'></input>
+                        <input className='form-input' type='text' name='firstName' value={firstName} onChange={(e) => handleOnChange(e)} onBlur={handleInputValidation} placeholder='FirstName'></input>
                     </div>
                     <div className='err'>
                         {firstNameError ? firstNameError : ''}
                     </div>
                     <div className='input-wrapper'>
                         <label className='form-label'>Last Name*</label>
-                        <input className='form-input' type='text' name='lastName' value={lastName} onChange={(e) => handleOnChange(e)} onBlur={handleInputValidation} placeholder='Dummy LastName'></input>
+                        <input className='form-input' type='text' name='lastName' value={lastName} onChange={(e) => handleOnChange(e)} onBlur={handleInputValidation} placeholder='LastName'></input>
                     </div>
                     <div className='err'>
                         {lastNameError ? lastNameError : ''}
                     </div>
                     <div className='input-wrapper'>
                         <label className='form-label'>Email</label>
-                        <input className='form-input-readonly' type='email' name='email' value='jimmyand@dal.ca' readOnly placeholder='Email'></input>
+                        <input className='form-input-readonly' type='email' name='email' value={emailInput} readOnly placeholder='Email'></input>
                     </div>
                     <div className='footNote'>
                         <p>* Mandatory fields</p>

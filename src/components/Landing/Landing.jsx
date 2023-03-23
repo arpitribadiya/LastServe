@@ -7,10 +7,9 @@ import { useLocation } from "react-router-dom";
 
 const Landing = () => {
   const loc = useLocation();
-  console.log(loc.state);
   return (
     <StyledLanding>
-      <Sidebar activeRoute="home" email={loc.state.email} />
+      <Sidebar activeRoute="home" />
       <Posts />
       <Filters />
     </StyledLanding>

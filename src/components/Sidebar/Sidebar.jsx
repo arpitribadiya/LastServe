@@ -11,8 +11,6 @@ import app_logo from "../../assets/app_logo.jpg";
 import { Link } from "react-router-dom";
 
 const Sidebar = ({ activeRoute, email }) => {
-  console.log(activeRoute);
-  console.log(email);
   return (
     <StyledSideabar>
       <div className="logo-wrapper">
@@ -48,7 +46,7 @@ const Sidebar = ({ activeRoute, email }) => {
         </div>
         <div className={`link-wrapper profile-wrapper`}>
           <BiUser />
-          <Link to="/profile" state={{ email: email }}>Profile</Link>
+          <Link to="/profile">Profile</Link>
         </div>
       </div>
     </StyledSideabar>

@@ -28,7 +28,8 @@ function Login() {
     try {
       const result = await axios.post('http://localhost:5000/users/login', { email: username, password: password });
       if (result.status === 200) {
-        navigate('/home', { state: { email: username } });
+        navigate('/home');
+        window.localStorage.setItem("email", username);
       }
       else if ("xyz@gmail.com" === username && "12345678" === password) {
         navigate('/restaurantSideBar');

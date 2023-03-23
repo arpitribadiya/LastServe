@@ -5,14 +5,13 @@ import Footer from "../Footer/Footer";
 import axios from "axios";
 
 const UserDetails = ({ email }) => {
-  console.log(email);
   const [userDetails, setUserDetails] = useState('');
 
   useEffect(() => {
+    console.log(email);
     const getUserDetails = async () => {
       const result = await axios.get("http://localhost:5000/users/" + email);
       setUserDetails(result.data);
-      console.log(result.data);
     }
     getUserDetails();
   }, []);
