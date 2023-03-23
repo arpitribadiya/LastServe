@@ -43,34 +43,47 @@ function PasswordReset() {
 
   const handleOnClick = async (e) => {
     e.preventDefault();
-    const result = await axios.get('http://localhost:5000/users/resetkey/' + email);
-    if (result.status === 200) {
-      setipWrapDisable('input-wrapper');
-      setNewPasBtn('newpass-btn');
-      setResend("Resend");
-      setResetKeyError('');
-    } else {
+    try {
+      const result = await axios.get('http://localhost:5000/users/resetkey/' + email);
+      console.log('On click');
+      console.log(result.status);
+      if (result.status === 200) {
+        setipWrapDisable('input-wrapper');
+        setNewPasBtn('newpass-btn');
+        setResend("Resend");
+        setResetKeyError('');
+      }
+    } catch (error) {
       setResetKeyError('Unable to send key');
     }
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const result = await axios.post('http://localhost:5000/users/verifyKey', { email: email, resetKey: resetKey })
-    if (result.status === 200) {
-      navigate('/newPassword');
-    } else {
-      setResetKeyError('Invalid Reset Key');
+    try {
+      const result = await axios.post('http://localhost:5000/users/verifyKey', { email: email, resetKey: resetKey });
+      if (result.status === 200) {
+        navigate('/newPassword');
+      }
+    } catch (error) {
+      if (error.response.status === 403) {
+        setResetKeyError('Invalid Reset Key');
+      } else {
+        console.error(error);
+      }
     }
   }
 
   const emailExists = async () => {
-    const result = await axios.post('http://localhost:5000/users/checkEmail', { email: email });
-    console.log(result);
-    if (result.status === 400) {
-      return true;
-    } else {
-      return false;
+    try {
+      const result = await axios.post('http://localhost:5000/users/checkEmail', { email: email });
+      if (result.status === 200) {
+        return false;
+      }
+    } catch (error) {
+      if (error.response.status === 400) {
+        return true;
+      }
     }
   }
 

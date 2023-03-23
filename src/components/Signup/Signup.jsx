@@ -44,12 +44,15 @@ function SignUp() {
     }
 
     const emailExists = async () => {
-        const result = await axios.post('http://localhost:5000/users/checkEmail', { email: email });
-        console.log(result);
-        if (result.status === 400) {
-            return true;
-        } else {
-            return false;
+        try {
+            const result = await axios.post('http://localhost:5000/users/checkEmail', { email: email });
+            if (result.status === 400) {
+                return true;
+            }
+        } catch (error) {
+            if (error.response.status === 200) {
+                return false;
+            }
         }
     }
 

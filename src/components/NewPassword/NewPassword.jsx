@@ -9,7 +9,7 @@ function NewPassword() {
 
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
-    const [disabled, setDisabled] = useState('false');
+    const [disabled, setDisabled] = useState(true);
 
     const [passwordError, setPasswordError] = useState('');
     const [confirmPasswordError, setConfirmPasswordError] = useState('');
@@ -122,7 +122,7 @@ function NewPassword() {
                         {<span className='blank-err'>{blankFromError}</span>}
                     </div>
 
-                    <button className="new-pass-btn" disabled={disabled} >Reset Password</button>
+                    <button className="new-pass-btn" disabled={disabled}>Reset Password</button>
                     <div className='reset-modal'>
                         <NewPassModal showModal={showModal} onClose={handleModalClose} />
                     </div>
@@ -168,7 +168,7 @@ const StyledReset = styled.form`
       border-radius: 5px;
     }
   }
-  button {
+    .new-pass-btn {
     background-color: rgb(0, 127, 255);
     outline: none;
     border: none;
@@ -176,16 +176,16 @@ const StyledReset = styled.form`
     color: white;
     padding: 1rem;
     margin-top: auto;
-    :hover {
+    }
+    .new-pass-btn:hover {
       cursor: pointer;
     }
-    new-pass-btn:disabled,
-    [disabled]{
+    .new-pass-btn:disabled,
+    .new-pass-btn[disabled]{
     cursor: not-allowed;
     color: #666666;
     background-color: #ccc;
-    }
-   } 
+    } 
   .err{
     padding: 0rem;
     color: red;
