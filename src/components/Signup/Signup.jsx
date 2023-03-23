@@ -87,11 +87,9 @@ function SignUp() {
                 setEmailError('Enter a valid email address');
                 setDisabled(true);
             } else if (await emailExists()) {
-                console.log("Email already exists");
                 setEmailError('Email already exists');
                 setDisabled(true);
             } else {
-                console.log("Email doesnt exist");
                 setEmailError('');
                 setDisabled(false);
             }
