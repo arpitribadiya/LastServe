@@ -10,7 +10,7 @@ import styled from "styled-components";
 import app_logo from "../../assets/app_logo.jpg";
 import { Link } from "react-router-dom";
 
-const Sidebar = ({ activeRoute, email }) => {
+const Sidebar = ({ activeRoute }) => {
   return (
     <StyledSideabar>
       <div className="logo-wrapper">

@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import passreset_img from '../../assets/passreset.jpg'
 import Footer from '../Footer/Footer';
+import axios from 'axios';
 
 function PasswordReset() {
 
@@ -27,12 +28,12 @@ function PasswordReset() {
     }
   }
 
-  const handleInputValidation = e => {
+  const handleInputValidation = async e => {
     const { name, value } = e.target;
     if ("email" === name) {
       if (!value) {
         setEmailError('Enter an email');
-      } else if (!('abc@gmail.com' === value)) {
+      } else if (!(await emailExists())) {
         setEmailError('Entered email is not a registered email');
       } else {
         setEmailError('');
@@ -40,19 +41,49 @@ function PasswordReset() {
     }
   }
 
-  const handleOnClick = (e) => {
+  const handleOnClick = async (e) => {
     e.preventDefault();
-    setipWrapDisable('input-wrapper');
-    setNewPasBtn('newpass-btn');
-    setResend("Resend");
+    try {
+      const result = await axios.get('http://localhost:5000/users/resetkey/' + email);
+      console.log('On click');
+      console.log(result.status);
+      if (result.status === 200) {
+        setipWrapDisable('input-wrapper');
+        setNewPasBtn('newpass-btn');
+        setResend("Resend");
+        setResetKeyError('');
+      }
+    } catch (error) {
+      setResetKeyError('Unable to send key');
+    }
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if ("abc123" === resetKey && "abc") {
-      navigate('/newPassword');
-    } else {
-      setResetKeyError('Invalid Reset Key');
+    try {
+      const result = await axios.post('http://localhost:5000/users/verifyKey', { email: email, resetKey: resetKey });
+      if (result.status === 200) {
+        navigate('/newPassword');
+      }
+    } catch (error) {
+      if (error.response.status === 403) {
+        setResetKeyError('Invalid Reset Key');
+      } else {
+        console.error(error);
+      }
+    }
+  }
+
+  const emailExists = async () => {
+    try {
+      const result = await axios.post('http://localhost:5000/users/checkEmail', { email: email });
+      if (result.status === 200) {
+        return false;
+      }
+    } catch (error) {
+      if (error.response.status === 400) {
+        return true;
+      }
     }
   }
 

@@ -34,14 +34,16 @@ function Login() {
       else if ("xyz@gmail.com" === username && "12345678" === password) {
         navigate('/restaurantSideBar');
       }
-      else {
+    } catch (error) {
+      if (error.response.status === 403) {
         setUsername('');
         setPassword('');
         setAuthError("Invalid Username and Password");
+      } else {
+        setUsername('');
+        setPassword('');
+        console.error(error);
       }
-    } catch (error) {
-      console.error(error);
-      setAuthError("Invalid Username and Password");
     }
   };
 
