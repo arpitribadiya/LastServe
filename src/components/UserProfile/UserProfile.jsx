@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
   AiOutlineUser,
   AiOutlineEdit,
@@ -12,20 +12,28 @@ import UserDetails from '../UserDetails/UserDetails';
 import EditUserDetails from '../EditUserDetails/EditUserDetails';
 import { useLocation } from 'react-router-dom';
 
-function UserProfile() {
+const UserProfile = () => {
 
   const [activeComponent, setactiveComponent] = useState('profile');
   const [activeLink, setActiveLink] = useState('profile');
-  const loc = useLocation();
+  const [component, setComponent] = useState(null);
 
-  let component = null;
-  if ('profile' === activeComponent) {
-    component = <UserDetails email={loc.state.email} />
-  } else if ('edit' === activeComponent) {
-    component = <EditUserDetails />
-  } else if ('order' === activeComponent) {
 
-  }
+  useEffect(() => {
+    // console.log(loc.state.email);
+    const email = window.localStorage.getItem("email");
+    console.log(window.localStorage);
+    if ('profile' === activeComponent) {
+      // console.log(loc.state.email);
+      setComponent(<UserDetails email={email} />);
+    } else if ('edit' === activeComponent) {
+      // console.log(loc.state);
+      setComponent(<EditUserDetails email={email} />);
+    } else if ('order' === activeComponent) {
+
+    }
+  }, [activeComponent]);
+
 
   return (
     <>
