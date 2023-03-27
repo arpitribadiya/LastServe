@@ -5,7 +5,7 @@ import login_img from "../../assets/login.jpg";
 import Footer from "../Footer/Footer";
 import axios from 'axios';
 
-function Login() {
+function RestaurantLogin() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -88,7 +88,7 @@ function Login() {
             {<span className='err'>{authError}</span>}
           </div>
           <Link to="/passwordReset">Reset Password</Link>
-          <Link to="/restaurantLogin">Login Restaurant</Link>
+          <Link to="/login">Login User</Link>
         </StyledLogin>
         <StyledLoginImg className="login-img">
           <img src={login_img} alt="login_img" />
@@ -179,4 +179,4 @@ const StyledLoginImg = styled.div`
   }
 `;
 
-export default Login;
+export default RestaurantLogin;

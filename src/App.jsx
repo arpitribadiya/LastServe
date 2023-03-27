@@ -13,6 +13,7 @@ import RestaurantSideBar from "./components/RestaurantSideBar/RestaurantSideBar"
 import Subscription from "./components/Subscription/Subscription";
 import Appointment from "./components/Appoinment/Appointment";
 import SignupVolunteer from "./components/Volunteer/SignupVolunteer";
+import RestaurantLogin from "./components/RestaurantLogin/RestaurantLogin";
 
 const App = () => {
   return (
@@ -26,6 +27,7 @@ const App = () => {
         <Route path="/newPassword" element={<NewPassword />} />
         <Route path="/profile" element={<UserProfile />} />
         <Route path="/signupRestaurant" element={<SignupRestaurant />} />
+        <Route path="/restaurantLogin" element={<RestaurantLogin />} />
         <Route
           path="/approvalPending"
           element={<RestaurantApprovalPending />}
