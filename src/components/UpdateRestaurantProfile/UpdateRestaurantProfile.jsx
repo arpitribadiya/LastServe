@@ -1,16 +1,25 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import axios from 'axios';
 
 
 
-function UpdateRestaurantProfile() {
+function UpdateRestaurantProfile(props) {
 
-    
-    const [restaurantName, setRestaurantName] = useState('Subway');
-    const [address, setAddress] = useState('133, Spring Garden Road');
-    const [postalcode, setPostalCode] = useState('B3J 2K9');
-    const [phoneNumber, setPhoneNumber] = useState('1231231234');
+    React.useEffect(() => {
+        setRestaurantName(props.restaurantdetails.name);
+        setAddress(props.restaurantdetails.address);
+        setPostalCode(props.restaurantdetails.postalcode);
+        setPhoneNumber(props.restaurantdetails.phonenumber);
+    });
+
+
+
+    const [restaurantName, setRestaurantName] = useState();
+    const [address, setAddress] = useState();
+    const [postalcode, setPostalCode] = useState();
+    const [phoneNumber, setPhoneNumber] = useState();
 
     const [restaurantNameError, setRestaurantNameError] = useState('');
     const [addressError, setAddressError] = useState('');
@@ -90,7 +99,19 @@ function UpdateRestaurantProfile() {
         if (restaurantNameError || addressError || postalcodeError || phoneNumberError) {
             setBlankFormError('Enter mandatory fields');
         } else {
-            navigate('/restaurantSideBar');
+            const email = window.localStorage.getItem("email");
+
+            const restaurant = {
+                "name": restaurantName,
+                "address": address,
+                "postalcode": postalcode,
+                "phonenumber": phoneNumber,
+                "email": email,
+            };
+            axios.put('http://localhost:5000/restaurants/updateRestaurant', restaurant)
+                .then(res => {
+                    navigate('/restaurantSideBar');
+                });
         }
     }
 

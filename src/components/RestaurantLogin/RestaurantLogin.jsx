@@ -26,13 +26,15 @@ function RestaurantLogin() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const result = await axios.post('http://localhost:5000/users/login', { email: username, password: password });
+      const result = await axios.post('http://localhost:5000/restaurants/login', { email: username, password: password });
       if (result.status === 200) {
-        navigate('/home');
+        navigate('/restaurantSideBar');
         window.localStorage.setItem("email", username);
       }
-      else if ("xyz@gmail.com" === username && "12345678" === password) {
-        navigate('/restaurantSideBar');
+      else{
+        setUsername('');
+        setPassword('');
+        setAuthError("Invalid Username and Password");
       }
     } catch (error) {
       if (error.response.status === 403) {
@@ -87,7 +89,6 @@ function RestaurantLogin() {
           <div className="err">
             {<span className='err'>{authError}</span>}
           </div>
-          <Link to="/passwordReset">Reset Password</Link>
           <Link to="/login">Login User</Link>
         </StyledLogin>
         <StyledLoginImg className="login-img">
