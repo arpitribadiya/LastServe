@@ -164,7 +164,8 @@ function SignupRestaurant() {
                 "postalcode": postalcode,
                 "phonenumber": phoneNumber,
                 "email": email,
-                "password": password
+                "password": password,
+                "isapproved": 0
             };
             const testemail = {
                 "email" : restaurant.email

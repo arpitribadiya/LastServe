@@ -15,7 +15,7 @@ function UpdateRestaurantProfile(props) {
         setAddress(props.restaurantdetails.address);
         setPostalCode(props.restaurantdetails.postalcode);
         setPhoneNumber(props.restaurantdetails.phonenumber);
-    },[]);
+    });
 
 
 
