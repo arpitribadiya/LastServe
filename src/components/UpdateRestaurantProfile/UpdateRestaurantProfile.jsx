@@ -1,3 +1,6 @@
+//Created By Arpit Ribadiya (B00932018)
+
+
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
@@ -12,7 +15,7 @@ function UpdateRestaurantProfile(props) {
         setAddress(props.restaurantdetails.address);
         setPostalCode(props.restaurantdetails.postalcode);
         setPhoneNumber(props.restaurantdetails.phonenumber);
-    });
+    },[]);
 
 
 
