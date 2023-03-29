@@ -1,15 +1,34 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components';
 import restaurant_img from "../../assets/Restaurant.avif";
 import UpdateRestaurantProfile from '../UpdateRestaurantProfile/UpdateRestaurantProfile';
+import axios from 'axios';
 
 function RestaurantProfile() {
+
+  const [childData, setchildData] = useState('');
+
+  React.useEffect(() => {
+    const username = window.localStorage.getItem("email");
+    const email = {
+      "email": username
+    }
+    axios.post('http://localhost:5000/restaurants/viewRestaurant', email)
+    .then(function (response) {
+      setchildData(response.data.restaurant);
+ })
+.catch(function (error) {
+   console.log(error);
+});
+  });
+
     return (
     <StyledDiv>
      <StyledHome className="home">
       <StyledSectionOne className="section-1">
         {/* <div className="section-details"> */}
-            <UpdateRestaurantProfile />
+
+            <UpdateRestaurantProfile restaurantdetails = {childData} />
         {/* </div> */}
         <div className="section-img">
           <img src={restaurant_img} alt="restaurant_img" />

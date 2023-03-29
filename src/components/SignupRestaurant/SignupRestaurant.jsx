@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import login_img from "../../assets/login.jpg";
+import axios from 'axios';
 
 function SignupRestaurant() {
 
@@ -154,7 +155,18 @@ function SignupRestaurant() {
             passwordError || confirmPasswordError) {
             setBlankFormError('Enter mandatory fields');
         } else {
-            navigate('/approvalPending');
+            const restaurant = {
+                "name": restaurantName,
+                "address": address,
+                "postalcode": postalcode,
+                "phonenumber": phoneNumber,
+                "email": email,
+                "password": password
+            };
+            axios.post('http://localhost:5000/restaurants/register', restaurant)
+                .then(res => {
+                    navigate('/approvalPending');
+                });
         }
     }
 

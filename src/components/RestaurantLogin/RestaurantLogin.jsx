@@ -5,7 +5,7 @@ import login_img from "../../assets/login.jpg";
 import Footer from "../Footer/Footer";
 import axios from 'axios';
 
-function Login() {
+function RestaurantLogin() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -26,13 +26,15 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const result = await axios.post('http://localhost:5000/users/login', { email: username, password: password });
+      const result = await axios.post('http://localhost:5000/restaurants/login', { email: username, password: password });
       if (result.status === 200) {
-        navigate('/home');
+        navigate('/restaurantSideBar');
         window.localStorage.setItem("email", username);
       }
-      else if ("xyz@gmail.com" === username && "12345678" === password) {
-        navigate('/restaurantSideBar');
+      else{
+        setUsername('');
+        setPassword('');
+        setAuthError("Invalid Username and Password");
       }
     } catch (error) {
       if (error.response.status === 403) {
@@ -87,8 +89,7 @@ function Login() {
           <div className="err">
             {<span className='err'>{authError}</span>}
           </div>
-          <Link to="/passwordReset">Reset Password</Link>
-          <Link to="/restaurantLogin">Login Restaurant</Link>
+          <Link to="/login">Login User</Link>
         </StyledLogin>
         <StyledLoginImg className="login-img">
           <img src={login_img} alt="login_img" />
@@ -179,4 +180,4 @@ const StyledLoginImg = styled.div`
   }
 `;
 
-export default Login;
+export default RestaurantLogin;
