@@ -59,8 +59,6 @@ function SignUp() {
     const handleInputValidation = async e => {
         const { name, value } = e.target;
         if ('firstName' === name) {
-            console.log(value);
-            console.log(value.match(nameRegEx));
             if (!value) {
                 setFirstNameError('Enter first name');
                 setDisabled(true);

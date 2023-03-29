@@ -45,8 +45,6 @@ function PasswordReset() {
     e.preventDefault();
     try {
       const result = await axios.get('http://localhost:5000/users/resetkey/' + email);
-      console.log('On click');
-      console.log(result.status);
       if (result.status === 200) {
         setipWrapDisable('input-wrapper');
         setNewPasBtn('newpass-btn');
@@ -63,6 +61,7 @@ function PasswordReset() {
     try {
       const result = await axios.post('http://localhost:5000/users/verifyKey', { email: email, resetKey: resetKey });
       if (result.status === 200) {
+        window.localStorage.setItem('resetEmail', email);
         navigate('/newPassword');
       }
     } catch (error) {

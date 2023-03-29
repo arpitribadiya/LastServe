@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
@@ -82,7 +83,14 @@ function NewPassword() {
             setBlankFormError('');
             setPassword('');
             setConfirmPassword('');
-            setShowModal(true);
+            axios.put('http://localhost:5000/users/updatePassword',
+                {
+                    email: window.localStorage.getItem('resetEmail'),
+                    newPassword: password
+                }).then(res => {
+                    window.localStorage.removeItem('resetEmail');
+                    setShowModal(true);
+                });
         }
     }
 
