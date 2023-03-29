@@ -166,10 +166,21 @@ function SignupRestaurant() {
                 "email": email,
                 "password": password
             };
-            axios.post('http://localhost:5000/restaurants/register', restaurant)
+            const testemail = {
+                "email" : restaurant.email
+            }
+
+            axios.post('http://localhost:5000/restaurants/checkEmail', testemail)
                 .then(res => {
-                    navigate('/approvalPending');
+                    axios.post('http://localhost:5000/restaurants/register', restaurant)
+                    .then(res => {
+                        navigate('/approvalPending');
+                    });
+                })
+                .catch(({res}) => {
+                    setBlankFormError('Email already Exists. Please, enter different email.');
                 });
+            
         }
     }
 
