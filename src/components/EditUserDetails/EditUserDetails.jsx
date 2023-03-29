@@ -67,7 +67,6 @@ const EditUserDetails = ({ email }) => {
         if (firstNameError || lastNameError) {
             setBlankFormError('Enter mandatory fields');
         } else {
-            console.log(lastName);
             const result = await axios.put('http://localhost:5000/users/update', { fname: firstName, lname: lastName, email: emailInput });
             if (result.status === 200) {
                 setBlankFormError('');
