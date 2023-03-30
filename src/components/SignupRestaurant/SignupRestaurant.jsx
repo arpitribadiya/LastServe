@@ -1,3 +1,6 @@
+//Created By Arpit Ribadiya (B00932018)
+
+
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
@@ -161,12 +164,24 @@ function SignupRestaurant() {
                 "postalcode": postalcode,
                 "phonenumber": phoneNumber,
                 "email": email,
-                "password": password
+                "password": password,
+                "isapproved": 0
             };
-            axios.post('http://localhost:5000/restaurants/register', restaurant)
+            const testemail = {
+                "email" : restaurant.email
+            }
+
+            axios.post('http://localhost:5000/restaurants/checkEmail', testemail)
                 .then(res => {
-                    navigate('/approvalPending');
+                    axios.post('http://localhost:5000/restaurants/register', restaurant)
+                    .then(res => {
+                        navigate('/approvalPending');
+                    });
+                })
+                .catch(({res}) => {
+                    setBlankFormError('Email already Exists. Please, enter different email.');
                 });
+            
         }
     }
 
