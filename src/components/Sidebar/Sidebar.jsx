@@ -24,13 +24,14 @@ const Sidebar = ({ activeRoute }) => {
           <Link to="/home">Home</Link>
         </div>
         <div
-          className={`link-wrapper ${activeRoute === "explore" ? "active" : ""
-            }`}
+          className={`link-wrapper ${
+            activeRoute === "explore" ? "active" : ""
+          }`}
         >
           <AiOutlineSearch />
           <Link to="/restaurants">Explore</Link>
         </div>
-        <div
+        {/* <div
           className={`link-wrapper ${activeRoute === "notifications" ? "active" : ""
             }`}
         >
@@ -43,7 +44,7 @@ const Sidebar = ({ activeRoute }) => {
         >
           <AiOutlineCalendar />
           <Link to="/appointments">Appointments</Link>
-        </div>
+        </div> */}
         <div className={`link-wrapper profile-wrapper`}>
           <BiUser />
           <Link to="/profile">Profile</Link>
