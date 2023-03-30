@@ -4,18 +4,61 @@ import DashboardHeader from '../DashboardHeader/DashboardHeader';
 import { toast, ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import DataTable from 'react-data-table-component';
+import axios from 'axios';
 
 function RestaurantOrders() {
-    const [selectedRows, setSelectedRows] = useState([]);
+    const [activeOrders, setActiveOrders] = useState([]);
+    const [pastOrders, setPastOrders] = useState([]);
+    const [pastOrdersPending, setPastOrdersPending] = useState(true);
+    const [activeOrdersPending, setActiveOrdersPending] = useState(true);
+    const[updateOrders,setUpdateOrders]=useState(false)
+    const email=window.localStorage.getItem("email");
 
 	useEffect(() => {
-	}, [selectedRows]);
+    const getActiveOrders=async () => {
+    const result = await axios.get('http://localhost:5000/restaurantorders/activeorders', {headers:{ email: email}});
+    if(result.status===200){
+      setActiveOrders(result.data)
+      setActiveOrdersPending(false)
+      setUpdateOrders(false)
+    }
+  }
+  getActiveOrders();
+
+	},[updateOrders]);
+
+  useEffect(() => {
+    const getPastOrders=async () => {
+      const result = await axios.get('http://localhost:5000/restaurantorders/pastorders', {headers:{ email: email}});
+      if(result.status===200){
+        setPastOrders(result.data)
+        setPastOrdersPending(false)
+        setUpdateOrders(false)
+      }
+
+    }
+    getPastOrders();
+
+	}, [updateOrders]);
 
 	const handleButtonClickPacked = (e) => {
 		
         let orderNumber=e.currentTarget.parentNode.parentNode.firstChild.firstChild.innerText;
-        let message=orderNumber+"  status could not be set to packed, please try again in some time" 
-        toast.error(message, {
+        let link='http://localhost:5000/restaurantorders/changeorderstatus/'+orderNumber;
+        const changeStatus =async () => {
+        const result = await axios.post(link,{status:"packed"}, {headers:{ email: email}});
+        let error=true
+        let message=""
+        console.log(result.status)
+        if (result.status!=204){
+          message="status for the order "+orderNumber+" could not be set to packed, please try again in some time" 
+        }
+        else{
+          message="status for the order "+orderNumber+" changed to packed" 
+          error=false
+        }
+        if (error){
+          toast.error(message, {
             position: "top-center",
             autoClose: false,
             hideProgressBar: false,
@@ -25,11 +68,12 @@ function RestaurantOrders() {
             progress: undefined,
             theme: "light",
             });
-	};
-    const handleButtonClickPicked = (e) => {
-        let orderNumber=e.currentTarget.parentNode.parentNode.firstChild.firstChild.innerText;
-        let message=orderNumber+"  status successfully changed to picked!" 
-        toast.success(message, {
+
+        }else{
+          setPastOrdersPending(true)
+          setActiveOrdersPending(true)
+          setUpdateOrders(true)
+          toast.success(message, {
             position: "top-center",
             autoClose: true,
             hideProgressBar: false,
@@ -39,16 +83,61 @@ function RestaurantOrders() {
             progress: undefined,
             theme: "light",
             });
+        }
+      }
+      changeStatus()
 	};
+	const handleButtonClickPicked = (e) => {
+		
+    let orderNumber=e.currentTarget.parentNode.parentNode.firstChild.firstChild.innerText;
+    let link='http://localhost:5000/restaurantorders/changeorderstatus/'+orderNumber;
+    const changeStatus =async () => {
+    const result = await axios.post(link,{status:"picked"}, {headers:{ email: email}});
+    let error=true
+    let message=""
+    if (result.status!=204){
+      message="status for the order "+orderNumber+" could not be set to picked, please try again in some time" 
+    }
+    else{
+      message="status for the order "+orderNumber+" changed to picked" 
+      error=false
+    }
+    if (error){
+      toast.error(message, {
+        position: "top-center",
+        autoClose: false,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
 
-	const handleChange = useCallback(state => {
-		setSelectedRows(state.selectedRows);
-	}, []);
+    }else{
+      setPastOrdersPending(true)
+      setActiveOrdersPending(true)
+      setUpdateOrders(true)
+      toast.success(message, {
+        position: "top-center",
+        autoClose: true,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
+    }
+  }
+  changeStatus();
+};
+
     const activeOrderColumns = [
 
         {
             name: 'Order Number',
-            selector: row => row.orderNumber,
+            selector: row => row._id,
             sortable: true,
         },
         {
@@ -86,7 +175,7 @@ function RestaurantOrders() {
 
         {
             name: 'Order Number',
-            selector: row => row.orderNumber,
+            selector: row => row._id,
             sortable: true,
         },
         {
@@ -175,9 +264,9 @@ function RestaurantOrders() {
       </div>
         <DataTable
             columns={activeOrderColumns}
-            data={activeOrdesData}
+            data={activeOrders}
+            progressPending={activeOrdersPending}
             pagination
-			onSelectedRowsChange={handleChange}
         />
         <div class="table-heading">
         <h3>Past Orders</h3>
@@ -187,7 +276,8 @@ function RestaurantOrders() {
       </div>
         <DataTable
             columns={pastOrderColumns}
-            data={activeOrdesData}
+            data={pastOrders}
+            progressPending={pastOrdersPending}
             pagination
         />
     </div>
