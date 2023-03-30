@@ -1,49 +1,56 @@
-import React, { useState } from 'react'
-import styled from 'styled-components';
+import React, { useState } from "react";
+import styled from "styled-components";
 import restaurant_img from "../../assets/Restaurant.avif";
-import UpdateRestaurantProfile from '../UpdateRestaurantProfile/UpdateRestaurantProfile';
-import axios from 'axios';
+import UpdateRestaurantProfile from "../UpdateRestaurantProfile/UpdateRestaurantProfile";
+import axios from "axios";
 
 function RestaurantProfile() {
-
-  const [childData, setchildData] = useState('');
+  const [childData, setchildData] = useState(null);
 
   React.useEffect(() => {
     const username = window.localStorage.getItem("email");
     const email = {
-      "email": username
-    }
-    axios.post('http://localhost:5000/restaurants/viewRestaurant', email)
-    .then(function (response) {
-      setchildData(response.data.restaurant);
- })
-.catch(function (error) {
-   console.log(error);
-});
-  });
+      email: username,
+    };
 
-    return (
+    const getData = async () => {
+      try {
+        const result = await axios.post(
+          "http://localhost:5000/restaurants/viewRestaurant",
+          email
+        );
+        console.log(result.data.restaurant);
+        setchildData({ ...result.data.restaurant });
+      } catch (err) {
+        console.error(err);
+      }
+    };
+    getData();
+  }, []);
+
+  return (
     <StyledDiv>
-     <StyledHome className="home">
-      <StyledSectionOne className="section-1">
-        {/* <div className="section-details"> */}
+      <StyledHome className="home">
+        <StyledSectionOne className="section-1">
+          {/* <div className="section-details"> */}
 
-            <UpdateRestaurantProfile restaurantdetails = {childData} />
-        {/* </div> */}
-        <div className="section-img">
-          <img src={restaurant_img} alt="restaurant_img" />
-        </div>
-      </StyledSectionOne>
-    </StyledHome>
+          {childData ? (
+            <UpdateRestaurantProfile restaurantdetails={childData} />
+          ) : null}
+          {/* </div> */}
+          <div className="section-img">
+            <img src={restaurant_img} alt="restaurant_img" />
+          </div>
+        </StyledSectionOne>
+      </StyledHome>
     </StyledDiv>
-    );
-};
+  );
+}
 
 const StyledDiv = styled.div`
   min-height: 100vh;
- margin-left: 10%;
+  margin-left: 10%;
 `;
-
 
 const StyledHome = styled.div``;
 
@@ -73,12 +80,12 @@ const StyledSectionOne = styled.div`
     padding-left: 1rem;
     /* display: none; */
     img {
-        width: 30%;
-        height: 50rem;
-        object-fit: cover;
-        position: absolute;
-        left: 92rem;
-        top: 2rem;
+      width: 30%;
+      height: 50rem;
+      object-fit: cover;
+      position: absolute;
+      left: 92rem;
+      top: 2rem;
     }
   }
   @media only screen and (min-width: 280px) and (max-width: 1120px) {
@@ -103,6 +110,5 @@ const StyledSectionOne = styled.div`
     padding: 2rem 2rem 2rem 5rem;
   }
 `;
-
 
 export default RestaurantProfile;
