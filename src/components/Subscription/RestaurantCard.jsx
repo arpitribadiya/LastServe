@@ -2,12 +2,25 @@ import React, { useState } from "react";
 import { GoLocation } from "react-icons/go";
 import styled from "styled-components";
 import res_img from "../../assets/res_img4.jpg";
+import axios from "axios";
 
-const RestaurantCard = () => {
-  const [isSubscribed, setIsSubscribed] = useState(false);
-
-  const subscriptionHandler = () => {
-    setIsSubscribed(!isSubscribed);
+const RestaurantCard = ({ data, subscribed }) => {
+  const [isSubscribed, setIsSubscribed] = useState(subscribed);
+  const subscriptionHandler = async () => {
+    try {
+      const result = await axios.post(
+        process.env.REACT_APP_BACKEND_URL + "/subscription",
+        {
+          res_id: data._id,
+          email: window.localStorage.getItem("email"),
+          action: isSubscribed ? "unsubscribe" : "subscribe",
+        }
+      );
+      console.log(result);
+      setIsSubscribed(!isSubscribed);
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   return (
@@ -16,7 +29,7 @@ const RestaurantCard = () => {
         <img src={res_img} alt="res_img" />
       </div>
       <div className="res-content-wrapper">
-        <h4 className="res-name">Res name</h4>
+        <h4 className="res-name">{data.name}</h4>
         <p className="res-details">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam,
           qui? Quo magnam aliquid alias ea, magni commodi vero temporibus soluta
@@ -25,7 +38,7 @@ const RestaurantCard = () => {
         </p>
         <p className="res-location">
           <GoLocation />
-          <span>6969 Bayers Rd, NS</span>
+          <span>{data.address}</span>
         </p>
         <button
           className={`res-subscribe ${isSubscribed ? "unsubscribe" : ""}`}
