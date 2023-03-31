@@ -171,9 +171,9 @@ function SignupRestaurant() {
                 "email" : restaurant.email
             }
 
-            axios.post('http://localhost:5000/restaurants/checkEmail', testemail)
+            axios.post('https://csci5709-a3-backend.onrender.com/restaurants/checkEmail', testemail)
                 .then(res => {
-                    axios.post('http://localhost:5000/restaurants/register', restaurant)
+                    axios.post('https://csci5709-a3-backend.onrender.com/restaurants/register', restaurant)
                     .then(res => {
                         navigate('/approvalPending');
                     });

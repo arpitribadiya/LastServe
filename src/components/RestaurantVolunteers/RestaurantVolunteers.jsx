@@ -16,7 +16,7 @@ function RestaurantVolunteers() {
 
   useEffect(() => {
     const fetchVolunteersData=async ()=>{
-      const result = await axios.get('http://localhost:5000/restaurant/volunteers', {headers:{ email: email}});
+      const result = await axios.get('https://csci5709-a3-backend.onrender.com/restaurant/volunteers', {headers:{ email: email}});
       if(result.status===200){
         setVolunteers(result.data)
         setVolunteerPending(false)

@@ -112,7 +112,7 @@ function UpdateRestaurantProfile(props) {
         email: email,
       };
       axios
-        .put("http://localhost:5000/restaurants/updateRestaurant", restaurant)
+        .put("https://csci5709-a3-backend.onrender.com/restaurants/updateRestaurant", restaurant)
         .then((res) => {
           let message="Details updated successfully!!!" 
                     toast.success(message, {

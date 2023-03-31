@@ -9,7 +9,7 @@ const UserDetails = ({ email }) => {
 
   useEffect(() => {
     const getUserDetails = async () => {
-      const result = await axios.get("http://localhost:5000/users/" + email);
+      const result = await axios.get("https://csci5709-a3-backend.onrender.com/users/" + email);
       setUserDetails(result.data);
     }
     getUserDetails();

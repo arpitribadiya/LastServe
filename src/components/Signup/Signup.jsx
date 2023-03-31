@@ -45,7 +45,7 @@ function SignUp() {
 
     const emailExists = async () => {
         try {
-            const result = await axios.post('http://localhost:5000/users/checkEmail', { email: email });
+            const result = await axios.post('https://csci5709-a3-backend.onrender.com/users/checkEmail', { email: email });
             if (result.status === 400) {
                 return true;
             }
@@ -154,7 +154,7 @@ function SignUp() {
             setEmail('');
             setPassword('');
             setConfirmPassword('');
-            axios.post('http://localhost:5000/users/register', user)
+            axios.post('https://csci5709-a3-backend.onrender.com/users/register', user)
                 .then(res => {
                     setShowModal(true);
                 });
