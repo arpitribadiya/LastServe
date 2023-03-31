@@ -1,4 +1,8 @@
+//created by Lav Patel (B00910579)
+import axios from "axios";
 import React from "react";
+import { useEffect } from "react";
+import { useState } from "react";
 import DataTable from "react-data-table-component";
 import "react-toastify/dist/ReactToastify.css";
 import styled from "styled-components";
@@ -6,132 +10,42 @@ import DashboardHeader from "../DashboardHeader/DashboardHeader";
 import "./RestaurantVolunteers.css";
 
 function RestaurantVolunteers() {
+  const email=window.localStorage.getItem("email");
+  const[VolunteersData,setVolunteers]=useState([]);
+  const[volunteerPending,setVolunteerPending]=useState(true);
+
+  useEffect(() => {
+    const fetchVolunteersData=async ()=>{
+      const result = await axios.get('http://localhost:5000/restaurant/volunteers', {headers:{ email: email}});
+      if(result.status===200){
+        setVolunteers(result.data)
+        setVolunteerPending(false)
+      }
+    }
+    fetchVolunteersData();
+	},[]);
   const columns = [
     {
       name: "Name",
-      selector: (row) => row.name,
+      selector: (row) => row.volunteername,
       sortable: true,
     },
     {
       name: "Availability",
-      selector: (row) => row.availability,
+      selector: (row) => row.availibility,
       sortable: true,
     },
     {
       name: "Phone Number",
-      selector: (row) => row.phoneNumber,
+      selector: (row) => row.phonenumber,
     },
   ];
 
-  const data = [
-    {
-      id: 1,
-      name: "jason smith",
-      availability: "Monday to friday 10 am to 10 pm",
-      phoneNumber: "012456789",
-    },
-    {
-      id: 2,
-      name: "Bradd Pitt",
-      availability: "saturday to sunday 10 am to 10 pm",
-      phoneNumber: "012456789",
-    },
-    {
-      id: 3,
-      name: "Jason Stathom",
-      availability: "all day 10 am to 10 pm",
-      phoneNumber: "012456789",
-    },
-    {
-      id: 4,
-      name: "Bradd Pitt",
-      availability: "saturday to sunday 10 am to 10 pm",
-      phoneNumber: "012456789",
-    },
-    {
-      id: 5,
-      name: "Jason Stathom",
-      availability: "all day 10 am to 10 pm",
-      phoneNumber: "012456789",
-    },
-    {
-      id: 6,
-      name: "Bradd Pitt",
-      availability: "saturday to sunday 10 am to 10 pm",
-      phoneNumber: "012456789",
-    },
-    {
-      id: 7,
-      name: "Jason Stathom",
-      availability: "all day 10 am to 10 pm",
-      phoneNumber: "012456789",
-    },
-    {
-      id: 8,
-      name: "Bradd Pitt",
-      availability: "saturday to sunday 10 am to 10 pm",
-      phoneNumber: "012456789",
-    },
-    {
-      id: 9,
-      name: "Jason Stathom",
-      availability: "all day 10 am to 10 pm",
-      phoneNumber: "012456789",
-    },
-    {
-      id: 10,
-      name: "Bradd Pitt",
-      availability: "saturday to sunday 10 am to 10 pm",
-      phoneNumber: "012456789",
-    },
-    {
-      id: 11,
-      name: "Jason Stathom",
-      availability: "all day 10 am to 10 pm",
-      phoneNumber: "012456789",
-    },
-    {
-      id: 12,
-      name: "Bradd Pitt",
-      availability: "saturday to sunday 10 am to 10 pm",
-      phoneNumber: "012456789",
-    },
-    {
-      id: 13,
-      name: "Jason Stathom",
-      availability: "all day 10 am to 10 pm",
-      phoneNumber: "012456789",
-    },
-    {
-      id: 14,
-      name: "Bradd Pitt",
-      availability: "saturday to sunday 10 am to 10 pm",
-      phoneNumber: "012456789",
-    },
-    {
-      id: 15,
-      name: "Jason Stathom",
-      availability: "all day 10 am to 10 pm",
-      phoneNumber: "012456789",
-    },
-    {
-      id: 16,
-      name: "Bradd Pitt",
-      availability: "saturday to sunday 10 am to 10 pm",
-      phoneNumber: "012456789",
-    },
-    {
-      id: 17,
-      name: "Jason Stathom",
-      availability: "all day 10 am to 10 pm",
-      phoneNumber: "012456789",
-    },
-  ];
   return (
     <StyledDiv>
       <DashboardHeader heading="Volunteers" />
       <div class="dashboard-content">
-        <DataTable columns={columns} data={data} pagination />
+        <DataTable columns={columns} data={VolunteersData} progressPending={volunteerPending} pagination />
       </div>
     </StyledDiv>
   );
