@@ -8,7 +8,10 @@ import axios from 'axios';
 
 function RestaurantOrders() {
     const [activeOrders, setActiveOrders] = useState([]);
+    const [tempActiveOrders, setTempActiveOrders] = useState([]);
+    
     const [pastOrders, setPastOrders] = useState([]);
+    const [tempPastOrders, setTempPastOrders] = useState([]);
     const [pastOrdersPending, setPastOrdersPending] = useState(true);
     const [activeOrdersPending, setActiveOrdersPending] = useState(true);
     const[updateOrders,setUpdateOrders]=useState(false)
@@ -19,6 +22,7 @@ function RestaurantOrders() {
     const result = await axios.get('http://localhost:5000/restaurantorders/activeorders', {headers:{ email: email}});
     if(result.status===200){
       setActiveOrders(result.data)
+      setTempActiveOrders(result.data)
       setActiveOrdersPending(false)
       setUpdateOrders(false)
     }
@@ -32,6 +36,7 @@ function RestaurantOrders() {
       const result = await axios.get('http://localhost:5000/restaurantorders/pastorders', {headers:{ email: email}});
       if(result.status===200){
         setPastOrders(result.data)
+        setTempPastOrders(result.data)
         setPastOrdersPending(false)
         setUpdateOrders(false)
       }
@@ -41,65 +46,20 @@ function RestaurantOrders() {
 
 	}, [updateOrders]);
 
-	const handleButtonClickPacked = (e) => {
-		
-        let orderNumber=e.currentTarget.parentNode.parentNode.firstChild.firstChild.innerText;
-        let link='http://localhost:5000/restaurantorders/changeorderstatus/'+orderNumber;
-        const changeStatus =async () => {
-        const result = await axios.post(link,{status:"packed"}, {headers:{ email: email}});
-        let error=true
-        let message=""
-        console.log(result.status)
-        if (result.status!=204){
-          message="status for the order "+orderNumber+" could not be set to packed, please try again in some time" 
-        }
-        else{
-          message="status for the order "+orderNumber+" changed to packed" 
-          error=false
-        }
-        if (error){
-          toast.error(message, {
-            position: "top-center",
-            autoClose: false,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-            });
-
-        }else{
-          setPastOrdersPending(true)
-          setActiveOrdersPending(true)
-          setUpdateOrders(true)
-          toast.success(message, {
-            position: "top-center",
-            autoClose: true,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-            });
-        }
-      }
-      changeStatus()
-	};
-	const handleButtonClickPicked = (e) => {
+	const handleButtonClick = (e,action) => {
 		
     let orderNumber=e.currentTarget.parentNode.parentNode.firstChild.firstChild.innerText;
     let link='http://localhost:5000/restaurantorders/changeorderstatus/'+orderNumber;
     const changeStatus =async () => {
-    const result = await axios.post(link,{status:"picked"}, {headers:{ email: email}});
+    const result = await axios.post(link,{status:action}, {headers:{ email: email}});
     let error=true
     let message=""
+    console.log(result.status)
     if (result.status!=204){
-      message="status for the order "+orderNumber+" could not be set to picked, please try again in some time" 
+      message="status for the order "+orderNumber+" could not be set to "+action+" , please try again in some time" 
     }
     else{
-      message="status for the order "+orderNumber+" changed to picked" 
+      message="status for the order "+orderNumber+" changed to "+action; 
       error=false
     }
     if (error){
@@ -130,7 +90,7 @@ function RestaurantOrders() {
         });
     }
   }
-  changeStatus();
+  changeStatus()
 };
 
     const activeOrderColumns = [
@@ -159,12 +119,12 @@ function RestaurantOrders() {
           selector: row => row.status,
           sortable:true
         },
-        { cell: () => <button class="button-packed" onClick={handleButtonClickPacked}>Packed</button>,
+        { cell: () => <button class="button-packed" onClick={e => handleButtonClick(e,'packed')}>Packed</button>,
         ignoreRowClick: true,
         allowOverflow: true,
         button: true,
         },
-        { cell: () => <button class="button-picked" onClick={handleButtonClickPicked}>Picked</button>,
+        { cell: () => <button class="button-picked" onClick={e => handleButtonClick(e,'picked')}>Picked</button>,
         ignoreRowClick: true,
         allowOverflow: true,
         button: true,
@@ -194,63 +154,37 @@ function RestaurantOrders() {
         }
 
     ];
-     const activeOrdesData=[
+    const searchOrders=(e,ordertype)=>{
+      if (e.target.value!==""){
+        let result=[]
+        if (ordertype==="active"){
+        result=search(e.target.value,tempActiveOrders)
+        setActiveOrders(result)
+        }else{
+          result=search(e.target.value,tempPastOrders)
+          setPastOrders(result)
+        }
 
-      {
-        id: 1,
-        orderNumber: 'adfe7454-29ff-4cbb-b6d0-e82154fa3ed3',
-        name: 'Bradd Pitt',
-        items:'Donuts:2',
-        pickupTime:'8 pm',
-        status:'packed',	
-           
-      },
-      {
-        id: 2,
-        orderNumber: '8720e8c6-0f24-4b71-8ca8-646f20438308',
-        name: 'Tom',
-        items:'wraps:1',
-        pickupTime:'8:10 pm',
-        status:'pending',
-        changeStatus:''
-      },
-      {
-        id: 3,
-        orderNumber: 'adfe7454-29ff-4cbb-b6d0-e82154fa3ed3',
-        name: 'Bradd Pitt',
-        items:'Donuts:2',
-        pickupTime:'8 pm',
-        status:'packed',
-        changeStatus:''
-      },
-      {
-        id: 4,
-        orderNumber: '8720e8c6-0f24-4b71-8ca8-646f20438308',
-        name: 'Tom',
-        items:'wraps:1',
-        pickupTime:'8:10 pm',
-        status:'pending',
-        changeStatus:''
-      },
-      {
-        id: 5,
-        orderNumber: 'adfe7454-29ff-4cbb-b6d0-e82154fa3ed3',
-        name: 'Bradd Pitt',
-        items:'Donuts:2',
-        pickupTime:'8 pm',
-        status:'packed',
-        changeStatus:''
-      },
-      {
-        id: 6,
-        orderNumber: '8720e8c6-0f24-4b71-8ca8-646f20438308',
-        name: 'Tom',
-        items:'wraps:1',
-        pickupTime:'8:10 pm',
-        status:'pending',
-        changeStatus:''
       }
-    ]
+      else{
+        if (ordertype==="active"){
+          setActiveOrders(tempActiveOrders)
+        }else{
+          setPastOrders(tempPastOrders)
+        }
+
+      }
+    }
+    const search=(value,searchData)=>{
+      let result=[];
+      searchData.map((row)=>{
+        if (row.name.toUpperCase().startsWith(value.toUpperCase()) || 
+        row._id.toUpperCase().startsWith(value.toUpperCase())){
+          result.push(row);
+        }
+      })
+      return result
+    }
     return (
         <StyledDiv>
             <ToastContainer/>
@@ -259,7 +193,7 @@ function RestaurantOrders() {
       <div class="table-heading">
         <h3>Active Orders</h3>
         <div class="search-bar">
-          <input type="text" placeholder='search' name='activeOrderSearch' id="activeOrderSearch"></input>
+          <input type="text" placeholder='search' name='activeOrderSearch' onChange={e => searchOrders(e,'active')} id="activeOrderSearch"></input>
         </div>
       </div>
         <DataTable
@@ -271,7 +205,7 @@ function RestaurantOrders() {
         <div class="table-heading">
         <h3>Past Orders</h3>
         <div class="search-bar">
-          <input type="text" placeholder='search' name='pastOrderSearch' id="pastOrderSearch"></input>
+          <input type="text" placeholder='search' name='pastOrderSearch' onChange={e => searchOrders(e,'past')} id="pastOrderSearch"></input>
         </div>
       </div>
         <DataTable
