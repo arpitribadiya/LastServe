@@ -1,9 +1,12 @@
+//Created by Neha Karkhanis
+
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import login_img from "../../assets/volunteer_reg.jpg";
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
+import axios from 'axios';
 
 function SignupVolunteer() {
 
@@ -11,6 +14,8 @@ function SignupVolunteer() {
     const [phoneNumber, setPhoneNumber] = useState('');
     const [email, setEmail] = useState('');
     const [value, onChange1] = useState(new Date());
+    const [selectedGender, setSelectedGender] = useState("");
+    const [selectedOccupation, setSelectedOccupation] = useState("");
 
     const [volunteerNameError, setVolunteerNameError] = useState('');
     const [phoneNumberError, setPhoneNumberError] = useState('');
@@ -25,6 +30,15 @@ function SignupVolunteer() {
     
 
     const navigate = useNavigate();
+
+    const handleOccupationChange = (event) => {
+        setSelectedOccupation(event.target.value);
+      };
+      
+    const handleGenderChange = (event) => {
+        setSelectedGender(event.target.value);
+      };
+
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -85,6 +99,29 @@ function SignupVolunteer() {
         if (volunteerNameError || emailError || phoneNumberError) {
             setBlankFormError('Kindly enter mandatory fields');
         } else {
+            const restaurant = {
+                "volunteername": volunteerName,
+                "phonenumber": phoneNumber,
+                "email": email,
+                "availibility": value,
+                "gender": selectedGender,
+                "occupation": selectedOccupation
+            };
+
+            const volunteeremail = {
+                "email" : email
+            }
+
+            axios.post('http://localhost:5000/volunteers/checkEmail', volunteeremail)
+            .then(res => {
+                axios.post('http://localhost:5000/volunteers/register', restaurant)
+                .then(res => {
+                    navigate('/');
+                });
+            })
+            .catch(({res}) => {
+                setBlankFormError('Email already Exists. Please, enter different email.');
+            });
             navigate('/');
         }
     }
@@ -126,15 +163,15 @@ function SignupVolunteer() {
                     <div className="login-type-wrapper">
                     <label className='formLabel'>Kindly choose your gender*</label>
             <div className="radio-input-wrapper"> 
-              <input type="radio" name="login-type" id="male-user" checked/>
+            <input type="radio" name="login-type" id="male-user" onChange={handleGenderChange} value="Male" checked={selectedGender === "Male"}/>
               <label htmlFor="male-user">Male</label>
             </div>
             <div className="radio-input-wrapper">
-              <input type="radio" name="login-type" id="female-user" />
+            <input type="radio" name="login-type" id="female-user" onChange={handleGenderChange} value="Female" checked={selectedGender === "Female"}/>
               <label htmlFor="female-user"> Female</label>
             </div>
             <div className="radio-input-wrapper">
-              <input type="radio" name="login-type" id="notsay-user" />
+            <input type="radio" name="login-type" id="notsay-user" onChange={handleGenderChange} value="Prefer not to say" checked={selectedGender === "Prefer not to say"}/>
               <label htmlFor="notsay-user"> Prefer not to say</label>
             </div>
           </div>
@@ -142,11 +179,11 @@ function SignupVolunteer() {
           <div className="login-type-wrapper">
                     <label className='formLabel'>Kindly choose your occupation*</label>
             <div className="radio-input-wrapper"> 
-              <input type="radio" name="occupation-type" id="student" checked/>
+            <input type="radio" name="occupation-type" id="student" onChange={handleOccupationChange} value="Student" checked={selectedOccupation === "Student"}/>
               <label htmlFor="student">Student</label>
             </div>
             <div className="radio-input-wrapper">
-              <input type="radio" name="occupation-type" id="worker" />
+            <input type="radio" name="occupation-type" id="worker" onChange={handleOccupationChange} value="Working Professional" checked={selectedOccupation === "Working Professional"}/>
               <label htmlFor="worker"> Working Professional</label>
             </div>
           </div>
