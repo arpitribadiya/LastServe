@@ -26,13 +26,10 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const result = await axios.post('http://localhost:5000/users/login', { email: username, password: password });
+      const result = await axios.post('https://csci5709-a3-backend.onrender.com/users/login', { email: username, password: password });
       if (result.status === 200) {
         navigate('/home');
         window.localStorage.setItem("email", username);
-      }
-      else if ("xyz@gmail.com" === username && "12345678" === password) {
-        navigate('/restaurantSideBar');
       }
     } catch (error) {
       if (error.response.status === 403) {

@@ -4,6 +4,8 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import axios from "axios";
+import { toast, ToastContainer } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 
 function UpdateRestaurantProfile(props) {
   React.useEffect(() => {
@@ -29,8 +31,6 @@ function UpdateRestaurantProfile(props) {
   const phoneRegEx = new RegExp("^[0-9]{10}$");
 
   const [disabled, setDisabled] = useState(true);
-
-  const navigate = useNavigate();
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -112,15 +112,26 @@ function UpdateRestaurantProfile(props) {
         email: email,
       };
       axios
-        .put("http://localhost:5000/restaurants/updateRestaurant", restaurant)
+        .put("https://csci5709-a3-backend.onrender.com/restaurants/updateRestaurant", restaurant)
         .then((res) => {
-          navigate("/restaurantSideBar");
+          let message="Details updated successfully!!!" 
+                    toast.success(message, {
+                        position: "top-center",
+                        autoClose: true,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "light",
+                        });
         });
     }
   };
 
   return (
     <StyledSignupImgWrapper className="login-img-wrapper">
+      <ToastContainer/>
       <StyledForm className="form">
         <div className="formContent">
           <div className="formTitle">
