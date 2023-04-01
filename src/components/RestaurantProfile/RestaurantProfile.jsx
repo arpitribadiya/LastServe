@@ -16,7 +16,7 @@ function RestaurantProfile() {
     const getData = async () => {
       try {
         const result = await axios.post(
-          "http://localhost:5000/restaurants/viewRestaurant",
+          "https://csci5709-a3-backend.onrender.com/restaurants/viewRestaurant",
           email
         );
         console.log(result.data.restaurant);

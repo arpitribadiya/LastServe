@@ -84,7 +84,7 @@ function NewPassword() {
             setBlankFormError('');
             setPassword('');
             setConfirmPassword('');
-            axios.put('http://localhost:5000/users/updatePassword',
+            axios.put('https://csci5709-a3-backend.onrender.com/users/updatePassword',
                 {
                     email: window.localStorage.getItem('resetEmail'),
                     newPassword: password

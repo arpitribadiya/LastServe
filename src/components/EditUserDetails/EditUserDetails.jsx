@@ -15,7 +15,7 @@ const EditUserDetails = ({ email }) => {
 
     useEffect(() => {
         const getUserDetails = async () => {
-            const result = await axios.get("http://localhost:5000/users/" + email);
+            const result = await axios.get("https://csci5709-a3-backend.onrender.com/users/" + email);
             setFirstName(result.data.fname);
             setLastName(result.data.lname);
             setEmailInput(email);
@@ -69,7 +69,7 @@ const EditUserDetails = ({ email }) => {
         if (firstNameError || lastNameError) {
             setBlankFormError('Enter mandatory fields');
         } else {
-            const result = await axios.put('http://localhost:5000/users/update', { fname: firstName, lname: lastName, email: emailInput });
+            const result = await axios.put('https://csci5709-a3-backend.onrender.com/users/update', { fname: firstName, lname: lastName, email: emailInput });
             if (result.status === 200) {
                 setBlankFormError('');
                 setFirstNameError('');
