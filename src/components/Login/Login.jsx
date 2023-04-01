@@ -31,9 +31,6 @@ function Login() {
         navigate('/home');
         window.localStorage.setItem("email", username);
       }
-      else if ("xyz@gmail.com" === username && "12345678" === password) {
-        navigate('/restaurantSideBar');
-      }
     } catch (error) {
       if (error.response.status === 403) {
         setUsername('');
