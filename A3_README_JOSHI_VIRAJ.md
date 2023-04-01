@@ -32,6 +32,9 @@
 * src/components/UserDetails/UserDetails.jsx
 * src/components/EditUserDetails/EditUserDetails.jsx
 * src/components/EditUserDetails/EditUserDetailsModal.jsx
+* src/components/NewPassword/NewPassword.jsx
+* src/components/NewPassword/NewPassModal.jsx
+* src/components/PasswordReset/PasswordReset.jsx
 
 ## Created files for Backend 
 
