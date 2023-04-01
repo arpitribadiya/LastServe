@@ -22,12 +22,32 @@ const Post = () => {
         <img src={res_img} alt="res_img" />
       </div>
       <div className="post-content">
-        <h4 className="res-name">Res name</h4>
+        <h4 className="res-name">Tawa Grill</h4>
         <p className="res-post-details">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam,
-          qui? Quo magnam aliquid alias ea, magni commodi vero temporibus soluta
-          ipsa. Aperiam accusantium cum impedit? Necessitatibus impedit quam
-          earum nemo!
+          Hey everyone! I'm excited to share that I have some delicious food
+          available to give away for free. As someone who cares deeply about
+          reducing food waste and helping those in need, I'm thrilled to be able
+          to share this food with you all. The dishes I'm giving away are still
+          fresh and tasty, and I want them to be enjoyed by someone who could
+          use a good meal. Here's what's available for pickup today: <br />
+          <br />
+          Chicken Alfredo with pasta <br />
+          <br />
+          Veggie stir-fry with rice <br />
+          <br />
+          Chocolate chip cookies <br />
+          <br />
+          All of the dishes were made fresh yesterday and are still in great
+          condition. If you're interested in picking up any of these dishes,
+          please let me know in the comments below. Pickup is available between
+          2-6 pm today
+          <br />
+          <br />
+          I'll be giving out the dishes on a first-come, first-served basis. So
+          don't wait too long to let me know if you're interested! Thank you for
+          helping me reduce food waste and share some love through food. Let's
+          spread the word and make sure these dishes go to someone who could use
+          a good meal today.
         </p>
         <p className="res-location">
           <GoLocation />
