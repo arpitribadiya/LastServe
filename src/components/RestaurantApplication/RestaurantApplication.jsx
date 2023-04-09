@@ -18,7 +18,7 @@ function RestaurantApplication() {
 
 	useEffect(() => {
     const getRestaurantApplications=async () => {
-    const result = await axios.get('http://localhost:5000/admin/pendingrestaurantapplications', {headers:{ email: email}});
+    const result = await axios.get('http://https://csci5709-a3-backend.onrender.com:5000/admin/pendingrestaurantapplications', {headers:{ email: email}});
     if(result.status===200){
       setRestaurantApplications(result.data)
       setTempRestaurantApplications(result.data)
@@ -34,7 +34,7 @@ function RestaurantApplication() {
 	const handleButtonClick = (e,action) => {
 		
     let restaurantEmail=e.currentTarget.parentNode.parentNode.firstChild.firstChild.innerText;
-    let link='http://localhost:5000/admin/changerestaurantapplicationstatus/'+restaurantEmail;
+    let link='http://https://csci5709-a3-backend.onrender.com:5000/admin/changerestaurantapplicationstatus/'+restaurantEmail;
     const changeStatus =async () => {
     const result = await axios.post(link,{status:action}, {headers:{ email: email}});
     let error=true

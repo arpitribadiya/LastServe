@@ -18,7 +18,7 @@ function AdminPosts() {
 
 	useEffect(() => {
     const getPosts=async () => {
-    const result = await axios.get('http://localhost:5000/admin/posts', {headers:{ email: email}});
+    const result = await axios.get('http://https://csci5709-a3-backend.onrender.com:5000/admin/posts', {headers:{ email: email}});
     if(result.status===200){
       setPosts(result.data)
       setTempPosts(result.data)
@@ -34,7 +34,7 @@ function AdminPosts() {
 	const handleButtonClick = (e) => {
 		
     let postId=e.currentTarget.parentNode.parentNode.firstChild.firstChild.innerText;
-    let link='http://localhost:5000/admin/post/'+postId;
+    let link='http://https://csci5709-a3-backend.onrender.com:5000/admin/post/'+postId;
     const changeStatus =async () => {
     const result = await axios.delete(link, {headers:{ email: email}});
     let error=true

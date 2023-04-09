@@ -26,11 +26,11 @@ function AdminLogin() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      //const result = await axios.post('https://csci5709-a3-backend.onrender.com/admin/login', { email: username, password: password });
-      window.localStorage.setItem("email", username);
-      navigate('/adminDashboard');
-        
-      
+      const result = await axios.post('https://csci5709-a3-backend.onrender.com/admin/login', { email: username, password: password });
+      if (result.status === 200) {
+        navigate('/adminDashboard');
+        window.localStorage.setItem("email", username);
+      }
     } catch (error) {
       if (error.response.status === 403) {
         setUsername('');
@@ -69,16 +69,6 @@ function AdminLogin() {
               onChange={(e) => handleInputChange(e)}
               placeholder="Password"
             ></input>
-          </div>
-          <div className="login-type-wrapper">
-            <div className="radio-input-wrapper">
-              <input type="radio" name="login-type" id="login-user" />
-              <label htmlFor="login-user">User login</label>
-            </div>
-            <div className="radio-input-wrapper">
-              <input type="radio" name="login-type" id="login-restaurant" />
-              <label htmlFor="login-restaurant">Restaurant login</label>
-            </div>
           </div>
           <button className="login-btn">Login</button>
           <div className="err">
