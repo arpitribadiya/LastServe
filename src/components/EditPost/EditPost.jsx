@@ -110,6 +110,10 @@ function EditPost() {
     }
   };
 
+  const handleBackClick = () => {
+    navigate("/activePosts")
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault();
     handleInputValidation(e);
@@ -243,6 +247,13 @@ function EditPost() {
           >
             Update
           </button>
+          <button
+            className="registerBackBtn"
+            type="submit"
+            onClick={() => handleBackClick()}
+          >
+            Back
+          </button>
         </div>
       </StyledForm>
     </StyledSignupImgWrapper>
@@ -297,6 +308,17 @@ const StyledForm = styled.form`
     margin: 0 auto;
     padding: 0.5rem;
     background-color: rgb(16, 109, 240);
+    border-radius: 5px;
+    border: none;
+    box-shadow: 1px 1px 1px 1px #ccc;
+    color: white;
+    letter-spacing: 1px;
+  }
+  .registerBackBtn {
+    width: fit-content;
+    margin: 0 auto;
+    padding: 0.5rem;
+    background-color: rgb(0, 0, 0);
     border-radius: 5px;
     border: none;
     box-shadow: 1px 1px 1px 1px #ccc;

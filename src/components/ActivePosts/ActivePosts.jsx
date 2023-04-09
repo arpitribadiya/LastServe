@@ -36,7 +36,11 @@ function ActivePosts() {
        
         },[]);
 
-    const activePostsColumns = [
+        const handleClick = () => {
+            navigate("/createPost")
+        }
+
+        const activePostsColumns = [
         {
             name: 'Item Name',
             selector: row => row.Item_name,
@@ -60,7 +64,7 @@ function ActivePosts() {
 
     return (
         <StyledDiv>
-            <button>Create</button>
+            <button onClick={handleClick}>Create Post</button>
             <div class="dashboard-content">
                 <div class="table-heading">
                     <h1>Active Posts</h1>
@@ -109,7 +113,6 @@ const StyledDiv = styled.div`
 .search-bar input{
     width: auto;
     float: right;
-
 }
 .button-packed{
     background-color:yellow;

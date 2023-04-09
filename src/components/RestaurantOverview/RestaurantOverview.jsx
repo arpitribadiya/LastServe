@@ -2,8 +2,22 @@ import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import styled from "styled-components";
 import DashboardHeader from "../DashboardHeader/DashboardHeader";
+import { useNavigate } from "react-router-dom";
 
 function RestaurantOverview() {
+
+  const navigate = useNavigate();
+
+
+  const handleActivePosts = () => {
+    navigate("/activePosts")
+
+  }
+
+  const handlePastPosts = () => {
+    navigate("/pastPosts")
+
+  }
   return (
     <StyledDiv>
       <script
@@ -49,14 +63,14 @@ function RestaurantOverview() {
               </Col>
               <Col md={3} sm={6} xs={12} x>
                 {" "}
-                <div className="overview-dashboard-tile">
+                <div className="overview-dashboard-tile" onClick={handlePastPosts}>
                   <h2 className="heading">Posts</h2>
                   <h2 className="number">10</h2>
                 </div>
               </Col>
               <Col md={3} sm={6} xs={12} x>
                 {" "}
-                <div className="overview-dashboard-tile">
+                <div className="overview-dashboard-tile" onClick={handleActivePosts}>
                   <h2 className="heading">Active Posts</h2>
                   <h2 className="number">10</h2>
                 </div>

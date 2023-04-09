@@ -24,17 +24,6 @@ function ViewPost() {
   const [endTime, setEndTime] = useState(new Date());
   const [foodType, setFoodType] = useState();
 
-  const [itemNameError, setItemNameError] = useState("");
-  const [itemQuantityError, setItemQuantityError] = useState("");
-  const [startTimeError, setStartTimeError] = useState("");
-  const [endTimeError, setEndTimeError] = useState("");
-  const [foodTypeError, setFoodTypeError] = useState("");
-  const [blankFromError, setBlankFormError] = useState("");
-
-  const commonRegEx = new RegExp("^[A-Za-z]+$");
-
-  const [disabled, setDisabled] = useState(true);
-
   React.useEffect(() => {
     setItemName(currentPost.itemName);
     setItemQuantity(currentPost.itemQuantity);
@@ -43,6 +32,12 @@ function ViewPost() {
     setFoodType(currentPost.foodType);
 
   }, []);
+
+  
+  const handleBackClick = () => {
+    navigate("/pastPosts")
+  }
+
 
   return (
     <StyledSignupImgWrapper className="login-img-wrapper">
@@ -103,6 +98,13 @@ function ViewPost() {
               value={foodType}
             />
           </div>
+          <button
+            className="registerBackBtn"
+            type="submit"
+            onClick={() => handleBackClick()}
+          >
+            Back
+          </button>
         </div>
       </StyledForm>
     </StyledSignupImgWrapper>
@@ -157,6 +159,17 @@ const StyledForm = styled.form`
     margin: 0 auto;
     padding: 0.5rem;
     background-color: rgb(16, 109, 240);
+    border-radius: 5px;
+    border: none;
+    box-shadow: 1px 1px 1px 1px #ccc;
+    color: white;
+    letter-spacing: 1px;
+  }
+  .registerBackBtn {
+    width: fit-content;
+    margin: 0 auto;
+    padding: 0.5rem;
+    background-color: rgb(0, 0, 0);
     border-radius: 5px;
     border: none;
     box-shadow: 1px 1px 1px 1px #ccc;
