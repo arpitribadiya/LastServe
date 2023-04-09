@@ -3,6 +3,8 @@ import styled from "styled-components";
 import Home from "./components/Home/Home";
 import Landing from "./components/Landing/Landing";
 import Login from "./components/Login/Login";
+import AdminLogin from "./components/Admin/AdminLogin";
+import AdminSidebar from "./components/Admin/AdminSidebar";
 import NewPassword from "./components/NewPassword/NewPassword";
 import PasswordReset from "./components/PasswordReset/PasswordReset";
 import SignUp from "./components/Signup/Signup";
@@ -28,11 +30,13 @@ const App = () => {
         <Route path="/profile" element={<UserProfile />} />
         <Route path="/signupRestaurant" element={<SignupRestaurant />} />
         <Route path="/restaurantLogin" element={<RestaurantLogin />} />
+        <Route path="/admin" element={<AdminLogin />} />
         <Route
           path="/approvalPending"
           element={<RestaurantApprovalPending />}
         />
         <Route path="/restaurantSideBar" element={<RestaurantSideBar />} />
+        <Route path="/adminDashboard" element={<AdminSidebar />} />
         <Route path="/restaurants" element={<Subscription />} />
         <Route path="/signupVolunteer" element={<SignupVolunteer />} />
         <Route path="/appointment" element={<Appointment />} />
