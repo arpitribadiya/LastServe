@@ -1,14 +1,9 @@
 import React from "react";
-import {
-  AiOutlineCalendar,
-  AiOutlineHome,
-  AiOutlineSearch,
-} from "react-icons/ai";
+import { AiOutlineHome, AiOutlineSearch } from "react-icons/ai";
 import { BiUser } from "react-icons/bi";
-import { IoNotificationsOutline } from "react-icons/io5";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import app_logo from "../../assets/app_logo.jpg";
-import { Link } from "react-router-dom";
 
 const Sidebar = ({ activeRoute }) => {
   return (
@@ -31,20 +26,6 @@ const Sidebar = ({ activeRoute }) => {
           <AiOutlineSearch />
           <Link to="/restaurants">Explore</Link>
         </div>
-        {/* <div
-          className={`link-wrapper ${activeRoute === "notifications" ? "active" : ""
-            }`}
-        >
-          <IoNotificationsOutline />
-          <Link to="/notifications">Notifications</Link>
-        </div>
-        <div
-          className={`link-wrapper ${activeRoute === "appointments" ? "active" : ""
-            }`}
-        >
-          <AiOutlineCalendar />
-          <Link to="/appointments">Appointments</Link>
-        </div> */}
         <div className={`link-wrapper profile-wrapper`}>
           <BiUser />
           <Link to="/profile">Profile</Link>
