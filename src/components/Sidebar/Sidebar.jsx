@@ -3,11 +3,12 @@
 import React from "react";
 import { AiOutlineHome, AiOutlineSearch } from "react-icons/ai";
 import { BiUser } from "react-icons/bi";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import app_logo from "../../assets/app_logo.jpg";
 
 const Sidebar = ({ activeRoute }) => {
+  const navigate = useNavigate();
   return (
     <StyledSideabar>
       <div className="logo-wrapper">
@@ -21,13 +22,17 @@ const Sidebar = ({ activeRoute }) => {
           <Link to="/home">Home</Link>
         </div>
         <div
-          className={`link-wrapper ${activeRoute === "explore" ? "active" : ""
-            }`}
+          className={`link-wrapper ${
+            activeRoute === "explore" ? "active" : ""
+          }`}
         >
           <AiOutlineSearch />
           <Link to="/restaurants">Explore</Link>
         </div>
-        <div className={`link-wrapper profile-wrapper`}>
+        <div
+          className={`link-wrapper profile-wrapper`}
+          onClick={() => navigate("/profile")}
+        >
           <BiUser />
           <Link to="/profile">Profile</Link>
         </div>
