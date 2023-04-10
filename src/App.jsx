@@ -22,6 +22,9 @@ import PastPosts from "./components/PastPosts/PastPosts";
 import CreatePost from "./components/CreatePost/CreatePost";
 import EditPost from "./components/EditPost/EditPost";
 import ViewPost from "./components/ViewPost/ViewPost";
+import DonationAmount from "./components/Donations/DonationAmount";
+import DonationForm from "./components/Donations/DonationForm";
+import DonationFinal from "./components/Donations/DonationFinal";
 
 const App = () => {
   return (
@@ -58,6 +61,9 @@ const App = () => {
         <Route path="/createPost" element={<CreatePost />} />
         <Route path="/updatePost" element={<EditPost />} />
         <Route path="/viewPost" element={<ViewPost />} />
+        <Route path="/donationAmount" element={<DonationAmount />} />
+        <Route path="/donationForm" element={<DonationForm />} />
+        <Route path="/donationfinal" element={<DonationFinal />} />
       </Routes>
     </StyledApp>
   );
