@@ -2,22 +2,8 @@ import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import styled from "styled-components";
 import DashboardHeader from "../DashboardHeader/DashboardHeader";
-import { useNavigate } from "react-router-dom";
 
-function RestaurantOverview() {
-
-  const navigate = useNavigate();
-
-
-  const handleActivePosts = () => {
-    navigate("/activePosts")
-
-  }
-
-  const handlePastPosts = () => {
-    navigate("/pastPosts")
-
-  }
+function AdminOverview() {
   return (
     <StyledDiv>
       <script
@@ -47,32 +33,42 @@ function RestaurantOverview() {
         <div class="dashboard-content">
           <Container>
             <Row>
-              <Col md={3} sm={6} xs={12}>
+            <Col md={3} sm={6} xs={12} x>
                 {" "}
                 <div className="overview-dashboard-tile">
-                  <h2 className="heading">Orders</h2>
-                  <h2 className="number">10</h2>
-                </div>
-              </Col>
-              <Col md={3} sm={6} xs={12} x>
-                {" "}
-                <div className="overview-dashboard-tile">
-                  <h2 className="heading">Active Orders</h2>
-                  <h2 className="number">10</h2>
-                </div>
-              </Col>
-              <Col md={3} sm={6} xs={12} x>
-                {" "}
-                <div className="overview-dashboard-tile" onClick={handlePastPosts}>
                   <h2 className="heading">Posts</h2>
                   <h2 className="number">10</h2>
                 </div>
               </Col>
               <Col md={3} sm={6} xs={12} x>
                 {" "}
-                <div className="overview-dashboard-tile" onClick={handleActivePosts}>
+                <div className="overview-dashboard-tile">
                   <h2 className="heading">Active Posts</h2>
                   <h2 className="number">10</h2>
+                </div>
+              </Col>
+              <Col md={3} sm={6} xs={12}>
+                {" "}
+                <div className="overview-dashboard-tile">
+                  <h2 className="heading">Restaurant Applications</h2>
+                  <h2 className="number">2</h2>
+                </div>
+              </Col>
+              <Col md={3} sm={6} xs={12} x>
+                {" "}
+                <div className="overview-dashboard-tile">
+                  <h2 className="heading">Enrolled Restaurants</h2>
+                  <h2 className="number">10</h2>
+                </div>
+              </Col>
+            </Row>
+            <br></br>
+            <Row>
+            <Col md={3} sm={6} xs={12} x>
+                {" "}
+                <div className="overview-dashboard-tile">
+                  <h2 className="heading">Users</h2>
+                  <h2 className="number">100</h2>
                 </div>
               </Col>
             </Row>
@@ -139,4 +135,4 @@ const StyledDiv = styled.div`
   }
 `;
 
-export default RestaurantOverview;
+export default AdminOverview;
