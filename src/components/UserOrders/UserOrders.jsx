@@ -39,6 +39,7 @@ const UserOrders = ({ email }) => {
     })
 
     const currentOrdersHtml = currentOrders.map(order => {
+        console.log(order);
         const item = order.items.split(":");
         return <div className='current-order-wrapper'>
             <div className="res-name">Tawa Grill</div>
@@ -46,9 +47,23 @@ const UserOrders = ({ email }) => {
             <div className="item-qty">{item[1]}</div>
             <div className="pickup-date">{order.pickupDate}</div>
             <div className="pickup-time">{order.pickupTime}</div>
-            <div className='cancel'>Cancel</div>
+            <div className='cancel' onClick={() => handleOnClick(order._id)}>Cancel</div>
         </div>
     })
+
+    const handleOnClick = async (id) => {
+        try {
+            console.log(id);
+            await axios.delete(`${process.env.REACT_APP_BACKEND_URL}/users/cancelOrder`, { data: { id: id } });
+            let tempOrders = [...userOrders];
+            tempOrders = tempOrders.filter(order => {
+                return order._id !== id;
+            })
+            setUserOrders([...tempOrders]);
+        } catch (error) {
+            console.error(error);
+        }
+    }
 
     return (
         <StyledOrders>
@@ -127,6 +142,9 @@ const StyledOrders = styled.div`
                 color: white;
                 width: fit-content;
                 border-radius: 10px;
+                :hover {
+                    cursor: pointer;
+                }
             }
         } 
         .past-order-wrapper {
