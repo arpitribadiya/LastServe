@@ -14,6 +14,7 @@ import { Link, useNavigate } from "react-router-dom";
 import UserDetails from "../UserDetails/UserDetails";
 import EditUserDetails from "../EditUserDetails/EditUserDetails";
 import axios from "axios";
+import UserOrders from '../UserOrders/UserOrders';
 
 const UserProfile = () => {
   const [activeComponent, setactiveComponent] = useState("profile");
@@ -28,6 +29,7 @@ const UserProfile = () => {
     } else if ("edit" === activeComponent) {
       setComponent(<EditUserDetails email={email} />);
     } else if ("order" === activeComponent) {
+      setComponent(<UserOrders email={email} />);
     }
   }, [activeComponent]);
 

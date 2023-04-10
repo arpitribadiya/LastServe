@@ -11,7 +11,7 @@ const UserDetails = ({ email }) => {
 
   useEffect(() => {
     const getUserDetails = async () => {
-      const result = await axios.get("https://csci5709-a3-backend.onrender.com/users/" + email);
+      const result = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/users/` + email);
       setUserDetails(result.data);
     }
     getUserDetails();
