@@ -1,3 +1,5 @@
+//Created by Viraj Joshi
+
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components';
 import Footer from '../Footer/Footer';
@@ -13,7 +15,7 @@ const EditUserDetails = ({ email }) => {
 
     useEffect(() => {
         const getUserDetails = async () => {
-            const result = await axios.get("https://csci5709-a3-backend.onrender.com/users/" + email);
+            const result = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/users/` + email);
             setFirstName(result.data.fname);
             setLastName(result.data.lname);
             setEmailInput(email);
@@ -67,7 +69,7 @@ const EditUserDetails = ({ email }) => {
         if (firstNameError || lastNameError) {
             setBlankFormError('Enter mandatory fields');
         } else {
-            const result = await axios.put('https://csci5709-a3-backend.onrender.com/users/update', { fname: firstName, lname: lastName, email: emailInput });
+            const result = await axios.put(`${process.env.REACT_APP_BACKEND_URL}/users/update`, { fname: firstName, lname: lastName, email: emailInput });
             if (result.status === 200) {
                 setBlankFormError('');
                 setFirstNameError('');

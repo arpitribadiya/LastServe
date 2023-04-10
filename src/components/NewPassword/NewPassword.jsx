@@ -1,3 +1,4 @@
+//Created by Viraj Joshi
 import axios from 'axios';
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
@@ -83,7 +84,7 @@ function NewPassword() {
             setBlankFormError('');
             setPassword('');
             setConfirmPassword('');
-            axios.put('https://csci5709-a3-backend.onrender.com/users/updatePassword',
+            axios.put(`${process.env.REACT_APP_BACKEND_URL}/users/updatePassword`,
                 {
                     email: window.localStorage.getItem('resetEmail'),
                     newPassword: password

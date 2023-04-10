@@ -1,3 +1,5 @@
+//Created by Viraj Joshi 
+
 import React, { useState } from 'react';
 import { Link, useNavigate } from "react-router-dom";
 import styled from 'styled-components';
@@ -45,7 +47,7 @@ function SignUp() {
 
     const emailExists = async () => {
         try {
-            const result = await axios.post('https://csci5709-a3-backend.onrender.com/users/checkEmail', { email: email });
+            const result = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/users/checkEmail`, { email: email });
             if (result.status === 400) {
                 return true;
             }
@@ -154,7 +156,7 @@ function SignUp() {
             setEmail('');
             setPassword('');
             setConfirmPassword('');
-            axios.post('https://csci5709-a3-backend.onrender.com/users/register', user)
+            axios.post(`${process.env.REACT_APP_BACKEND_URL}/users/register`, user)
                 .then(res => {
                     setShowModal(true);
                 });

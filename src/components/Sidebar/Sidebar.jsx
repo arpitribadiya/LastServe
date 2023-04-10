@@ -1,3 +1,5 @@
+//Updated by Viraj Joshi
+
 import React from "react";
 import { AiOutlineHome, AiOutlineSearch } from "react-icons/ai";
 import { BiUser } from "react-icons/bi";
@@ -19,9 +21,8 @@ const Sidebar = ({ activeRoute }) => {
           <Link to="/home">Home</Link>
         </div>
         <div
-          className={`link-wrapper ${
-            activeRoute === "explore" ? "active" : ""
-          }`}
+          className={`link-wrapper ${activeRoute === "explore" ? "active" : ""
+            }`}
         >
           <AiOutlineSearch />
           <Link to="/restaurants">Explore</Link>
