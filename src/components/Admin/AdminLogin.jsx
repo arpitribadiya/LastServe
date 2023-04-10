@@ -1,17 +1,17 @@
-//Created by Viraj Joshi
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import login_img from "../../assets/login.jpg";
 import Footer from "../Footer/Footer";
-import axios from "axios";
+import axios from 'axios';
 
-function Login() {
+function AdminLogin() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
   const [authError, setAuthError] = useState("");
   const navigate = useNavigate();
+
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -26,22 +26,19 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const result = await axios.post(
-        `${process.env.REACT_APP_BACKEND_URL}/users/login`,
-        { email: username, password: password }
-      );
+      const result = await axios.post('https://csci5709-a3-backend.onrender.com/admin/login', { email: username, password: password });
       if (result.status === 200) {
-        navigate("/home");
+        navigate('/adminDashboard');
         window.localStorage.setItem("email", username);
       }
     } catch (error) {
       if (error.response.status === 403) {
-        setUsername("");
-        setPassword("");
+        setUsername('');
+        setPassword('');
         setAuthError("Invalid Username and Password");
       } else {
-        setUsername("");
-        setPassword("");
+        setUsername('');
+        setPassword('');
         console.error(error);
       }
     }
@@ -73,20 +70,10 @@ function Login() {
               placeholder="Password"
             ></input>
           </div>
-          <div className="login-type-wrapper">
-            <div className="radio-input-wrapper">
-              <input type="radio" name="login-type" id="login-user" />
-              <label htmlFor="login-user">User login</label>
-            </div>
-            <div className="radio-input-wrapper">
-              <input type="radio" name="login-type" id="login-restaurant" />
-              <label htmlFor="login-restaurant">Restaurant login</label>
-            </div>
-          </div>
           <button className="login-btn">Login</button>
-          <div className="err">{<span className="err">{authError}</span>}</div>
-          <Link to="/passwordReset">Reset Password</Link>
-          <Link to="/restaurantLogin">Login Restaurant</Link>
+          <div className="err">
+            {<span className='err'>{authError}</span>}
+          </div>
         </StyledLogin>
         <StyledLoginImg className="login-img">
           <img src={login_img} alt="login_img" />
@@ -126,11 +113,11 @@ const StyledLogin = styled.form`
       border-radius: 5px;
     }
   }
-  a {
+  a{
     text-decoration: none;
     font-size: 1.5rem;
     text-align: center;
-    color: rgb(0, 127, 255);
+    color:  rgb(0, 127, 255);
   }
   button {
     background-color: rgb(0, 127, 255);
@@ -160,7 +147,7 @@ const StyledLogin = styled.form`
       }
     }
   }
-  .err {
+  .err{
     padding: 0rem;
     color: red;
     font-size: small;
@@ -177,4 +164,4 @@ const StyledLoginImg = styled.div`
   }
 `;
 
-export default Login;
+export default AdminLogin;

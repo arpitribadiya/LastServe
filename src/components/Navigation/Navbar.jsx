@@ -1,13 +1,20 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
+import app_logo from "../../assets/app_logo.jpg";
 
 const Navbar = () => {
   return (
     <StyledNavbar>
       <div className="nav-logo-wrapper">
-        <NavLink className="nav-link nav-link-left">Logo</NavLink>
-        <NavLink className="nav-link nav-link-left" to="/signupVolunteer">Volunteer</NavLink>
+        <NavLink className="nav-link nav-link-left">
+          <div className="logo-wrapper">
+            <img src={app_logo} alt="app_logo" />
+          </div>
+        </NavLink>
+        <NavLink className="nav-link nav-link-left" to="/signupVolunteer">
+          Volunteer
+        </NavLink>
         <NavLink className="nav-link nav-link-left">About Us</NavLink>
       </div>
       <div className="nav-links">
@@ -30,9 +37,20 @@ const StyledNavbar = styled.nav`
   font-size: 1.8rem;
   border-bottom: 1px solid rgb(219, 216, 216);
   .nav-logo-wrapper {
-    .nav-link-left{
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    .nav-link-left {
       text-decoration: none;
       color: black;
+      .logo-wrapper {
+        width: 50px;
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+      }
     }
     display: flex;
     gap: 1rem;

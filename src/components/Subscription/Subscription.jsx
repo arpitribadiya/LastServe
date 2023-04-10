@@ -25,8 +25,6 @@ const Subscription = () => {
             email: window.localStorage.getItem("email"),
           }
         );
-        console.log(res.data.subscribed_restaurants);
-        console.log(result.data.restaurants);
         setSubscribedRestaurants([...res.data.subscribed_restaurants]);
         setRestaurants([...result.data.restaurants]);
       } catch (err) {}

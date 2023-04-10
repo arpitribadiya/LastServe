@@ -6,35 +6,37 @@ import {
   AiOutlineEdit,
   AiOutlineCalendar,
   AiOutlineHome,
-  AiOutlineLogout
+  AiOutlineLogout,
 } from "react-icons/ai";
 import styled from "styled-components";
 import app_logo from "../../assets/app_logo.jpg";
 import { Link, useNavigate } from "react-router-dom";
-import UserDetails from '../UserDetails/UserDetails';
-import EditUserDetails from '../EditUserDetails/EditUserDetails';
+import UserDetails from "../UserDetails/UserDetails";
+import EditUserDetails from "../EditUserDetails/EditUserDetails";
+import axios from "axios";
 
 const UserProfile = () => {
-
-  const [activeComponent, setactiveComponent] = useState('profile');
-  const [activeLink, setActiveLink] = useState('profile');
+  const [activeComponent, setactiveComponent] = useState("profile");
+  const [activeLink, setActiveLink] = useState("profile");
   const [component, setComponent] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
     const email = window.localStorage.getItem("email");
-    if ('profile' === activeComponent) {
+    if ("profile" === activeComponent) {
       setComponent(<UserDetails email={email} />);
-    } else if ('edit' === activeComponent) {
+    } else if ("edit" === activeComponent) {
       setComponent(<EditUserDetails email={email} />);
-    } else if ('order' === activeComponent) {
-
+    } else if ("order" === activeComponent) {
     }
   }, [activeComponent]);
 
-  const handleLogout = (e) => {
-    window.localStorage.removeItem('email');
-    navigate('/');
+  const handleLogout = async (e) => {
+    await axios.post(`${process.env.REACT_APP_BACKEND_URL}/users/logout`, {
+      email: window.localStorage.getItem("email"),
+    });
+    window.localStorage.removeItem("email");
+    navigate("/");
   };
 
   return (
@@ -44,28 +46,74 @@ const UserProfile = () => {
           <img src={app_logo} alt="app_logo" />
         </div>
         <div className="nav-links">
-          <div className='link-wrapper'>
+          <div className="link-wrapper">
             <AiOutlineHome />
             <Link to="/home">Home</Link>
           </div>
-          <div className={activeLink === 'profile' ? 'link-wrapper active' : 'link-wrapper'}>
+          <div
+            className={
+              activeLink === "profile" ? "link-wrapper active" : "link-wrapper"
+            }
+          >
             <AiOutlineUser />
-            <Link to="/profile" onClick={() => { setactiveComponent("profile"); setActiveLink('profile') }}>Profile Details</Link>
+            <Link
+              to="/profile"
+              onClick={() => {
+                setactiveComponent("profile");
+                setActiveLink("profile");
+              }}
+            >
+              Profile Details
+            </Link>
           </div>
-          <div className={activeLink === 'edit' ? 'link-wrapper active' : 'link-wrapper'}>
+          <div
+            className={
+              activeLink === "edit" ? "link-wrapper active" : "link-wrapper"
+            }
+          >
             <AiOutlineEdit />
-            <Link to="/profile" onClick={() => { setactiveComponent("edit"); setActiveLink('edit') }}>Edit Profile</Link>
+            <Link
+              to="/profile"
+              onClick={() => {
+                setactiveComponent("edit");
+                setActiveLink("edit");
+              }}
+            >
+              Edit Profile
+            </Link>
           </div>
-          <div className={activeLink === 'order' ? 'link-wrapper active' : 'link-wrapper'}>
+          <div
+            className={
+              activeLink === "order" ? "link-wrapper active" : "link-wrapper"
+            }
+          >
             <AiOutlineCalendar />
-            <Link to="/profile" onClick={() => { setactiveComponent("order"); setActiveLink('order') }}>Orders</Link>
+            <Link
+              to="/profile"
+              onClick={() => {
+                setactiveComponent("order");
+                setActiveLink("order");
+              }}
+            >
+              Orders
+            </Link>
           </div>
-          <div className={activeLink === 'logout' ? 'link-wrapper active' : 'link-wrapper'}>
+          <div
+            className={
+              activeLink === "logout" ? "link-wrapper active" : "link-wrapper"
+            }
+          >
             <AiOutlineLogout />
-            <div onClick={(e) => { handleLogout(e) }}>Logout</div>
+            <div
+              onClick={(e) => {
+                handleLogout(e);
+              }}
+            >
+              Logout
+            </div>
           </div>
         </div>
-      </StyledSideabar >
+      </StyledSideabar>
       {component}
     </>
   );
@@ -125,8 +173,7 @@ const StyledSideabar = styled.div`
     .profile-wrapper {
       margin-top: auto;
     }
-    .logout{
-
+    .logout {
     }
   }
 `;

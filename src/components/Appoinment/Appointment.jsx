@@ -9,7 +9,6 @@ const Appointment = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log(location.state?.res_id);
     if (!location.state?.res_id) {
       navigate("/home");
     }
@@ -19,7 +18,7 @@ const Appointment = () => {
     <StyledAppointment>
       <Sidebar activeRoute="home" />
       <StyledAppointmentCardWrapper>
-        <AppointmentCard />
+        <AppointmentCard data={location.state.data} />
       </StyledAppointmentCardWrapper>
     </StyledAppointment>
   );
