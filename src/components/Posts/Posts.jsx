@@ -23,13 +23,13 @@ const Posts = ({ posts, filters, subscribedRestaurants }) => {
       // sort out subscribed/unsubscribed filters
       if (filters.includes("subscribed")) {
         posts.forEach((post) => {
-          if (subscribedRestaurants.includes(post.res_id)) {
+          if (subscribedRestaurants.includes(post.rest_id)) {
             html.push(<Post data={post} key={post._id} />);
           }
         });
       } else if (filters.includes("unsubscribed")) {
         posts.forEach((post) => {
-          if (!subscribedRestaurants.includes(post.res_id)) {
+          if (!subscribedRestaurants.includes(post.rest_id)) {
             html.push(<Post data={post} key={post._id} />);
           }
         });
