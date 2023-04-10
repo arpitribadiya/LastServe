@@ -73,16 +73,6 @@ function Login() {
               placeholder="Password"
             ></input>
           </div>
-          <div className="login-type-wrapper">
-            <div className="radio-input-wrapper">
-              <input type="radio" name="login-type" id="login-user" />
-              <label htmlFor="login-user">User login</label>
-            </div>
-            <div className="radio-input-wrapper">
-              <input type="radio" name="login-type" id="login-restaurant" />
-              <label htmlFor="login-restaurant">Restaurant login</label>
-            </div>
-          </div>
           <button className="login-btn">Login</button>
           <div className="err">{<span className="err">{authError}</span>}</div>
           <Link to="/passwordReset">Reset Password</Link>
