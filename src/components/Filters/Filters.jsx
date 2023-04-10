@@ -2,7 +2,11 @@ import React from "react";
 import styled from "styled-components";
 import { BsSliders } from "react-icons/bs";
 
-const Filters = () => {
+const Filters = ({ filters, filterHandler }) => {
+  const filterAction = (event) => {
+    filterHandler(event.target.id, event.target.checked);
+  };
+
   return (
     <StyledFilters>
       <div className="filter-header">
@@ -12,25 +16,50 @@ const Filters = () => {
       <div className="filter-options">
         <div className="filter-food-preference">
           <div className="input-wrapper">
-            <input type="checkbox" name="veg" id="veg" />
+            <input
+              type="checkbox"
+              name="veg"
+              id="veg"
+              onChange={filterAction}
+            />
             <label htmlFor="veg">Veg</label>
           </div>
           <div className="input-wrapper">
-            <input type="checkbox" name="non-veg" id="non-veg" />
+            <input
+              type="checkbox"
+              name="non-veg"
+              id="non-veg"
+              onChange={filterAction}
+            />
             <label htmlFor="non-veg">Non-Veg</label>
           </div>
           <div className="input-wrapper">
-            <input type="checkbox" name="vegan" id="vegan" />
+            <input
+              type="checkbox"
+              name="vegan"
+              id="vegan"
+              onChange={filterAction}
+            />
             <label htmlFor="vegan">Vegan</label>
           </div>
         </div>
         <div className="filter-subscription-preference">
           <div className="input-wrapper">
-            <input type="checkbox" name="subscribed" id="subscribed" />
+            <input
+              type="checkbox"
+              name="subscribed"
+              id="subscribed"
+              onChange={filterAction}
+            />
             <label htmlFor="subscribed">Subscribed</label>
           </div>
           <div className="input-wrapper">
-            <input type="checkbox" name="unsubscribed" id="unsubscribed" />
+            <input
+              type="checkbox"
+              name="unsubscribed"
+              id="unsubscribed"
+              onChange={filterAction}
+            />
             <label htmlFor="unsubscribed">Unsubscribed</label>
           </div>
         </div>

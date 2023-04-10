@@ -19,7 +19,6 @@ const CheckUser = ({ children }) => {
             email: window.localStorage.getItem("email"),
           }
         );
-        console.log(result.data);
         if (result.data.isLoggedIn) {
           setIsLoggedIn({
             value: true,
