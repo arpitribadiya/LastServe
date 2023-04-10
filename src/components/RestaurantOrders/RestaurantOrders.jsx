@@ -20,7 +20,7 @@ function RestaurantOrders() {
 
 	useEffect(() => {
     const getActiveOrders=async () => {
-    const result = await axios.get('https://csci5709-a3-backend.onrender.com/restaurantorders/activeorders', {headers:{ email: email}});
+    const result = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/restaurantorders/activeorders`, {headers:{ email: email}});
     if(result.status===200){
       setActiveOrders(result.data)
       setTempActiveOrders(result.data)
@@ -34,7 +34,7 @@ function RestaurantOrders() {
 
   useEffect(() => {
     const getPastOrders=async () => {
-      const result = await axios.get('https://csci5709-a3-backend.onrender.com/restaurantorders/pastorders', {headers:{ email: email}});
+      const result = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/restaurantorders/pastorders`, {headers:{ email: email}});
       if(result.status===200){
         setPastOrders(result.data)
         setTempPastOrders(result.data)
@@ -50,7 +50,7 @@ function RestaurantOrders() {
 	const handleButtonClick = (e,action) => {
 		
     let orderNumber=e.currentTarget.parentNode.parentNode.firstChild.firstChild.innerText;
-    let link='https://csci5709-a3-backend.onrender.com/restaurantorders/changeorderstatus/'+orderNumber;
+    let link=`${process.env.REACT_APP_BACKEND_URL}/restaurantorders/changeorderstatus/`+orderNumber;
     const changeStatus =async () => {
     const result = await axios.post(link,{status:action}, {headers:{ email: email}});
     let error=true

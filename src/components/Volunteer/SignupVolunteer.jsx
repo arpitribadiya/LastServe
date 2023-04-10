@@ -112,9 +112,9 @@ function SignupVolunteer() {
                 "email" : email
             }
 
-            axios.post('https://csci5709-a3-backend.onrender.com/volunteers/checkEmail', volunteeremail)
+            axios.post(`${process.env.REACT_APP_BACKEND_URL}/volunteers/checkEmail`, volunteeremail)
             .then(res => {
-                axios.post('https://csci5709-a3-backend.onrender.com/volunteers/register', restaurant)
+                axios.post(`${process.env.REACT_APP_BACKEND_URL}/volunteers/register`, restaurant)
                 .then(res => {
                     navigate('/');
                 });

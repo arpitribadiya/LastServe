@@ -124,7 +124,7 @@ function CreatePost(props) {
         restId: email
       };
       axios
-        .post("http://localhost:5000/posts/createPost", post)
+        .post(`${process.env.REACT_APP_BACKEND_URL}/posts/createPost`, post)
         .then((res) => {
           console.log("--------------");
           navigate('/activePosts');

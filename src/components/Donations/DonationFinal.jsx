@@ -95,7 +95,7 @@ function DonationFinal() {
       }
       console.log(donations);
       
-      axios.post("http://localhost:5000/donation/postDonation", donations)
+      axios.post(`${process.env.REACT_APP_BACKEND_URL}/donation/postDonation`, donations)
       .then((res) => {
       console.log("----------success----");
       navigate('/');

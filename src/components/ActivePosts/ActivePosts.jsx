@@ -12,11 +12,9 @@ function ActivePosts() {
     const handleButtonClick = async (e) => {
         console.log("--------------------");
 		console.log(e);
-        const result = await axios.get('http://localhost:5000/posts/getPostById/' + e);
+        const result = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/posts/getPostById/` + e);
         if(result.status===200){
             navigate('/updatePost', { state: result.data.post});
-          console.log("-------------------------------------------------------------------");
-          console.log(result.data.post);
       }
     };
 
@@ -25,10 +23,8 @@ function ActivePosts() {
             const email=window.localStorage.getItem("email");
 
             console.log("--------------useeffect--------------------")
-              const result = await axios.get('http://localhost:5000/posts/getActivePosts/' + email);
+              const result = await axios.get(`${process.env.REACT_APP_BACKEND_URL}posts/getActivePosts/` + email);
               if(result.status===200){
-                console.log("-------------------------------------------------------------------");
-                console.log(result.data.posts);
                 setActivePosts(result.data.posts);
             }
         }

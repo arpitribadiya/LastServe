@@ -12,7 +12,7 @@ function PastPosts() {
     const handleButtonClick = async (e) => {
         console.log("--------------------");
 		console.log(e);
-        const result = await axios.get('http://localhost:5000/posts/getPostById/' + e);
+        const result = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/posts/getPostById/` + e);
         if(result.status===200){
             navigate('/viewPost', { state: result.data.post});
           console.log("-------------------------------------------------------------------");
@@ -25,7 +25,7 @@ function PastPosts() {
             const email=window.localStorage.getItem("email");
 
             console.log("--------------useeffect--------------------");
-              const result = await axios.get('http://localhost:5000/posts/getPastPosts/' + email);
+              const result = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/posts/getPastPosts/` + email);
               if(result.status===200){
                 console.log("-------------------------------------------------------------------");
                 console.log(result.data.posts);

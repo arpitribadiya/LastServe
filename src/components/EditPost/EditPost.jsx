@@ -144,7 +144,7 @@ function EditPost() {
       console.log("-------------------------------------------------------------");
       console.log(post);
       axios
-        .put("http://localhost:5000/posts/updatePost", post)
+        .put(`${process.env.REACT_APP_BACKEND_URL}/posts/updatePost`, post)
         .then((res) => {
           console.log("--------------");
           navigate('/activePosts');

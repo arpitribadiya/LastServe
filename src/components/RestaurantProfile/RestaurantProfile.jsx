@@ -16,7 +16,7 @@ function RestaurantProfile() {
     const getData = async () => {
       try {
         const result = await axios.post(
-          "https://csci5709-a3-backend.onrender.com/restaurants/viewRestaurant",
+          `${process.env.REACT_APP_BACKEND_URL}/restaurants/viewRestaurant`,
           email
         );
         console.log(result.data.restaurant);

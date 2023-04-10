@@ -29,7 +29,7 @@ function RestaurantLogin() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const result = await axios.post('https://csci5709-a3-backend.onrender.com/restaurants/login', { email: username, password: password });
+      const result = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/restaurants/login`, { email: username, password: password });
       if (result.status === 200) {
         navigate('/restaurantSideBar');
         window.localStorage.setItem("email", username);
