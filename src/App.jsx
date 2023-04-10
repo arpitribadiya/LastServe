@@ -14,6 +14,7 @@ import Subscription from "./components/Subscription/Subscription";
 import Appointment from "./components/Appoinment/Appointment";
 import SignupVolunteer from "./components/Volunteer/SignupVolunteer";
 import RestaurantLogin from "./components/RestaurantLogin/RestaurantLogin";
+import ProtectedRoute from "./components/Authentication/ProtectedRoute";
 
 const App = () => {
   return (
@@ -22,7 +23,14 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/home" element={<Landing />} />
+        <Route
+          path="/home"
+          element={
+            <ProtectedRoute>
+              <Landing />
+            </ProtectedRoute>
+          }
+        />
         <Route path="/passwordReset" element={<PasswordReset />} />
         <Route path="/newPassword" element={<NewPassword />} />
         <Route path="/profile" element={<UserProfile />} />
