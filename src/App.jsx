@@ -16,6 +16,7 @@ import Subscription from "./components/Subscription/Subscription";
 import Appointment from "./components/Appoinment/Appointment";
 import SignupVolunteer from "./components/Volunteer/SignupVolunteer";
 import RestaurantLogin from "./components/RestaurantLogin/RestaurantLogin";
+import ProtectedRoute from "./components/Authentication/ProtectedRoute";
 import ActivePosts from "./components/ActivePosts/ActivePosts";
 import PastPosts from "./components/PastPosts/PastPosts";
 import CreatePost from "./components/CreatePost/CreatePost";
@@ -29,7 +30,14 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/home" element={<Landing />} />
+        <Route
+          path="/home"
+          element={
+            <ProtectedRoute>
+              <Landing />
+            </ProtectedRoute>
+          }
+        />
         <Route path="/passwordReset" element={<PasswordReset />} />
         <Route path="/newPassword" element={<NewPassword />} />
         <Route path="/profile" element={<UserProfile />} />
@@ -48,8 +56,8 @@ const App = () => {
         <Route path="/activePosts" element={<ActivePosts />} />
         <Route path="/pastPosts" element={<PastPosts />} />
         <Route path="/createPost" element={<CreatePost />} />
-        <Route path="/updatePost" element={< EditPost />} />
-        <Route path="/viewPost" element={< ViewPost />} />
+        <Route path="/updatePost" element={<EditPost />} />
+        <Route path="/viewPost" element={<ViewPost />} />
       </Routes>
     </StyledApp>
   );

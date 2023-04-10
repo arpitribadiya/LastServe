@@ -4,7 +4,7 @@ import styled from "styled-components";
 import res_img from "../../assets/res_img1.jpg";
 import AppointmentForm from "./AppointmentForm";
 
-const AppointmentCard = () => {
+const AppointmentCard = ({ data }) => {
   return (
     <StyledAppointmentCard>
       <StyledResPostWrapper className="res-post-wrapper">
@@ -14,10 +14,8 @@ const AppointmentCard = () => {
         <div className="post-content">
           <h4 className="res-name">Res name</h4>
           <p className="res-post-details">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam,
-            qui? Quo magnam aliquid alias ea, magni commodi vero temporibus
-            soluta ipsa. Aperiam accusantium cum impedit? Necessitatibus impedit
-            quam earum nemo!
+            Hey everyone! I'm excited to share that I have some delicious food
+            available to give away for free.
           </p>
           <p className="res-location">
             <GoLocation />
@@ -25,7 +23,7 @@ const AppointmentCard = () => {
           </p>
         </div>
       </StyledResPostWrapper>
-      <AppointmentForm />
+      <AppointmentForm data={data} />
     </StyledAppointmentCard>
   );
 };
@@ -48,7 +46,7 @@ const StyledResPostWrapper = styled.div`
     align-self: flex-start;
     border: 1px solid #ccc;
     border-radius: 50%;
-    width: 200px;
+    width: 100px;
     /* overflow: hidden; */
     img {
       width: 100%;

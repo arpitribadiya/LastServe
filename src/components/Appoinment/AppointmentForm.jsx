@@ -1,37 +1,109 @@
-import React from "react";
+import axios from "axios";
+import React, { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
-const AppointmentForm = () => {
+const AppointmentForm = ({ data }) => {
   const navigate = useNavigate();
 
-  const submitHandler = (event) => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const responseRef = useRef(null);
+
+  const submitHandler = async (event) => {
     event.preventDefault();
+    await axios.post(`${process.env.REACT_APP_BACKEND_URL}/appointments`, {
+      rest_id: data.rest_id,
+      user_id: window.localStorage.getItem("email"),
+      user_name: name,
+      user_email: email,
+      appointment_date: getDate(data.Start_Time),
+      appointment_time: convertTime(new Date(data.Start_Time).getTime()),
+      items: `${data.Item_name}:${data.Item_Quantity}`,
+      sendEmail: responseRef.current.checked,
+    });
     navigate("/home");
+  };
+
+  const inputHandler = (event) => {
+    if (event.target.id === "name") {
+      setName(event.target.value);
+    } else {
+      setEmail(event.target.value);
+    }
+  };
+
+  const convertTime = (milliseconds) => {
+    let seconds = Math.floor(milliseconds / 1000);
+    let minutes = Math.floor(seconds / 60);
+    let hours = Math.floor(minutes / 60);
+
+    seconds = seconds % 60;
+    minutes = minutes % 60;
+
+    hours = hours % 24;
+    const padTo2Digits = (num) => {
+      return num.toString().padStart(2, "0");
+    };
+
+    return `${padTo2Digits(hours)}:${padTo2Digits(minutes)}`;
+  };
+
+  const getDate = (fullDate) => {
+    const dateObj = new Date(fullDate);
+    const date =
+      dateObj.getDate() +
+      "/" +
+      dateObj.getMonth() +
+      "/" +
+      dateObj.getFullYear();
+    return date;
   };
 
   return (
     <StyledAppointmentForm onSubmit={submitHandler}>
       <div className="input-wrapper">
         <label htmlFor="name">Name</label>
-        <input type="text" id="name" placeholder="Name" required />
+        <input
+          type="text"
+          id="name"
+          placeholder="Name"
+          required
+          onChange={inputHandler}
+          value={name}
+        />
       </div>
       <div className="input-wrapper">
         <label htmlFor="email">Email</label>
-        <input type="email" id="email" placeholder="Email" required />
+        <input
+          type="email"
+          id="email"
+          placeholder="Email"
+          required
+          onChange={inputHandler}
+          value={email}
+        />
       </div>
-      <div className="time-slot-wrapper">
-        <div className="input-wrapper btn-grp">
-          <input type="radio" name="time-slot" id="slot-1" required />
-          <label>9:00 PM - 9:00 PM</label>
+      <div className="post-info">
+        <div className="item-name">
+          <label htmlFor="name">Food Item:</label>
+          <span id="name">{data.Item_name}</span>
         </div>
-        <div className="input-wrapper btn-grp">
-          <input type="radio" name="time-slot" id="slot-2" />
-          <label>9:00 PM - 10:00 PM</label>
+        <div className="item-quantity">
+          <label htmlFor="qty">Available Quantity:</label>
+          <span id="qty">{data.Item_Quantity}</span>
         </div>
-        <div className="input-wrapper btn-grp">
-          <input type="radio" name="time-slot" id="slot-3" />
-          <label>10:00 PM - 11:00 PM</label>
+        <div className="item-type">
+          <label htmlFor="type">Category:</label>
+          <span id="type">{data.Food_Type}</span>
+        </div>
+        <div className="item-date">
+          <label htmlFor="date">Date:</label>
+          <span id="date">{getDate(data.Start_Time)}</span>
+        </div>
+        <div className="item-timings">
+          <label htmlFor="time">Time:</label>
+          <span> {convertTime(new Date(data.Start_Time).getTime())}</span>
         </div>
       </div>
       <div className="input-wrapper email-confirmation">
@@ -39,6 +111,7 @@ const AppointmentForm = () => {
           type="checkbox"
           name="email-confirmation"
           id="email-confirmation"
+          ref={responseRef}
         />
         <label htmlFor="">Send me copy of my Response</label>
       </div>
@@ -71,10 +144,22 @@ const StyledAppointmentForm = styled.form`
       flex-direction: row;
     }
   }
-  .time-slot-wrapper {
+  .post-info {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: 1rem;
+    margin-top: 2rem;
+    div[class^="item-"] {
+      display: flex;
+      gap: 1rem;
+      label {
+        font-weight: 500;
+        text-transform: capitalize;
+      }
+      span {
+        text-transform: capitalize;
+      }
+    }
   }
   .submit {
     padding: 1rem;
