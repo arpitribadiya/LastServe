@@ -33,7 +33,7 @@ function EditPost() {
   const [blankFromError, setBlankFormError] = useState("");
 
   const commonRegEx = new RegExp("^[A-Za-z]+$");
-
+  const quantityRegEx = new RegExp("^[0-9]*$")
   const [disabled, setDisabled] = useState(true);
 
   React.useEffect(() => {
@@ -63,12 +63,8 @@ function EditPost() {
   const handleInputValidation = (e) => {
     const { name, value } = e.target;
     if ("itemName" === name) {
-      console.log(value);
       if (!value) {
         setItemNameError("Enter Item name");
-        setDisabled(true);
-      } else if (!value.match(commonRegEx)) {
-        setItemNameError("Item name can contain only alphabets");
         setDisabled(true);
       } else {
         setItemNameError("");
@@ -77,6 +73,9 @@ function EditPost() {
     } else if ("itemQuantity" === name) {
       if (!value) {
         setItemQuantityError("Enter Item Quantity");
+        setDisabled(true);
+      } else if (!value.match(quantityRegEx)) {
+        setItemQuantityError("Quantity can contain only numbers");
         setDisabled(true);
       } else {
         setItemQuantityError("");
@@ -116,7 +115,6 @@ function EditPost() {
   const handleSubmit = (e) => {
     e.preventDefault();
     handleInputValidation(e);
-    console.log(blankFromError);
     if (
       itemNameError ||
       itemQuantityError ||
@@ -190,6 +188,8 @@ function EditPost() {
           <Calendar
           onChange={setStartTime}
           value={new Date(startTime)}
+          minDate={new Date()}
+
           />
               </div>
           <div className="err">
@@ -201,6 +201,8 @@ function EditPost() {
           <Calendar
           onChange={setEndTime}
           value={new Date(endTime)}
+          minDate={new Date()}
+
           />
               </div>
           <div className="err">

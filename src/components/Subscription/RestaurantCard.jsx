@@ -17,7 +17,6 @@ const RestaurantCard = ({ data, subscribed }) => {
           action: isSubscribed ? "unsubscribe" : "subscribe",
         }
       );
-      console.log(result);
       setIsSubscribed(!isSubscribed);
     } catch (err) {
       console.error(err);

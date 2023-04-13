@@ -26,6 +26,8 @@ function CreatePost(props) {
   const [blankFromError, setBlankFormError] = useState("");
 
   const commonRegEx = new RegExp("^[A-Za-z]+$");
+  const quantityRegEx = new RegExp("^[0-9]*$");
+
   const navigate = useNavigate();
 
   const [disabled, setDisabled] = useState(true);
@@ -54,12 +56,8 @@ function CreatePost(props) {
   const handleInputValidation = (e) => {
     const { name, value } = e.target;
     if ("itemName" === name) {
-      console.log(value);
       if (!value) {
         setItemNameError("Enter Item name");
-        setDisabled(true);
-      } else if (!value.match(commonRegEx)) {
-        setItemNameError("Item name can contain only alphabets");
         setDisabled(true);
       } else {
         setItemNameError("");
@@ -68,6 +66,9 @@ function CreatePost(props) {
     } else if ("itemQuantity" === name) {
       if (!value) {
         setItemQuantityError("Enter Item Quantity");
+        setDisabled(true);
+      } else if (!value.match(quantityRegEx)) {
+        setItemQuantityError("Quantity can contain only numbers");
         setDisabled(true);
       } else {
         setItemQuantityError("");
@@ -103,7 +104,6 @@ function CreatePost(props) {
   const handleSubmit = (e) => {
     e.preventDefault();
     handleInputValidation(e);
-    console.log(blankFromError);
     if (
       itemNameError ||
       itemQuantityError ||
@@ -177,6 +177,7 @@ function CreatePost(props) {
           <Calendar
           onChange={setStartTime}
           value={startTime}
+          minDate={new Date()}
           />
               </div>
           <div className="err">
@@ -188,6 +189,7 @@ function CreatePost(props) {
           <Calendar
           onChange={setEndTime}
           value={endTime}
+          minDate={new Date()}
           />
               </div>
           <div className="err">

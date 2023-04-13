@@ -56,13 +56,8 @@ function SignupRestaurant() {
     const handleInputValidation = e => {
         const { name, value } = e.target;
         if ('restaurantName' === name) {
-            console.log(value);
-            console.log(value.match(commonRegEx));
             if (!value) {
                 setRestaurantNameError('Enter Restaurant name');
-                setDisabled(true);
-            } else if (!value.match(commonRegEx)) {
-                setRestaurantNameError('Restaurant name can contain only alphabets');
                 setDisabled(true);
             } else {
                 setRestaurantNameError('');
@@ -71,9 +66,6 @@ function SignupRestaurant() {
         } else if ('address' === name) {
             if (!value) {
                 setAddressError('Enter address');
-                setDisabled(true);
-            } else if (!value.match(commonRegEx)) {
-                setAddressError('Address can contain only alphabets');
                 setDisabled(true);
             } else {
                 setAddressError('');
@@ -153,7 +145,6 @@ function SignupRestaurant() {
     const handleSubmit = (e) => {
         e.preventDefault();
         handleInputValidation(e);
-        console.log(blankFromError);
         if (restaurantNameError || addressError || postalcodeError || emailError || phoneNumberError ||
             passwordError || confirmPasswordError) {
             setBlankFormError('Enter mandatory fields');

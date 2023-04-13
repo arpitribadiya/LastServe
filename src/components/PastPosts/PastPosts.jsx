@@ -10,13 +10,9 @@ function PastPosts() {
     const navigate = useNavigate();
 
     const handleButtonClick = async (e) => {
-        console.log("--------------------");
-		console.log(e);
         const result = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/posts/getPostById/` + e);
         if(result.status===200){
             navigate('/viewPost', { state: result.data.post});
-          console.log("-------------------------------------------------------------------");
-          console.log(result.data.post);
       }
     };
 
@@ -24,11 +20,8 @@ function PastPosts() {
         const fetchPastPostData=async ()=>{
             const email=window.localStorage.getItem("email");
 
-            console.log("--------------useeffect--------------------");
               const result = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/posts/getPastPosts/` + email);
               if(result.status===200){
-                console.log("-------------------------------------------------------------------");
-                console.log(result.data.posts);
                 setPastPosts(result.data.posts);
             }
         }

@@ -39,7 +39,6 @@ function AdminPosts() {
     const result = await axios.delete(link, {headers:{ email: email}});
     let error=true
     let message=""
-    console.log(result.status)
     if (result.status!=204){
       message="post with the id "+postId+" could not be deleted, please try again in some time" 
     }
