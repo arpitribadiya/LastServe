@@ -135,7 +135,7 @@ function AdminPosts() {
     <div class="dashboard-content">
       <div class="table-heading">
         <div class="search-bar">
-          <input type="text" placeholder='search by postId or restaurant email' name='restaurantSearch' onChange={e => searchRestaurant(e)} id="restaurantSearch"></input>
+          <input type="text" placeholder='search by postId or email' name='restaurantSearch' onChange={e => searchRestaurant(e)} id="restaurantSearch"></input>
         </div>
       </div>
         <DataTable
@@ -170,7 +170,7 @@ const StyledDiv = styled.div`
     width: 50%;
 }
 .search-bar{
-    width: 30%;
+    width: 100%;
     float: right;
     margin:12px;
 }
@@ -182,10 +182,12 @@ const StyledDiv = styled.div`
 .button-approve{
     background-color:yellow;
     color:black;
+    
 }
 .button-reject{
     background-color:red;
     color:white;
+    float:right
 }
 `;
 

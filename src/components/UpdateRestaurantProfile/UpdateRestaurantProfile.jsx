@@ -131,7 +131,7 @@ function UpdateRestaurantProfile(props) {
       <StyledForm className="form">
         <div className="formContent">
           <div className="formTitle">
-            <h3>Register Details</h3>
+            
           </div>
 
           <div className="inputWrapper">

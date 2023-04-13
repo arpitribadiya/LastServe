@@ -141,7 +141,7 @@ function RestaurantApplication() {
     <div class="dashboard-content">
       <div class="table-heading">
         <div class="search-bar">
-          <input type="text" placeholder='search by restaurant email or name' name='restaurantSearch' onChange={e => searchRestaurant(e)} id="restaurantSearch"></input>
+          <input type="text" placeholder='search by email or name' name='restaurantSearch' onChange={e => searchRestaurant(e)} id="restaurantSearch"></input>
         </div>
       </div>
         <DataTable
@@ -176,7 +176,7 @@ const StyledDiv = styled.div`
     width: 50%;
 }
 .search-bar{
-    width: 30%;
+    width: 100%;
     float: right;
     margin:12px;
 }

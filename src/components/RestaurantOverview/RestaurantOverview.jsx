@@ -1,21 +1,35 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import styled from "styled-components";
 import DashboardHeader from "../DashboardHeader/DashboardHeader";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import axios from "axios";
 
 function RestaurantOverview() {
 
   const navigate = useNavigate();
+  const [overview,setOverview]=useState({})
+  const email=window.localStorage.getItem("email");
+  useEffect(() => {
+    const getRestaurantOverview=async () => {
+    const result = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/restaurant/overview`, {headers:{ email: email}});
+    if(result.status===200){
+      setOverview(result.data)
+    }
+  }
+  getRestaurantOverview();
+
+	},{});
 
 
   const handleActivePosts = () => {
-    navigate("/activePosts")
+    navigate("/restaurantSidebar",{state:{page:"restaurantPosts"}})
 
   }
 
   const handlePastPosts = () => {
-    navigate("/pastPosts")
+    navigate("/restaurantSidebar",{state:{page:"restaurantPosts"}})
 
   }
   return (
@@ -51,28 +65,28 @@ function RestaurantOverview() {
                 {" "}
                 <div className="overview-dashboard-tile">
                   <h2 className="heading">Orders</h2>
-                  <h2 className="number">10</h2>
+                  <h2 className="number">{overview.orders}</h2>
                 </div>
               </Col>
               <Col md={3} sm={6} xs={12} x>
                 {" "}
                 <div className="overview-dashboard-tile">
                   <h2 className="heading">Active Orders</h2>
-                  <h2 className="number">10</h2>
+                  <h2 className="number">{overview.activeOrders}</h2>
                 </div>
               </Col>
               <Col md={3} sm={6} xs={12} x>
                 {" "}
                 <div className="overview-dashboard-tile" onClick={handlePastPosts}>
                   <h2 className="heading">Posts</h2>
-                  <h2 className="number">10</h2>
+                  <h2 className="number">{overview.posts}</h2>
                 </div>
               </Col>
               <Col md={3} sm={6} xs={12} x>
                 {" "}
                 <div className="overview-dashboard-tile" onClick={handleActivePosts}>
                   <h2 className="heading">Active Posts</h2>
-                  <h2 className="number">10</h2>
+                  <h2 className="number">{overview.activePostCount}</h2>
                 </div>
               </Col>
             </Row>

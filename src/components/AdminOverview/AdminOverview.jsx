@@ -1,9 +1,22 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import styled from "styled-components";
 import DashboardHeader from "../DashboardHeader/DashboardHeader";
 
 function AdminOverview() {
+  const [overview,setOverview]=useState({})
+  const email=window.localStorage.getItem("email");
+  useEffect(() => {
+    const getRestaurantOverview=async () => {
+    const result = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/admin/overview`, {headers:{ email: email}});
+    if(result.status===200){
+      setOverview(result.data)
+    }
+  }
+  getRestaurantOverview();
+
+	},{});
   return (
     <StyledDiv>
       <script
@@ -37,28 +50,28 @@ function AdminOverview() {
                 {" "}
                 <div className="overview-dashboard-tile">
                   <h2 className="heading">Posts</h2>
-                  <h2 className="number">10</h2>
+                  <h2 className="number">{overview.posts}</h2>
                 </div>
               </Col>
               <Col md={3} sm={6} xs={12} x>
                 {" "}
                 <div className="overview-dashboard-tile">
                   <h2 className="heading">Active Posts</h2>
-                  <h2 className="number">10</h2>
+                  <h2 className="number">{overview.activePostCount}</h2>
                 </div>
               </Col>
               <Col md={3} sm={6} xs={12}>
                 {" "}
                 <div className="overview-dashboard-tile">
                   <h2 className="heading">Restaurant Applications</h2>
-                  <h2 className="number">2</h2>
+                  <h2 className="number">{overview.pendingRestaurants}</h2>
                 </div>
               </Col>
               <Col md={3} sm={6} xs={12} x>
                 {" "}
                 <div className="overview-dashboard-tile">
                   <h2 className="heading">Enrolled Restaurants</h2>
-                  <h2 className="number">10</h2>
+                  <h2 className="number">{overview.enrolledRestaurants}</h2>
                 </div>
               </Col>
             </Row>
@@ -68,7 +81,7 @@ function AdminOverview() {
                 {" "}
                 <div className="overview-dashboard-tile">
                   <h2 className="heading">Users</h2>
-                  <h2 className="number">100</h2>
+                  <h2 className="number">{overview.enrolledRestaurants}</h2>
                 </div>
               </Col>
             </Row>

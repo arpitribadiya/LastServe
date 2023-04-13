@@ -10,14 +10,18 @@ import {
 } from "react-icons/ai";
 import styled from "styled-components";
 import app_logo from "../../assets/app_logo.jpg";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import RestaurantOrders from '../RestaurantOrders/RestaurantOrders';
 import RestaurantOverview from '../RestaurantOverview/RestaurantOverview';
 import RestaurantPosts from '../RestaurantPosts/RestaurantPosts';
 import RestaurantVolunteers from '../RestaurantVolunteers/RestaurantVolunteers';
 import RestaurantProfile from '../RestaurantProfile/RestaurantProfile';
+import CreatePost from '../CreatePost/CreatePost';
+import ViewPost from '../ViewPost/ViewPost';
+import EditPost from '../EditPost/EditPost';
 
-function RestaurantSideBar() {
+function RestaurantSideBar(props) {
+
 
   const [activeComponent, setactiveComponent] = useState('overview');
   const [activeLink, setActiveLink] = useState('overview');
@@ -34,6 +38,28 @@ function RestaurantSideBar() {
   }else{
     component = <RestaurantOverview />
   }
+
+  let { state } = useLocation();
+  if (state!=null){
+    let page=state.page;
+    if ("createPost"===page){
+      
+      component=<CreatePost/>
+      page=null
+
+    }
+    else if ("restaurantPosts"===page){
+      component=<RestaurantPosts/>
+    }
+    else if ("viewPost"===page){
+      component=<ViewPost/>
+    }
+    else if ("updatePost"===page){
+      component=<EditPost/>
+    }
+  }
+
+
     return(
     <>
       {/* <Navbar />  */}

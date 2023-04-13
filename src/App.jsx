@@ -17,7 +17,6 @@ import Appointment from "./components/Appoinment/Appointment";
 import SignupVolunteer from "./components/Volunteer/SignupVolunteer";
 import RestaurantLogin from "./components/RestaurantLogin/RestaurantLogin";
 import ProtectedRoute from "./components/Authentication/ProtectedRoute";
-import ActivePosts from "./components/ActivePosts/ActivePosts";
 import PastPosts from "./components/PastPosts/PastPosts";
 import CreatePost from "./components/CreatePost/CreatePost";
 import EditPost from "./components/EditPost/EditPost";
@@ -56,7 +55,6 @@ const App = () => {
         <Route path="/restaurants" element={<Subscription />} />
         <Route path="/signupVolunteer" element={<SignupVolunteer />} />
         <Route path="/appointment" element={<Appointment />} />
-        <Route path="/activePosts" element={<ActivePosts />} />
         <Route path="/pastPosts" element={<PastPosts />} />
         <Route path="/createPost" element={<CreatePost />} />
         <Route path="/updatePost" element={<EditPost />} />

@@ -49,7 +49,7 @@ function CreatePost(props) {
 
     
   const handleBackClick = () => {
-    navigate("/activePosts")
+    navigate("/restaurantSidebar", { state: { page: 'restaurantPosts' } });
   }
 
 
@@ -124,9 +124,9 @@ function CreatePost(props) {
         restId: email
       };
       axios
-      .post(`${process.env.REACT_APP_BACKEND_URL}/posts/createPost`, post)
-      .then((res) => {
-          navigate('/activePosts');
+        .post(`${process.env.REACT_APP_BACKEND_URL}/posts/createPost`, post)
+        .then((res) => {
+          navigate("/restaurantSidebar", { state: { page: 'restaurantPosts' } });
         });
     }
   };
