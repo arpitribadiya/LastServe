@@ -47,7 +47,7 @@ function CreatePost(props) {
 
     
   const handleBackClick = () => {
-    navigate("/activePosts")
+    navigate("/restaurantSidebar", { state: { page: 'restaurantPosts' } });
   }
 
 
@@ -126,9 +126,7 @@ function CreatePost(props) {
       axios
         .post(`${process.env.REACT_APP_BACKEND_URL}/posts/createPost`, post)
         .then((res) => {
-          console.log("--------------");
-          navigate('/activePosts');
-            console.log(res.data.message);
+          navigate("/restaurantSidebar", { state: { page: 'restaurantPosts' } });
         });
     }
   };

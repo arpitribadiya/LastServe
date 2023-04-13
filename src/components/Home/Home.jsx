@@ -13,11 +13,18 @@ import res_img6 from "../../assets/res_img6.jpg";
 import Navbar from "../Navigation/Navbar";
 import Footer from "../Footer/Footer";
 import { useNavigate } from "react-router-dom";
+import {Helmet} from"react-helmet"
 
 const Home = () => {
   const navigate = useNavigate();
   return (
+
     <StyledHome className="home">
+      <Helmet>
+        <meta charSet="utf-8"/>
+        <title>Last serve - Lets end hunger</title>
+        <description>website aimed at minimizing food wastage of restaurant by donating it to the needy</description>
+      </Helmet>
       <Navbar />
       <StyledSectionOne className="section-1">
         <div className="section-details">

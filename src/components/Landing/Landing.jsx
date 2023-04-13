@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Sidebar from "../Sidebar/Sidebar";
 import Posts from "../Posts/Posts";
 import Filters from "../Filters/Filters";
+import {Helmet} from"react-helmet"
 import axios from "axios";
 
 const Landing = () => {
@@ -41,6 +42,11 @@ const Landing = () => {
 
   return (
     <StyledLanding>
+      <Helmet>
+        <meta charSet="utf-8"/>
+        <title>Find Food Donation post that are best for you</title>
+        <description>Filter food Donations</description>
+      </Helmet>
       <Sidebar activeRoute="home" />
       <Posts
         posts={posts}

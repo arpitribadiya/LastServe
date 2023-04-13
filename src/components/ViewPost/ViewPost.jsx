@@ -9,15 +9,15 @@ import "react-toastify/dist/ReactToastify.css";
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import { useLocation } from 'react-router-dom';
+import DashboardHeader from "../DashboardHeader/DashboardHeader";
 
 
 function ViewPost() {
 
   let { state } = useLocation();
-  const [currentPost, setCurrentPost] = useState(state);
+  const [currentPost, setCurrentPost] = useState(state.result);
+  console.log(state)
   const navigate = useNavigate();
-
-  const [id, setId] = useState(currentPost._id);
   const [itemName, setItemName] = useState();
   const [itemQuantity, setItemQuantity] = useState();
   const [startTime, setStartTime] = useState(new Date());
@@ -35,18 +35,22 @@ function ViewPost() {
 
   
   const handleBackClick = () => {
-    navigate("/pastPosts")
+    navigate('/restaurantSidebar', { state: {page:"restaurantPosts"}});
   }
 
 
   return (
+    
+
+   
+    
     <StyledSignupImgWrapper className="login-img-wrapper">
       <ToastContainer/>
+      <DashboardHeader heading="Post details"/>
+      <div class="dashboard-content">
       <StyledForm className="form">
+      
         <div className="formContent">
-          <div className="formTitle">
-            <h3>Post Details</h3>
-          </div>
 
           <div className="inputWrapper">
             <label className="formLabel">Item Name</label>
@@ -107,20 +111,33 @@ function ViewPost() {
           </button>
         </div>
       </StyledForm>
+      </div>
     </StyledSignupImgWrapper>
+  
   );
 }
 
 const StyledSignupImgWrapper = styled.div`
-  display: flex;
-  width: 60%;
-  margin: 1rem auto;
-  padding: 3rem;
-  .myclass {
+
+  min-height: 100vh;
+  margin-left: 20%;
+.dashboard-content{
+    position: relative;
+    height: 134px;
+    left: 0;
+    padding-left: 12px;
+    padding-right: 12px;
+    right:0px;
+    top: 128px;
+    }
+  .table-heading{
     display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
+    justify-content: space-between;
+}
+.table-heading h3{
+    margin: 12px ;
+    width: 50%;
+}
 `;
 
 const StyledForm = styled.form`
@@ -130,6 +147,7 @@ const StyledForm = styled.form`
   flex-direction: column;
   gap: 2rem;
   padding: 0 0rem;
+  
   .formContent {
     display: flex;
     flex-direction: column;

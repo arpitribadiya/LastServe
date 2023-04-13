@@ -3,6 +3,7 @@ import styled from "styled-components";
 import restaurant_img from "../../assets/Restaurant.avif";
 import UpdateRestaurantProfile from "../UpdateRestaurantProfile/UpdateRestaurantProfile";
 import axios from "axios";
+import DashboardHeader from "../DashboardHeader/DashboardHeader";
 
 function RestaurantProfile() {
   const [childData, setchildData] = useState(null);
@@ -30,6 +31,7 @@ function RestaurantProfile() {
 
   return (
     <StyledDiv>
+      <DashboardHeader heading="Restaurant Details"/>
       <StyledHome className="home">
         <StyledSectionOne className="section-1">
           {/* <div className="section-details"> */}
@@ -49,7 +51,7 @@ function RestaurantProfile() {
 
 const StyledDiv = styled.div`
   min-height: 100vh;
-  margin-left: 10%;
+  margin-left: 20%;
 `;
 
 const StyledHome = styled.div``;

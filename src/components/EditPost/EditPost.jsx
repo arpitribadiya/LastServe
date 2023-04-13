@@ -9,12 +9,13 @@ import "react-toastify/dist/ReactToastify.css";
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import { useLocation } from 'react-router-dom';
+import DashboardHeader from "../DashboardHeader/DashboardHeader";
 
 
 function EditPost() {
 
   let { state } = useLocation();
-  const [currentPost, setCurrentPost] = useState(state);
+  const [currentPost, setCurrentPost] = useState(state.result);
   const navigate = useNavigate();
 
   const [id, setId] = useState(currentPost._id);
@@ -36,8 +37,6 @@ function EditPost() {
   const [disabled, setDisabled] = useState(true);
 
   React.useEffect(() => {
-    console.log("------------------------------------------------------------------");
-    console.log(currentPost);
     setItemName(currentPost.itemName);
     setItemQuantity(currentPost.itemQuantity);
     setStartTime(currentPost.startTime);
@@ -111,7 +110,7 @@ function EditPost() {
   };
 
   const handleBackClick = () => {
-    navigate("/activePosts")
+    navigate("/restaurantSidebar",{state:{page:"restaurantPosts"}})
   }
 
   const handleSubmit = (e) => {
@@ -128,9 +127,6 @@ function EditPost() {
       setBlankFormError("Enter mandatory fields");
     } else {
       const email = window.localStorage.getItem("email");
-      console.log("--------------");
-
-      console.log(currentPost.id);
       const post = {
         id : currentPost.id,
         itemName: itemName,
@@ -140,14 +136,10 @@ function EditPost() {
         foodType: foodType,
         restId: email
       };
-      
-      console.log("-------------------------------------------------------------");
-      console.log(post);
       axios
         .put(`${process.env.REACT_APP_BACKEND_URL}/posts/updatePost`, post)
         .then((res) => {
-          console.log("--------------");
-          navigate('/activePosts');
+          navigate('/restaurantSidebar', {state:{ page:"restaurantPost"}});
             console.log(res.data.message);
         });
     }
@@ -156,11 +148,10 @@ function EditPost() {
   return (
     <StyledSignupImgWrapper className="login-img-wrapper">
       <ToastContainer/>
+      <DashboardHeader heading="Update Posts"/>
+      <div class="dashboard-content">
       <StyledForm className="form">
         <div className="formContent">
-          <div className="formTitle">
-            <h3>Update Post</h3>
-          </div>
 
           <div className="inputWrapper">
             <label className="formLabel">Item Name*</label>
@@ -256,19 +247,22 @@ function EditPost() {
           </button>
         </div>
       </StyledForm>
+      </div>
     </StyledSignupImgWrapper>
   );
 }
 
 const StyledSignupImgWrapper = styled.div`
-  display: flex;
-  width: 60%;
-  margin: 1rem auto;
-  padding: 3rem;
-  .myclass {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
+min-height: 100vh;
+margin-left: 20%;
+.dashboard-content{
+  position: relative;
+  height: 134px;
+  left: 0;
+  padding-left: 12px;
+  padding-right: 12px;
+  right:0px;
+  top: 128px;
   }
 `;
 

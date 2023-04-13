@@ -32,7 +32,7 @@ function AdminLogin() {
         window.localStorage.setItem("email", username);
       }
     } catch (error) {
-      if (error.response.status === 403) {
+      if (error.response.status === 401) {
         setUsername('');
         setPassword('');
         setAuthError("Invalid Username and Password");
