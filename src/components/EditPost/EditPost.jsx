@@ -32,7 +32,7 @@ function EditPost() {
   const [blankFromError, setBlankFormError] = useState("");
 
   const commonRegEx = new RegExp("^[A-Za-z]+$");
-
+  const quantityRegEx = new RegExp("^[0-9]*$")
   const [disabled, setDisabled] = useState(true);
 
   React.useEffect(() => {
@@ -68,9 +68,6 @@ function EditPost() {
       if (!value) {
         setItemNameError("Enter Item name");
         setDisabled(true);
-      } else if (!value.match(commonRegEx)) {
-        setItemNameError("Item name can contain only alphabets");
-        setDisabled(true);
       } else {
         setItemNameError("");
         setDisabled(false);
@@ -78,6 +75,9 @@ function EditPost() {
     } else if ("itemQuantity" === name) {
       if (!value) {
         setItemQuantityError("Enter Item Quantity");
+        setDisabled(true);
+      } else if (!value.match(quantityRegEx)) {
+        setItemQuantityError("Quantity can contain only numbers");
         setDisabled(true);
       } else {
         setItemQuantityError("");
@@ -144,8 +144,8 @@ function EditPost() {
       console.log("-------------------------------------------------------------");
       console.log(post);
       axios
-        .put(`${process.env.REACT_APP_BACKEND_URL}/posts/updatePost`, post)
-        .then((res) => {
+      .put(`${process.env.REACT_APP_BACKEND_URL}/posts/updatePost`, post)
+      .then((res) => {
           console.log("--------------");
           navigate('/activePosts');
             console.log(res.data.message);

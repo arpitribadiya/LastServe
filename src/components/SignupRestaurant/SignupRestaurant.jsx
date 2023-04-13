@@ -61,9 +61,6 @@ function SignupRestaurant() {
             if (!value) {
                 setRestaurantNameError('Enter Restaurant name');
                 setDisabled(true);
-            } else if (!value.match(commonRegEx)) {
-                setRestaurantNameError('Restaurant name can contain only alphabets');
-                setDisabled(true);
             } else {
                 setRestaurantNameError('');
                 setDisabled(false);
@@ -71,9 +68,6 @@ function SignupRestaurant() {
         } else if ('address' === name) {
             if (!value) {
                 setAddressError('Enter address');
-                setDisabled(true);
-            } else if (!value.match(commonRegEx)) {
-                setAddressError('Address can contain only alphabets');
                 setDisabled(true);
             } else {
                 setAddressError('');

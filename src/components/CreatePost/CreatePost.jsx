@@ -26,6 +26,8 @@ function CreatePost(props) {
   const [blankFromError, setBlankFormError] = useState("");
 
   const commonRegEx = new RegExp("^[A-Za-z]+$");
+  const quantityRegEx = new RegExp("^[0-9]*$");
+
   const navigate = useNavigate();
 
   const [disabled, setDisabled] = useState(true);
@@ -58,9 +60,6 @@ function CreatePost(props) {
       if (!value) {
         setItemNameError("Enter Item name");
         setDisabled(true);
-      } else if (!value.match(commonRegEx)) {
-        setItemNameError("Item name can contain only alphabets");
-        setDisabled(true);
       } else {
         setItemNameError("");
         setDisabled(false);
@@ -68,6 +67,9 @@ function CreatePost(props) {
     } else if ("itemQuantity" === name) {
       if (!value) {
         setItemQuantityError("Enter Item Quantity");
+        setDisabled(true);
+      } else if (!value.match(quantityRegEx)) {
+        setItemQuantityError("Quantity can contain only numbers");
         setDisabled(true);
       } else {
         setItemQuantityError("");
@@ -124,8 +126,8 @@ function CreatePost(props) {
         restId: email
       };
       axios
-        .post(`${process.env.REACT_APP_BACKEND_URL}/posts/createPost`, post)
-        .then((res) => {
+      .post(`${process.env.REACT_APP_BACKEND_URL}/posts/createPost`, post)
+      .then((res) => {
           console.log("--------------");
           navigate('/activePosts');
             console.log(res.data.message);
