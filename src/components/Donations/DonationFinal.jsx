@@ -24,8 +24,6 @@ function DonationFinal() {
   const handleInputValidation = e => {
     const { name, value } = e.target;
     if ('cardNumber' === name) {
-        console.log(value);
-        console.log(value.match(cardRegEx));
         if (!value) {
             setCardNumberError('Enter your Card-Number.');
             setDisabled(true);
@@ -77,7 +75,6 @@ function DonationFinal() {
   const handleSubmit = (e) => {
     e.preventDefault();
     handleInputValidation(e);
-    console.log(blankFromError);
     if (cardNumberError || expirationDateError || cvvError) {
         setBlankFormError('Kindly enter mandatory fields');
     } else {
@@ -93,11 +90,9 @@ function DonationFinal() {
         expdate: expirationDate,
         cvv: cvv,
       }
-      console.log(donations);
       
       axios.post(`${process.env.REACT_APP_BACKEND_URL}/donation/postDonation`, donations)
       .then((res) => {
-      console.log("----------success----");
       navigate('/');
       });
     }

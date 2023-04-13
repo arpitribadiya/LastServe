@@ -56,8 +56,6 @@ function DonationForm() {
     const handleInputValidation = e => {
         const { name, value } = e.target;
         if ('donorName' === name) {
-            console.log(value);
-            console.log(value.match(commonRegEx));
             if (!value) {
                 setDonorNameError('Enter your name');
                 setDisabled(true);
@@ -132,22 +130,9 @@ function DonationForm() {
     const handleSubmit = (e) => {
         e.preventDefault();
         handleInputValidation(e);
-        console.log(blankFromError);
         if (donorNameError || emailError || donorPhoneNumberError || addressError || cityError || pincodeError) {
             setBlankFormError('Kindly enter mandatory fields');
         } else {
-
-            console.log(donorName);
-            console.log(donorPhoneNumber);
-
-            console.log(address);
-
-            console.log(city);
-
-            console.log(pincode);
-
-            console.log(email);
-            console.log(currentAmount);
             const tempdata = {
                 donorName : donorName,
                 donorPhoneNumber : donorPhoneNumber,

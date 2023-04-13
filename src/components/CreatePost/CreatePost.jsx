@@ -56,7 +56,6 @@ function CreatePost(props) {
   const handleInputValidation = (e) => {
     const { name, value } = e.target;
     if ("itemName" === name) {
-      console.log(value);
       if (!value) {
         setItemNameError("Enter Item name");
         setDisabled(true);
@@ -105,7 +104,6 @@ function CreatePost(props) {
   const handleSubmit = (e) => {
     e.preventDefault();
     handleInputValidation(e);
-    console.log(blankFromError);
     if (
       itemNameError ||
       itemQuantityError ||
@@ -128,9 +126,7 @@ function CreatePost(props) {
       axios
       .post(`${process.env.REACT_APP_BACKEND_URL}/posts/createPost`, post)
       .then((res) => {
-          console.log("--------------");
           navigate('/activePosts');
-            console.log(res.data.message);
         });
     }
   };

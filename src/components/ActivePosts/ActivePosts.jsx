@@ -9,8 +9,6 @@ function ActivePosts() {
   const navigate = useNavigate();
 
   const handleButtonClick = async (e) => {
-    console.log("--------------------");
-    console.log(e);
     const result = await axios.get(
       `${process.env.REACT_APP_BACKEND_URL}/posts/getPostById/` + e
     );
@@ -22,8 +20,6 @@ function ActivePosts() {
   useEffect(() => {
     const fetchActivePostData = async () => {
       const email = window.localStorage.getItem("email");
-
-      console.log("--------------useeffect--------------------");
       const result = await axios.get(
         `${process.env.REACT_APP_BACKEND_URL}/posts/getActivePosts/` + email
       );

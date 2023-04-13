@@ -55,7 +55,6 @@ function RestaurantOrders() {
     const result = await axios.post(link,{status:action}, {headers:{ email: email}});
     let error=true
     let message=""
-    console.log(result.status)
     if (result.status!=204){
       message="status for the order "+orderNumber+" could not be set to "+action+" , please try again in some time" 
     }

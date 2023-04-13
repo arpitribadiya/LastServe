@@ -36,8 +36,6 @@ function EditPost() {
   const [disabled, setDisabled] = useState(true);
 
   React.useEffect(() => {
-    console.log("------------------------------------------------------------------");
-    console.log(currentPost);
     setItemName(currentPost.itemName);
     setItemQuantity(currentPost.itemQuantity);
     setStartTime(currentPost.startTime);
@@ -64,7 +62,6 @@ function EditPost() {
   const handleInputValidation = (e) => {
     const { name, value } = e.target;
     if ("itemName" === name) {
-      console.log(value);
       if (!value) {
         setItemNameError("Enter Item name");
         setDisabled(true);
@@ -117,7 +114,6 @@ function EditPost() {
   const handleSubmit = (e) => {
     e.preventDefault();
     handleInputValidation(e);
-    console.log(blankFromError);
     if (
       itemNameError ||
       itemQuantityError ||
@@ -128,9 +124,6 @@ function EditPost() {
       setBlankFormError("Enter mandatory fields");
     } else {
       const email = window.localStorage.getItem("email");
-      console.log("--------------");
-
-      console.log(currentPost.id);
       const post = {
         id : currentPost.id,
         itemName: itemName,
@@ -140,15 +133,10 @@ function EditPost() {
         foodType: foodType,
         restId: email
       };
-      
-      console.log("-------------------------------------------------------------");
-      console.log(post);
       axios
       .put(`${process.env.REACT_APP_BACKEND_URL}/posts/updatePost`, post)
       .then((res) => {
-          console.log("--------------");
           navigate('/activePosts');
-            console.log(res.data.message);
         });
     }
   };

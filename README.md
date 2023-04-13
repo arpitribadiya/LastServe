@@ -238,8 +238,6 @@ try {
       // Connect to MongoDB cluster
       await client.connect();
 
-      console.log('Connected to MongoDB');
-
       // Return reference to database object
       return client.db('tutorial7');
     } catch (err) {

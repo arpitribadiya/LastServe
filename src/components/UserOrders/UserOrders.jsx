@@ -8,7 +8,6 @@ const UserOrders = ({ email }) => {
     useEffect(() => {
         const getUserOrders = async () => {
             const result = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/users/orders`, { email: email });
-            console.log(result.data);
             setUserOrders([...result.data]);
         }
         getUserOrders();
@@ -39,7 +38,6 @@ const UserOrders = ({ email }) => {
     })
 
     const currentOrdersHtml = currentOrders.map(order => {
-        console.log(order);
         const item = order.items.split(":");
         return <div className='current-order-wrapper'>
             <div className="res-name">Tawa Grill</div>
@@ -53,7 +51,6 @@ const UserOrders = ({ email }) => {
 
     const handleOnClick = async (id) => {
         try {
-            console.log(id);
             await axios.delete(`${process.env.REACT_APP_BACKEND_URL}/users/cancelOrder`, { data: { id: id } });
             let tempOrders = [...userOrders];
             tempOrders = tempOrders.filter(order => {

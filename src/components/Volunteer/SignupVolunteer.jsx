@@ -55,8 +55,6 @@ function SignupVolunteer() {
     const handleInputValidation = e => {
         const { name, value } = e.target;
         if ('volunteerName' === name) {
-            console.log(value);
-            console.log(value.match(commonRegEx));
             if (!value) {
                 setVolunteerNameError('Enter your name');
                 setDisabled(true);
@@ -95,7 +93,6 @@ function SignupVolunteer() {
     const handleSubmit = (e) => {
         e.preventDefault();
         handleInputValidation(e);
-        console.log(blankFromError);
         if (volunteerNameError || emailError || phoneNumberError) {
             setBlankFormError('Kindly enter mandatory fields');
         } else {

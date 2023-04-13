@@ -56,8 +56,6 @@ function SignupRestaurant() {
     const handleInputValidation = e => {
         const { name, value } = e.target;
         if ('restaurantName' === name) {
-            console.log(value);
-            console.log(value.match(commonRegEx));
             if (!value) {
                 setRestaurantNameError('Enter Restaurant name');
                 setDisabled(true);
@@ -147,7 +145,6 @@ function SignupRestaurant() {
     const handleSubmit = (e) => {
         e.preventDefault();
         handleInputValidation(e);
-        console.log(blankFromError);
         if (restaurantNameError || addressError || postalcodeError || emailError || phoneNumberError ||
             passwordError || confirmPasswordError) {
             setBlankFormError('Enter mandatory fields');

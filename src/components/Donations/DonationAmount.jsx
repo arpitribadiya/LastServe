@@ -23,7 +23,6 @@ function DonationsAmount() {
     const handleInputValidation = e => {
         const { name, value } = e.target;
         if ('donationAmount' === name) {
-            console.log(value);
             if (!value) {
                 setDonationAmountError('Enter the amount');
                 setDisabled(true);
@@ -39,9 +38,7 @@ function DonationsAmount() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log("--")
         handleInputValidation(e);
-        console.log(donationAmount);
         if (donationAmountError) {
             setBlankFormError(donationAmountError);
         } else {

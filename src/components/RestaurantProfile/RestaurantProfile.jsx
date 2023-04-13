@@ -19,7 +19,6 @@ function RestaurantProfile() {
           `${process.env.REACT_APP_BACKEND_URL}/restaurants/viewRestaurant`,
           email
         );
-        console.log(result.data.restaurant);
         setchildData({ ...result.data.restaurant });
       } catch (err) {
         console.error(err);
