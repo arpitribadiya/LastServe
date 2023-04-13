@@ -22,7 +22,6 @@ const Landing = () => {
           email: window.localStorage.getItem("email"),
         }
       );
-      console.log(response.data);
       setPosts([...result.data.posts]);
       setSubscribedRestaurants([...response.data.subscribed_restaurants]);
     })();

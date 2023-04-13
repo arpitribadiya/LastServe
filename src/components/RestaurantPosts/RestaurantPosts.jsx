@@ -12,13 +12,10 @@ function RestaurantPosts() {
     const [pastPosts, setPastPosts] = useState([]);
 
     const handleButtonViewClick = async (e) => {
-        console.log("--------------------");
-		console.log(e);
+
         const result = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/posts/getPostById/` + e);
         if(result.status===200){
             navigate('/restaurantSidebar', { state: {result:result.data.post,page:"viewPost"}});
-
-          console.log(result.data.post);
       }
     };
 
@@ -26,11 +23,9 @@ function RestaurantPosts() {
         const fetchPastPostData=async ()=>{
             const email=window.localStorage.getItem("email");
 
-            console.log("--------------useeffect--------------------");
+
               const result = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/posts/getPastPosts/` + email);
               if(result.status===200){
-                console.log("-------------------------------------------------------------------");
-                console.log(result.data.posts);
                 setPastPosts(result.data.posts);
             }
         }
@@ -61,8 +56,7 @@ function RestaurantPosts() {
     ];
   
     const handleButtonUpdateClick = async (e) => {
-      console.log("--------------------");
-      console.log(e);
+
       const result = await axios.get(
         `${process.env.REACT_APP_BACKEND_URL}/posts/getPostById/` + e
       );
@@ -74,8 +68,7 @@ function RestaurantPosts() {
     useEffect(() => {
       const fetchActivePostData = async () => {
         const email = window.localStorage.getItem("email");
-  
-        console.log("--------------useeffect--------------------");
+
         const result = await axios.get(
           `${process.env.REACT_APP_BACKEND_URL}/posts/getActivePosts/` + email
         );

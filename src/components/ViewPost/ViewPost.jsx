@@ -16,7 +16,6 @@ function ViewPost() {
 
   let { state } = useLocation();
   const [currentPost, setCurrentPost] = useState(state.result);
-  console.log(state)
   const navigate = useNavigate();
   const [itemName, setItemName] = useState();
   const [itemQuantity, setItemQuantity] = useState();
