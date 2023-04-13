@@ -179,6 +179,7 @@ function CreatePost(props) {
           <Calendar
           onChange={setStartTime}
           value={startTime}
+          minDate={new Date()}
           />
               </div>
           <div className="err">
@@ -190,6 +191,7 @@ function CreatePost(props) {
           <Calendar
           onChange={setEndTime}
           value={endTime}
+          minDate={new Date()}
           />
               </div>
           <div className="err">

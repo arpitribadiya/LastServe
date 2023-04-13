@@ -199,6 +199,8 @@ function EditPost() {
           <Calendar
           onChange={setStartTime}
           value={new Date(startTime)}
+          minDate={new Date()}
+
           />
               </div>
           <div className="err">
@@ -210,6 +212,8 @@ function EditPost() {
           <Calendar
           onChange={setEndTime}
           value={new Date(endTime)}
+          minDate={new Date()}
+
           />
               </div>
           <div className="err">

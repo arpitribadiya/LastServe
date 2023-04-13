@@ -193,6 +193,7 @@ function SignupVolunteer() {
           <Calendar
         onChange={onChange1}
         value={value}
+        minDate={new Date()}
       />
             </div>
             </div>
