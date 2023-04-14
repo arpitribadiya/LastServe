@@ -94,6 +94,9 @@ const StyledFilters = styled.div`
       }
     }
   }
+  @media only screen and (min-width: 280px) and (max-width: 432px) {
+    display: none;
+  }
 `;
 
 export default Filters;

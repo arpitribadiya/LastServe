@@ -1,4 +1,4 @@
-//Created by Viraj Joshi 
+//Created by Viraj Joshi
 
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
@@ -7,13 +7,15 @@ import Footer from "../Footer/Footer";
 import axios from "axios";
 
 const UserDetails = ({ email }) => {
-  const [userDetails, setUserDetails] = useState('');
+  const [userDetails, setUserDetails] = useState("");
 
   useEffect(() => {
     const getUserDetails = async () => {
-      const result = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/users/` + email);
+      const result = await axios.get(
+        `${process.env.REACT_APP_BACKEND_URL}/users/` + email
+      );
       setUserDetails(result.data);
-    }
+    };
     getUserDetails();
   }, []);
 
@@ -45,7 +47,7 @@ const UserDetails = ({ email }) => {
       <Footer />
     </>
   );
-}
+};
 
 const StyledUsrDetailsImgWrapper = styled.div`
   min-height: 100vh;
@@ -53,6 +55,11 @@ const StyledUsrDetailsImgWrapper = styled.div`
   display: flex;
   width: 60%;
   padding: 4rem;
+  @media only screen and (min-width: 280px) and (max-width: 432px) {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
 `;
 
 const StyledUserDetails = styled.div`
@@ -86,6 +93,12 @@ const StyledUserDetails = styled.div`
       border-radius: 5px;
     }
   }
+  @media only screen and (min-width: 280px) and (max-width: 1110px) {
+    flex-basis: 100%;
+    .profile-contents {
+      box-shadow: none;
+    }
+  }
 `;
 
 const StyledUsrDetailsImg = styled.div`
@@ -94,6 +107,9 @@ const StyledUsrDetailsImg = styled.div`
     width: 100%;
     height: 100%;
     object-fit: cover;
+  }
+  @media only screen and (min-width: 280px) and (max-width: 1110px) {
+    flex-basis: 0%;
   }
 `;
 

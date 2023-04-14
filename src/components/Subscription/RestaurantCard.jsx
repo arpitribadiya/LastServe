@@ -106,6 +106,14 @@ const StyledRestaurant = styled.div`
       gap: 1rem;
     }
   }
+  @media only screen and (min-width: 280px) and (max-width: 1110px) {
+    .res-img-wrapper {
+      display: none;
+    }
+    .res-content-wrapper {
+      flex-basis: 100%;
+    }
+  }
 `;
 
 export default RestaurantCard;
