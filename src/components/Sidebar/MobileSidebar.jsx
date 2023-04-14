@@ -1,10 +1,8 @@
 import React from "react";
-import styled from "styled-components";
-import { AiOutlineHome, AiOutlineSearch } from "react-icons/ai";
-import { BiUser } from "react-icons/bi";
-import { Link, NavLink, useNavigate } from "react-router-dom";
-import app_logo from "../../assets/logo-black.png";
 import { IoClose } from "react-icons/io5";
+import { Link } from "react-router-dom";
+import styled from "styled-components";
+import app_logo from "../../assets/logo-black.png";
 
 const MobileSidebar = ({ setProfileMenu }) => {
   return (

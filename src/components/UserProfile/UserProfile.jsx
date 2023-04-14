@@ -9,7 +9,7 @@ import {
   AiOutlineLogout,
 } from "react-icons/ai";
 import styled from "styled-components";
-import app_logo from "../../assets/app_logo.jpg";
+import app_logo from "../../assets/logo-black.png";
 import { Link, useNavigate } from "react-router-dom";
 import UserDetails from "../UserDetails/UserDetails";
 import EditUserDetails from "../EditUserDetails/EditUserDetails";

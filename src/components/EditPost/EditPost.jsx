@@ -1,19 +1,16 @@
 //Created By Arpit Ribadiya (B00932018)
 
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
 import axios from "axios";
-import { ToastContainer } from 'react-toastify';
+import React, { useState } from "react";
+import Calendar from "react-calendar";
+import "react-calendar/dist/Calendar.css";
+import { useLocation, useNavigate } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Calendar from 'react-calendar';
-import 'react-calendar/dist/Calendar.css';
-import { useLocation } from 'react-router-dom';
+import styled from "styled-components";
 import DashboardHeader from "../DashboardHeader/DashboardHeader";
 
-
 function EditPost() {
-
   let { state } = useLocation();
   const [currentPost, setCurrentPost] = useState(state.result);
   const navigate = useNavigate();
@@ -33,7 +30,7 @@ function EditPost() {
   const [blankFromError, setBlankFormError] = useState("");
 
   const commonRegEx = new RegExp("^[A-Za-z]+$");
-  const quantityRegEx = new RegExp("^[0-9]*$")
+  const quantityRegEx = new RegExp("^[0-9]*$");
   const [disabled, setDisabled] = useState(true);
 
   React.useEffect(() => {
@@ -42,7 +39,6 @@ function EditPost() {
     setStartTime(currentPost.startTime);
     setEndTime(currentPost.endTime);
     setFoodType(currentPost.foodType);
-
   }, []);
 
   const handleInputChange = (e) => {
@@ -109,8 +105,8 @@ function EditPost() {
   };
 
   const handleBackClick = () => {
-    navigate("/restaurantSidebar",{state:{page:"restaurantPosts"}})
-  }
+    navigate("/restaurantSidebar", { state: { page: "restaurantPosts" } });
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -126,145 +122,141 @@ function EditPost() {
     } else {
       const email = window.localStorage.getItem("email");
       const post = {
-        id : currentPost.id,
+        id: currentPost.id,
         itemName: itemName,
         itemQuantity: itemQuantity,
         startTime: startTime,
         endTime: endTime,
         foodType: foodType,
-        restId: email
+        restId: email,
       };
       axios
         .put(`${process.env.REACT_APP_BACKEND_URL}/posts/updatePost`, post)
         .then((res) => {
-          navigate('/restaurantSidebar', {state:{ page:"restaurantPost"}});
-            console.log(res.data.message);
+          navigate("/restaurantSidebar", { state: { page: "restaurantPost" } });
         });
     }
   };
 
   return (
     <StyledSignupImgWrapper className="login-img-wrapper">
-      <ToastContainer/>
-      <DashboardHeader heading="Update Posts"/>
+      <ToastContainer />
+      <DashboardHeader heading="Update Posts" />
       <div class="dashboard-content">
-      <StyledForm className="form">
-        <div className="formContent">
+        <StyledForm className="form">
+          <div className="formContent">
+            <div className="inputWrapper">
+              <label className="formLabel">Item Name*</label>
+              <input
+                className="formInput"
+                type="text"
+                name="itemName"
+                value={itemName}
+                onChange={(e) => handleInputChange(e)}
+                onBlur={handleInputValidation}
+                placeholder="Item Name"
+              />
+            </div>
+            <div className="err">
+              {<span className="err">{itemNameError}</span>}
+            </div>
 
-          <div className="inputWrapper">
-            <label className="formLabel">Item Name*</label>
-            <input
-              className="formInput"
-              type="text"
-              name="itemName"
-              value={itemName}
-              onChange={(e) => handleInputChange(e)}
-              onBlur={handleInputValidation}
-              placeholder="Item Name"
-            />
-          </div>
-          <div className="err">
-            {<span className="err">{itemNameError}</span>}
-          </div>
+            <div className="inputWrapper">
+              <label className="formLabel">Item Quantity*</label>
+              <input
+                className="formInput"
+                type="text"
+                name="itemQuantity"
+                value={itemQuantity}
+                onChange={(e) => handleInputChange(e)}
+                onBlur={handleInputValidation}
+                placeholder="Item Quantity"
+              />
+            </div>
+            <div className="err">
+              {<span className="err">{itemQuantityError}</span>}
+            </div>
 
-          <div className="inputWrapper">
-            <label className="formLabel">Item Quantity*</label>
-            <input
-              className="formInput"
-              type="text"
-              name="itemQuantity"
-              value={itemQuantity}
-              onChange={(e) => handleInputChange(e)}
-              onBlur={handleInputValidation}
-              placeholder="Item Quantity"
-            />
-          </div>
-          <div className="err">
-            {<span className="err">{itemQuantityError}</span>}
-          </div>
+            <div className="inputWrapper">
+              <label className="formLabel">Start Time*</label>
+              <Calendar
+                onChange={setStartTime}
+                value={new Date(startTime)}
+                minDate={new Date()}
+              />
+            </div>
+            <div className="err">
+              {<span className="err">{startTimeError}</span>}
+            </div>
 
-          <div className="inputWrapper">
-          <label className='formLabel'>Start Time*</label>
-          <Calendar
-          onChange={setStartTime}
-          value={new Date(startTime)}
-          minDate={new Date()}
+            <div className="inputWrapper">
+              <label className="formLabel">End Time*</label>
+              <Calendar
+                onChange={setEndTime}
+                value={new Date(endTime)}
+                minDate={new Date()}
+              />
+            </div>
+            <div className="err">
+              {<span className="err">{endTimeError}</span>}
+            </div>
 
-          />
-              </div>
-          <div className="err">
-            {<span className="err">{startTimeError}</span>}
-          </div>
+            <div className="inputWrapper">
+              <label className="formLabel">Food Type*</label>
+              <input
+                className="formInput"
+                type="text"
+                name="foodType"
+                value={foodType}
+                onChange={(e) => handleInputChange(e)}
+                onBlur={handleInputValidation}
+                placeholder="Food Type"
+              />
+            </div>
+            <div className="err">
+              {<span className="err">{foodTypeError}</span>}
+            </div>
+            <div className="footNote">
+              <p>* Mandatory fields</p>
+            </div>
 
-          <div className="inputWrapper">
-          <label className='formLabel'>End Time*</label>
-          <Calendar
-          onChange={setEndTime}
-          value={new Date(endTime)}
-          minDate={new Date()}
+            <div className="err">
+              {<span className="blank-err">{blankFromError}</span>}
+            </div>
 
-          />
-              </div>
-          <div className="err">
-            {<span className="err">{endTimeError}</span>}
+            <button
+              disabled={disabled}
+              className="registerBtn"
+              type="submit"
+              onClick={(e) => handleSubmit(e)}
+            >
+              Update
+            </button>
+            <button
+              className="registerBackBtn"
+              type="submit"
+              onClick={() => handleBackClick()}
+            >
+              Back
+            </button>
           </div>
-
-          <div className="inputWrapper">
-            <label className="formLabel">Food Type*</label>
-            <input
-              className="formInput"
-              type="text"
-              name="foodType"
-              value={foodType}
-              onChange={(e) => handleInputChange(e)}
-              onBlur={handleInputValidation}
-              placeholder="Food Type"
-            />
-          </div>
-          <div className="err">
-            {<span className="err">{foodTypeError}</span>}
-          </div>
-          <div className="footNote">
-            <p>* Mandatory fields</p>
-          </div>
-
-          <div className="err">
-            {<span className="blank-err">{blankFromError}</span>}
-          </div>
-
-          <button
-            disabled={disabled}
-            className="registerBtn"
-            type="submit"
-            onClick={(e) => handleSubmit(e)}
-          >
-            Update
-          </button>
-          <button
-            className="registerBackBtn"
-            type="submit"
-            onClick={() => handleBackClick()}
-          >
-            Back
-          </button>
-        </div>
-      </StyledForm>
+        </StyledForm>
       </div>
     </StyledSignupImgWrapper>
   );
 }
 
 const StyledSignupImgWrapper = styled.div`
-min-height: 100vh;
-margin-left: 20%;
-.dashboard-content{
-  position: relative;
-  height: 134px;
-  left: 0;
-  padding-left: 12px;
-  padding-right: 12px;
-  right:0px;
-  top: 128px;
+  min-height: 100vh;
+  margin-left: 20%;
+  .dashboard-content {
+    position: relative;
+    height: 134px;
+    left: 0;
+    padding-left: 12px;
+    padding-right: 12px;
+    right: 0px;
+    top: 128px;
   }
 `;
 

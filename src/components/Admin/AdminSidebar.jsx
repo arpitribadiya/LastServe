@@ -1,33 +1,27 @@
 //Created By Lav Patel (B00910579)
 
-
-import React, { useState } from 'react'
-import {
-  AiOutlineUser,
-  AiOutlineEdit,
-} from "react-icons/ai";
+import React, { useState } from "react";
+import { AiOutlineUser, AiOutlineEdit } from "react-icons/ai";
 import styled from "styled-components";
-import app_logo from "../../assets/app_logo.jpg";
+import app_logo from "../../assets/logo-black.png";
 import { Link } from "react-router-dom";
-import AdminOverview from '../AdminOverview/AdminOverview';
-import AdminPost from '../AdminPosts/AdminPosts';
-import RestaurantApplication from '../RestaurantApplication/RestaurantApplication';
-
+import AdminOverview from "../AdminOverview/AdminOverview";
+import AdminPost from "../AdminPosts/AdminPosts";
+import RestaurantApplication from "../RestaurantApplication/RestaurantApplication";
 
 function AdminSidebar() {
-
-  const [activeComponent, setactiveComponent] = useState('overview');
-  const [activeLink, setActiveLink] = useState('overview');
+  const [activeComponent, setactiveComponent] = useState("overview");
+  const [activeLink, setActiveLink] = useState("overview");
 
   let component = null;
- if ('posts' === activeComponent) {
-    component = <AdminPost />
-  } else if ('restaurantApplication' === activeComponent) {
-    component = <RestaurantApplication />
-  }else{
-    component = <AdminOverview />
+  if ("posts" === activeComponent) {
+    component = <AdminPost />;
+  } else if ("restaurantApplication" === activeComponent) {
+    component = <RestaurantApplication />;
+  } else {
+    component = <AdminOverview />;
   }
-    return(
+  return (
     <>
       {/* <Navbar />  */}
       <StyledSideabar>
@@ -35,26 +29,63 @@ function AdminSidebar() {
           <img src={app_logo} alt="app_logo" />
         </div>
         <div className="nav-links">
-          <div className={activeLink === 'overview' ? 'link-wrapper active' : 'link-wrapper'}>
+          <div
+            className={
+              activeLink === "overview" ? "link-wrapper active" : "link-wrapper"
+            }
+          >
             <AiOutlineUser />
-            <Link to="/adminDashboard" onClick={() => { setactiveComponent("overview"); setActiveLink('overview') }}>Overview</Link>
+            <Link
+              to="/adminDashboard"
+              onClick={() => {
+                setactiveComponent("overview");
+                setActiveLink("overview");
+              }}
+            >
+              Overview
+            </Link>
           </div>
-          <div className={activeLink === 'restaurantApplication' ? 'link-wrapper active' : 'link-wrapper'}>
+          <div
+            className={
+              activeLink === "restaurantApplication"
+                ? "link-wrapper active"
+                : "link-wrapper"
+            }
+          >
             <AiOutlineEdit />
-            <Link to="/adminDashboard" onClick={() => { setactiveComponent("restaurantApplication"); setActiveLink('restaurantApplication') }}>Restaurant Application</Link>
+            <Link
+              to="/adminDashboard"
+              onClick={() => {
+                setactiveComponent("restaurantApplication");
+                setActiveLink("restaurantApplication");
+              }}
+            >
+              Restaurant Application
+            </Link>
           </div>
-          <div className={activeLink === 'posts' ? 'link-wrapper active' : 'link-wrapper'}>
+          <div
+            className={
+              activeLink === "posts" ? "link-wrapper active" : "link-wrapper"
+            }
+          >
             <AiOutlineEdit />
-            <Link to="/adminDashboard" onClick={() => { setactiveComponent("posts"); setActiveLink('posts') }}>Posts</Link>
+            <Link
+              to="/adminDashboard"
+              onClick={() => {
+                setactiveComponent("posts");
+                setActiveLink("posts");
+              }}
+            >
+              Posts
+            </Link>
           </div>
         </div>
-      </StyledSideabar >
+      </StyledSideabar>
       {component}
       {/* <Footer /> */}
     </>
-    );
-};
-
+  );
+}
 
 const StyledSideabar = styled.div`
   display: flex;
