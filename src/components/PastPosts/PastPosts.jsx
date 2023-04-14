@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import styled from "styled-components";
-import { useLocation,useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import DataTable from 'react-data-table-component';
 import axios from "axios";
 
