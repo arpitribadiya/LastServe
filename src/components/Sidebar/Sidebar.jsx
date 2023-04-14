@@ -5,7 +5,7 @@ import { AiOutlineHome, AiOutlineSearch } from "react-icons/ai";
 import { BiUser } from "react-icons/bi";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import app_logo from "../../assets/app_logo.jpg";
+import app_logo from "../../assets/logo-black.png";
 
 const Sidebar = ({ activeRoute }) => {
   const navigate = useNavigate();
@@ -104,6 +104,13 @@ const StyledSideabar = styled.div`
         color: white;
       }
     }
+  }
+  @media only screen and (min-width: 280px) and (max-width: 432px) {
+    display: none;
+  }
+  @media only screen and (min-width: 433px) and (max-width: 1110px) {
+    margin-left: 5%;
+    width: fit-content;
   }
 `;
 

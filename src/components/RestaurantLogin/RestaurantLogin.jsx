@@ -1,12 +1,11 @@
 //Created By Arpit Ribadiya (B00932018)
 
-
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import login_img from "../../assets/login.jpg";
 import Footer from "../Footer/Footer";
-import axios from 'axios';
+import axios from "axios";
 
 function RestaurantLogin() {
   const [username, setUsername] = useState("");
@@ -14,7 +13,6 @@ function RestaurantLogin() {
 
   const [authError, setAuthError] = useState("");
   const navigate = useNavigate();
-
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -29,24 +27,26 @@ function RestaurantLogin() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const result = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/restaurants/login`, { email: username, password: password });
+      const result = await axios.post(
+        `${process.env.REACT_APP_BACKEND_URL}/restaurants/login`,
+        { email: username, password: password }
+      );
       if (result.status === 200) {
-        navigate('/restaurantSideBar');
+        navigate("/restaurantSideBar");
         window.localStorage.setItem("email", username);
-      }
-      else{
-        setUsername('');
-        setPassword('');
+      } else {
+        setUsername("");
+        setPassword("");
         setAuthError("Invalid Username and Password");
       }
     } catch (error) {
       if (error.response.status === 403) {
-        setUsername('');
-        setPassword('');
+        setUsername("");
+        setPassword("");
         setAuthError("Invalid Username and Password");
       } else {
-        setUsername('');
-        setPassword('');
+        setUsername("");
+        setPassword("");
         console.error(error);
       }
     }
@@ -78,11 +78,9 @@ function RestaurantLogin() {
               placeholder="Password"
             ></input>
           </div>
-          <button className="login-btn">Login</button>
-          <div className="err">
-            {<span className='err'>{authError}</span>}
-          </div>
           <Link to="/login">Login User</Link>
+          <button className="login-btn">Login</button>
+          <div className="err">{<span className="err">{authError}</span>}</div>
         </StyledLogin>
         <StyledLoginImg className="login-img">
           <img src={login_img} alt="login_img" />
@@ -100,6 +98,17 @@ const StyledLoginImgWrapper = styled.div`
   border-radius: 5px;
   margin: 5rem auto;
   padding: 4rem;
+  @media only screen and (min-width: 280px) and (max-width: 432px) {
+    width: 100%;
+    margin-top: 2rem;
+    padding: 4rem 1rem 0 1rem;
+    box-shadow: none;
+  }
+  @media only screen and (min-width: 433px) and (max-width: 1110px) {
+    width: 80%;
+    margin-top: 15rem;
+    padding: 4rem 1rem 0 1rem;
+  }
 `;
 
 const StyledLogin = styled.form`
@@ -122,11 +131,11 @@ const StyledLogin = styled.form`
       border-radius: 5px;
     }
   }
-  a{
+  a {
     text-decoration: none;
     font-size: 1.5rem;
     text-align: center;
-    color:  rgb(0, 127, 255);
+    color: rgb(0, 127, 255);
   }
   button {
     background-color: rgb(0, 127, 255);
@@ -156,11 +165,14 @@ const StyledLogin = styled.form`
       }
     }
   }
-  .err{
+  .err {
     padding: 0rem;
     color: red;
     font-size: small;
     text-align: center;
+  }
+  @media only screen and (min-width: 280px) and (max-width: 432px) {
+    flex-basis: 100%;
   }
 `;
 
@@ -170,6 +182,9 @@ const StyledLoginImg = styled.div`
     width: 100%;
     height: 100%;
     object-fit: cover;
+  }
+  @media only screen and (min-width: 280px) and (max-width: 432px) {
+    flex-basis: 0;
   }
 `;
 

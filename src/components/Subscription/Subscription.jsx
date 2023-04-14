@@ -4,12 +4,15 @@ import Sidebar from "../Sidebar/Sidebar";
 import { AiOutlineSearch } from "react-icons/ai";
 import RestaurantCard from "./RestaurantCard";
 import axios from "axios";
+import ProfileNavbar from "../Landing/ProfileNavbar";
+import MobileSidebar from "../Sidebar/MobileSidebar";
 
 const Subscription = () => {
   const [restaurants, setRestaurants] = useState([]);
   const [subscribedRestaurants, setSubscribedRestaurants] = useState([]);
   const [resInput, setResInput] = useState("");
   const [searchedRestaurants, setSearchedRestaurants] = useState([]);
+  const [profileMenu, setProfileMenu] = useState(false);
 
   useEffect(() => {
     const getData = async () => {
@@ -69,6 +72,8 @@ const Subscription = () => {
   return (
     <StyledSubscription>
       <Sidebar activeRoute="explore" />
+      <ProfileNavbar setProfileMenu={setProfileMenu} />
+      {profileMenu ? <MobileSidebar setProfileMenu={setProfileMenu} /> : null}
       <StyledSection>
         <div className="input-wrapper">
           <div className="logo-wrapper">
@@ -136,6 +141,11 @@ const StyledSection = styled.section`
     display: flex;
     flex-direction: column;
     gap: 2rem;
+  }
+  @media only screen and (min-width: 280px) and (max-width: 432px) {
+    width: 100%;
+    margin: 0;
+    padding: 2rem;
   }
 `;
 

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import home_img from "../../assets/home.jpg";
 import appointment_img from "../../assets/appointment.jpg";
@@ -13,19 +13,24 @@ import res_img6 from "../../assets/res_img6.jpg";
 import Navbar from "../Navigation/Navbar";
 import Footer from "../Footer/Footer";
 import { useNavigate } from "react-router-dom";
-import {Helmet} from"react-helmet"
+import { Helmet } from "react-helmet";
+import MobileNavbar from "../Navigation/MobileNavbar";
 
 const Home = () => {
   const navigate = useNavigate();
+  const [isVisible, setIsVisible] = useState(false);
   return (
-
     <StyledHome className="home">
       <Helmet>
-        <meta charSet="utf-8"/>
+        <meta charSet="utf-8" />
         <title>Last serve - Lets end hunger</title>
-        <description>website aimed at minimizing food wastage of restaurant by donating it to the needy</description>
+        <description>
+          website aimed at minimizing food wastage of restaurant by donating it
+          to the needy
+        </description>
       </Helmet>
-      <Navbar />
+      <Navbar setIsVisible={setIsVisible} />
+      {isVisible ? <MobileNavbar setIsVisible={setIsVisible} /> : null}
       <StyledSectionOne className="section-1">
         <div className="section-details">
           <h1>Last Serve</h1>

@@ -1,6 +1,6 @@
-//Created by Viraj Joshi 
+//Created by Viraj Joshi
 
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from "react";
 import {
   AiOutlineUser,
   AiOutlineEdit,
@@ -14,12 +14,15 @@ import { Link, useNavigate } from "react-router-dom";
 import UserDetails from "../UserDetails/UserDetails";
 import EditUserDetails from "../EditUserDetails/EditUserDetails";
 import axios from "axios";
-import UserOrders from '../UserOrders/UserOrders';
+import UserOrders from "../UserOrders/UserOrders";
+import ProfileNavbar from "./ProfileNavbar";
+import ProfileDetailsNavbar from "./ProfileDetailsNavbar";
 
 const UserProfile = () => {
   const [activeComponent, setactiveComponent] = useState("profile");
   const [activeLink, setActiveLink] = useState("profile");
   const [component, setComponent] = useState(null);
+  const [profileNavbar, setProfileNavbar] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -43,6 +46,7 @@ const UserProfile = () => {
 
   return (
     <>
+      <ProfileDetailsNavbar setProfileNavbar={setProfileNavbar} />
       <StyledSideabar>
         <div className="logo-wrapper">
           <img src={app_logo} alt="app_logo" />
@@ -116,6 +120,15 @@ const UserProfile = () => {
           </div>
         </div>
       </StyledSideabar>
+      {profileNavbar ? (
+        <ProfileNavbar
+          setProfileNavbar={setProfileNavbar}
+          setactiveComponent={setactiveComponent}
+          setActiveLink={setActiveLink}
+          activeLink={activeLink}
+          handleLogout={handleLogout}
+        />
+      ) : null}
       {component}
     </>
   );
@@ -177,6 +190,9 @@ const StyledSideabar = styled.div`
     }
     .logout {
     }
+  }
+  @media only screen and (min-width: 280px) and (max-width: 432px) {
+    display: none;
   }
 `;
 

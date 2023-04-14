@@ -37,6 +37,9 @@ const StyledAppointmentCard = styled.div`
   border-radius: 20px;
   font-size: 1.8rem;
   align-items: center;
+  @media only screen and (min-width: 280px) and (max-width: 432px) {
+    border-radius: 0px;
+  }
 `;
 
 const StyledResPostWrapper = styled.div`

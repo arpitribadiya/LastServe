@@ -56,6 +56,10 @@ const StyledPostsWrapper = styled.div`
   margin-left: 30%;
   width: 40%;
   border-right: 1px solid #ccc;
+  @media only screen and (min-width: 280px) and (max-width: 432px) {
+    width: 100%;
+    margin: 0;
+  }
 `;
 
 const StyledPosts = styled.div`
