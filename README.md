@@ -1,4 +1,5 @@
 
+
 <!--- The following README.md sample file was adapted from https://gist.github.com/PurpleBooth/109311bb0361f32d87a2#file-readme-template-md by Gabriella Mosquera for academic use ---> 
 <!--- You may delete any comments in this sample README.md file. If needing to use as a .txt file then simply delete all comments, edit as needed, and save as a README.txt file --->
 
@@ -15,7 +16,10 @@
 
 * *link to application*: https://lastserve-a3.netlify.app/
 
+# Description
+* "LastServe": a caring project that helps connect surplus food from stores with people who need it most. Instead of throwing away food that can't be kept, stores list it on our platform. People can then see where and when they can collect free meals and book a time slot to pick them up.
 
+* LastServe is all about stopping food waste and making sure everyone has enough to eat.
 # Feature developed
 ## Restaurant order management system 
 *  View orders by user, their timeslots, and items
